@@ -5,10 +5,10 @@ public class GasVehicle extends Vehicle {
     super(year, make, model, bodystyle); // call to super must be first statement in constructor
     this.milesPerGallon = milesPerGallon;
     this.gallonsInTank = gallonsInTank;
-  }
+  } // end GasVehicle
 
   // Methods
-  public double range() {
+  public double range() { // Test purposes only set random value
     return 1.0;
 
   };

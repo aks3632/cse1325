@@ -15,9 +15,8 @@ public class TravelCost {
 
     System.out.println("How many miles is your trip? ");
     double mi = scannerVin.nextDouble(); // Get value: Miles - length or distance
-
-    /*                                                                                      // wh/mi kwBat
-    ArrayList<Vehicles> vehicles = new ArrayList<>;                                         // mi/gal galTank
+                                                                                            // wh/mi kwBat
+    ArrayList<Vehicle> vehicles = new ArrayList<>();                                         // mi/gal galTank
     vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model S Plaid",   BodyStyle.Sedan,     297, 100  ));
     vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model 3 LR",      BodyStyle.Sedan,     242,  82  ));
     vehicles.add(new ElectricVehicle(2022, "GM",       "Bolt",            BodyStyle.Hatchback, 286,  66  ));
@@ -30,6 +29,14 @@ public class TravelCost {
     vehicles.add(new GasVehicle(     2022, "Nissan",   "Rogue",           BodyStyle.Hatchback,  33,  14.5));
     vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica",        BodyStyle.Minivan,    24,  19  ));
     vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica Hybrid", BodyStyle.Minivan,    30,  16.5));
+
+    /*
+    // Or use the for-each loop on either
+    for(int i : array) System.out.printf(" %2d", i);
+    System.out.println();
+    for(int i : ali)   System.out.printf(" %2d", i);
+    System.out.println();
     */
+
   } // end main()
 } // end TravelCost

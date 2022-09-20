@@ -9,19 +9,19 @@ public class GasVehicle extends Vehicle {
 
   // Methods
   public double range() { // Test purposes only set random value
-    return 1.0;
+    return gallonsInTank * milesPerGallon;
 
   };
   public double fuelConsumed(double miles) {
-    return 2.0;
+    return miles / milesPerGallon;
 
   };
   public double dollarsToTravel(double miles) {
-    return 3.0;
+    return fuelConsumed(miles) / dollarsPerGallonOfGas;
   };
 
   // Fields
-  public static double dollarsPerGallonOfGas;
+  public static double dollarsPerGallonOfGas = Double.NaN;
   private double milesPerGallon;
   private double gallonsInTank;
 

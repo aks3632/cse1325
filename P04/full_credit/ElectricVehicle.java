@@ -9,17 +9,17 @@ public class ElectricVehicle extends Vehicle {
 
   // Methods
   public double range() { // Test purposes only set random value
-    return 1.1;
+    return kwhInBattery / (whPerMile / 1000);
   };
   public double fuelConsumed(double miles) {
-    return 2.2;
+    return miles * (whPerMile / 1000);
   };
   public double dollarsToTravel(double miles) {
-    return 3.3;
+    return fuelConsumed(miles) / (centsPerKwhOfElectricity / 100);
   };
 
   // Fields
-  public static double centsPerKwhOfElectricity;
+  public static double centsPerKwhOfElectricity = Double.NaN;
   private double whPerMile;
   private double kwhInBattery;
 

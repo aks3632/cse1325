@@ -1,8 +1,21 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class TravelCost {
   public static void main(String[] args) { // function main begins program execution
+
+    Scanner scannerVin = new Scanner(System.in);
+
+    System.out.println("What is the price per gallon of gas (dollars)? "); // Prompt user $ of gasolnie
+    GasVehicle.dollarsPerGallonOfGas = scannerVin.nextDouble(); // Get value: US currency $
+
+    System.out.println("What is the price per kWh of electricity (cents)? "); // Prompt user $ of electricity
+    ElectricVehicle.centsPerKwhOfElectricity = scannerVin.nextDouble(); // Get value: US cents $
+
+    System.out.println("How many miles is your trip? ");
+    double mi = scannerVin.nextDouble(); // Get value: Miles - length or distance
+
     /*                                                                                      // wh/mi kwBat
     ArrayList<Vehicles> vehicles = new ArrayList<>;                                         // mi/gal galTank
     vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model S Plaid",   BodyStyle.Sedan,     297, 100  ));

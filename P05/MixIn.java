@@ -9,11 +9,11 @@ public class MixIn {
   @Override
   public String toString() {
 
-    if (amount!=(MixInAmount.Normal)) {
-      return " " + flavor;
+    if (amount != (MixInAmount.Normal)) {
+      return flavor + "(" + amount + ")";
     }
     else {
-      return flavor + "(" + amount + ")";
+      return " " + flavor;
     } // end if else
   } // end toString
 

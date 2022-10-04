@@ -1,7 +1,7 @@
 public class MixInFlavor extends Item {
 
   // Constructor
-  MixInFlavor (String name, String description, int cost, int price) {
+  public MixInFlavor (String name, String description, int cost, int price) {
     super(name, description, cost, price);
     /* Item = Superclass; therefore, see above */
   } // end MixInFlavor

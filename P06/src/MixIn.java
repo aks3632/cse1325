@@ -9,11 +9,13 @@ public class MixIn {
   @Override
   public String toString() {
 
+    /* Optional | Utilize ternary */
+    /* return flavor.toString() + ((amount != MixInAmount.Normal) */
     if (amount != (MixInAmount.Normal)) {
-      return flavor + "(" + amount + ")";
+      return flavor.toString() + "(" + amount + ")";
     }
     else {
-      return " " + flavor;
+      return " " + flavor.toString();
     } // end if else
   } // end toString
 

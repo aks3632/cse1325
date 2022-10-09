@@ -5,7 +5,7 @@ import java.util.List;
 import java.io.*;
 
 
-public class TestScoop {
+public class TestScoop { // InteractiveTest
 
 
   private ArrayList<MixInFlavor> mixins = new ArrayList<>();
@@ -14,6 +14,18 @@ public class TestScoop {
 
   /* Professor Rice's code */
   private Console console = System.console();
+
+  /* Hint: Prof Swiped from Swing - MOST USEFUL!! */
+  private int selectFromArray(String prompt, Object[] objects) {
+      try {
+          for(int i=0; i<objects.length; ++i)
+              console.printf("%d) %s\n", i, objects[i].toString());
+          return Integer.parseInt(console.readLine("\n%s ", prompt));
+      } catch(Exception e) {
+          System.err.println("#### Invalid selection, " + e);
+          return -1;
+      }
+  }
 
   private void addMixInFlavor() {
       mixins.add(new MixInFlavor(

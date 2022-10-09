@@ -5,13 +5,13 @@ import java.util.*;
 
 public class Scoop {
 
-  // Constructoer - immediately follows
+  // Constructer - immediately follows
   public Scoop(IceCreamFlavor flavor) {
     this.flavor = flavor;
     this.mixins = new ArrayList<>();
-  } // end Scoop
+  } // end Constructer Scoop
 
-  // Method /* i = count of mix toppings */
+  // Method | i = count of mix toppings
   public void addMixIn(MixIn mixin) {
     mixins.add(mixin); // OR push info onto ArrayList
   }
@@ -28,15 +28,10 @@ public class Scoop {
           }
       }
       return result.toString();
-  }
-  /* ^^Professor Rice's code */
+  }  /* ^^Professor Rice's code */
 
   // Fields
   private IceCreamFlavor flavor;
   private ArrayList<MixIn> mixins;
-  // private ArrayList<MixIn> mixins = new ArrayList<>();
-
-}
-
-// Example:
-// ArrayList<Vehicle> vehicles = new ArrayList<>();
+  // Example: private ArrayList<MixIn> mixins = new ArrayList<>();
+} // end Scoop

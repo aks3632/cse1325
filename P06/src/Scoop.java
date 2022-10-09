@@ -12,14 +12,24 @@ public class Scoop {
   } // end Scoop
 
   // Method /* i = count of mix toppings */
-  public void addMixIn(MixIn i) {
-    mixins.add(i);
+  public void addMixIn(MixIn mixin) {
+    mixins.add(mixin); // OR push info onto ArrayList
   }
 
+  /* Professor Rice's code */
   @Override
-  public String toString() { // Generic NOT QUITE FINISHED!!
-    return "" + flavor + "" + "With" + mixins;
+  public String toString() {
+      StringBuilder result = new StringBuilder(flavor.toString());
+      if(mixins.size() > 0) {
+          String separator = " with ";
+          for(MixIn m : mixins) {
+              result.append(separator + m.toString());
+              separator = ", ";
+          }
+      }
+      return result.toString();
   }
+  /* ^^Professor Rice's code */
 
   // Fields
   private IceCreamFlavor flavor;

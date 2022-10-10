@@ -1,3 +1,12 @@
+/***************************************************************************************
+*    Title: MixIn
+*    Author: George Rice
+*    Date: 10/4/2022
+*    Code version: 1.0
+*    Availability: https://github.com/prof-rice/cse1325-prof/tree/main/P05
+*
+***************************************************************************************/
+
 package test;
 
 import product.IceCreamFlavor;
@@ -104,6 +113,6 @@ public class TestScoop { // InteractiveTest
   public static void main(String[] args) { // function main begins program execution
     TestScoop testscoop = new TestScoop();
     testscoop.start();
-  } // end main()
+  } // end main() 2
 
 } // end TestScoop

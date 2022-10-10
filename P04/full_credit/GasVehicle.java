@@ -17,7 +17,7 @@ public class GasVehicle extends Vehicle {
 
   };
   public double dollarsToTravel(double miles) {
-    return fuelConsumed(miles) / dollarsPerGallonOfGas;
+    return fuelConsumed(miles) * dollarsPerGallonOfGas;
   };
 
   // Fields

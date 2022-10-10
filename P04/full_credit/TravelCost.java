@@ -7,15 +7,15 @@ public class TravelCost {
 
     Scanner scannerVin = new Scanner(System.in);
 
-    System.out.println("What is the price per gallon of gas (dollars)? "); // Prompt user $ of gasolnie
+    System.out.print("What is the price per gallon of gas (dollars)? "); // Prompt user $ of gasolnie
     GasVehicle.dollarsPerGallonOfGas = scannerVin.nextDouble(); // Get value: US currency $
 
-    System.out.println("What is the price per kWh of electricity (cents)? "); // Prompt user $ of electricity
+    System.out.print("What is the price per kWh of electricity (cents)? "); // Prompt user $ of electricity
     ElectricVehicle.centsPerKwhOfElectricity = scannerVin.nextDouble(); // Get value: US cents $
 
-    System.out.println("How many miles is your trip? ");
+    System.out.print("How many miles is your trip? ");
     double mi = scannerVin.nextDouble(); // Get value: Miles - length or distance
-                                                                                            // wh/mi kwBat
+                                                                                             // wh/mi kwBat
     ArrayList<Vehicle> vehicles = new ArrayList<>();                                         // mi/gal galTank
     vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model S Plaid",   BodyStyle.Sedan,     297, 100  ));
     vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model 3 LR",      BodyStyle.Sedan,     242,  82  ));
@@ -32,11 +32,18 @@ public class TravelCost {
 
     /*
     // Or use the for-each loop on either
-    for(int i : array) System.out.printf(" %2d", i);
-    System.out.println();
-    for(int i : ali)   System.out.printf(" %2d", i);
+    for(int i = 0; i < vehicles.size(); ++i){
+      System.out.printf(" %2d \n", i);
+    }
     System.out.println();
     */
+
+    // Or use the for-each loop on either
+    for(Vehicle car : vehicles){
+
+      System.out.printf("$ %5.2f %s %5.2f %s \n", car.dollarsToTravel(mi), "range", car.range(), car);
+    }
+    System.out.println();
 
   } // end main()
 } // end TravelCost

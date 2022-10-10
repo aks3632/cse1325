@@ -1,3 +1,5 @@
+package product;
+
 public class Item { // Superclass
 
   // Constructor

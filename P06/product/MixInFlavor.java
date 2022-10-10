@@ -1,3 +1,5 @@
+package product;
+
 public class MixInFlavor extends Item {
 
   // Constructor

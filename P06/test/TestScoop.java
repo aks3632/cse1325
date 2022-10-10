@@ -1,9 +1,18 @@
+package test;
+
+import product.IceCreamFlavor;
+import product.MixInFlavor;
+import product.MixInAmount;
+import product.MixIn;
+import product.Scoop;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.io.*;
 
+/* Ali Senkayi */
 
 public class TestScoop { // InteractiveTest
 

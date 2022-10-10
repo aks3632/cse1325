@@ -1,4 +1,4 @@
-abstract class Vehicle {
+public abstract class Vehicle {
   // Constructor
   public Vehicle(int year, String make, String model, BodyStyle bodystyle) {
     this.year = year;

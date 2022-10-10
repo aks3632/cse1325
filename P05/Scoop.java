@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.*;
+
 
 public class Scoop {
 
@@ -17,7 +17,7 @@ public class Scoop {
   }
 
   @Override
-  public String toString() {
+  public String toString() { // Generic NOT QUITE FINISHED!!
     return "" + flavor + "" + "With" + mixins;
   }
 

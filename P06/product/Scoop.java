@@ -42,7 +42,7 @@ public class Scoop {
   }  /* ^^Professor Rice's code */
 
   // Fields
-  private IceCreamFlavor flavor;
-  private ArrayList<MixIn> mixins;
+  private IceCreamFlavor flavor; // private IceCreamFlavor flavor;
+  private ArrayList<MixIn> mixins; // private ArrayList<MixIn> mixins;
   // Example: private ArrayList<MixIn> mixins = new ArrayList<>();
 } // end Scoop

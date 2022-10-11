@@ -62,6 +62,28 @@ public class TestScoop { // InteractiveTest
           Integer.parseInt(console.readLine("Cost? "))
       ));
   }
+
+  private void addScoop() {
+      try {
+              Scoop scoop = new Scoop(
+                  flavors.get(selectFromArray("Flavor?", flavors.toArray())));
+              String prompt = "Mixin? ";
+              while(mixins.size() > 0) {
+                  int mixinIndex = selectFromArray(prompt, mixins.toArray());
+                  if(mixinIndex < 0) break;
+                  int amount = selectFromArray("Amount?", MixInAmount.values());
+                  if(amount < 0) break;
+                  scoop.addMixIn(new MixIn(mixins.get(mixinIndex),
+                                 MixInAmount.values()[amount]));
+                  prompt = "Another mixin?";
+              }
+              console.printf("Adding %s\n", scoop.toString());
+              scoops.add(scoop);
+      } catch(Exception e) {
+          System.err.println("#### Cancel scoop creation: " + e);
+      }
+  }
+
   /* ^^Professor Rice's code */
 
   public void start() {
@@ -78,7 +100,8 @@ public class TestScoop { // InteractiveTest
         System.out.printf("Enter a choice: \n"); // Promt user
         System.out.printf("1. (m)ixin\n");
         System.out.printf("2. (i)ce cream flavor\n");
-        System.out.printf("3. (q)uit\n");
+        System.out.printf("3. (s)coop\n");
+        System.out.printf("4. (q)uit?\n");
         System.out.printf("> ");
         choice = scanner.next().charAt(0); // Get char input
         // while( getchar() != '\n' ); VOID
@@ -90,22 +113,31 @@ public class TestScoop { // InteractiveTest
               System.out.printf("\n");
               addMixInFlavor(); /* << Professor Rice's code */
               break;
-          case '2': // Display: Calcualted Averages
+
+          case '2': // Display: 2nd choice
               System.out.printf("Option 2: Creating new Ice Cream Flavor!\n");
               System.out.printf("\n");
               addIceCreamFlavor(); /* << Professor Rice's code */
               break;
-          case '3': // Gracefully terminate program
+
+          case '3': // Display: 2nd choice
+              System.out.printf("Option 3: Creating a scoop of ice cream!\n");
+              System.out.printf("\n");
+              addScoop(); /* << Professor Rice's code */
+              break;
+
+          case '4': // Gracefully terminate program
               System.out.printf("Good Bye!\n");
               System.out.printf("\n");
               break;
+
           default:
               System.out.printf("%s\n%s\n", "Invalid input!",
-              "Please enter a number range (1 - 3).\n"); // Key selection is NOT an integer.
+              "Please enter a number range (1 - 4).\n"); // Key selection is NOT an integer.
               break;
         } // end switch
         /* code */
-      } while(choice != '3'); // end do..while
+      } while(choice != '4'); // end do..while
 
   } // end start()
 

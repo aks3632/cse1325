@@ -3,7 +3,7 @@ package product;
 public class MixIn {
 
   // Constructor
-  MixIn(MixInFlavor flavor, MixInAmount amount) {
+  public MixIn(MixInFlavor flavor, MixInAmount amount) {
     this.flavor = flavor;
     this.amount = amount;
   } // end Constructor
@@ -22,7 +22,7 @@ public class MixIn {
   } // end toString
 
   // Two private Fields
-  private MixInFlavor flavor;
-  private MixInAmount amount;
+  private MixInFlavor flavor; // private MixInFlavor flavor;
+  private MixInAmount amount; // private MixInAmount amount;
 
-}
+} // end MixIn

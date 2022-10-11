@@ -83,7 +83,6 @@ public class TestScoop { // InteractiveTest
           System.err.println("#### Cancel scoop creation: " + e);
       }
   }
-
   /* ^^Professor Rice's code */
 
   public void start() {

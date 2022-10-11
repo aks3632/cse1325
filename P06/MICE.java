@@ -1,4 +1,10 @@
 import test.TestScoop;
+import gui.MainWin;
+import product.AboutDialog;
+import product.Nim;
+import emporium.Emporium;
+
+import product.Item;
 import product.IceCreamFlavor;
 import product.MixInFlavor;
 import product.MixInAmount;
@@ -14,5 +20,9 @@ public class MICE {
     testscoop.start();
     *********************************** */
 
+    MainWin myApp = new MainWin("Mavs Ice Cream Emporium");
+    myApp.setVisible(true);
+
   } // end main() 1
+
 } // emd MICE

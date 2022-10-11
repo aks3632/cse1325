@@ -1,5 +1,15 @@
 package product;
 
+/***************************************************************************************
+*    Title: MainWin
+*    Author: George Rice
+*    Date: 10/10/2022
+*    Code version: 1.0
+*    Availability: https://github.com/prof-rice/cse1325-prof/tree/main/P05
+*
+***************************************************************************************/
+
+
 import java.util.concurrent.ThreadLocalRandom;
 public class Nim {
     public Nim(int sticks, int firstPlayer) {

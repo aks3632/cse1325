@@ -10,6 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+/***************************************************************************************
+*    Title: MainWin
+*    Author: George Rice
+*    Date: 10/10/2022
+*    Code version: 1.0
+*    Availability: https://github.com/prof-rice/cse1325-prof/tree/main/P05
+*
+***************************************************************************************/
+
+
 public class AboutDialog extends JDialog {
   public AboutDialog() {
     setTitle("About");

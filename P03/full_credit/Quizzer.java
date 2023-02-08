@@ -7,6 +7,10 @@ public class Quizzer {
 
   public static void main(String[] args) { // Function main() begins program execution
 
+    Quiz quiz = new Quiz();
+
+    quiz.takeQuiz();
+
     /*
     try {
       println("This is a test");

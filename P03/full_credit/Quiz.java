@@ -7,10 +7,12 @@ import java.math.BigDecimal;
    // Constructor invoked by e.g.?
    public Quiz() {
 
+     /*
      // Composition: The Question is contained entirely within the Quiz
      for(int i=0; i< questions.size(); ++i) {
        // questions.add(new loadQuiz()); // Invoked per instructions
      } // end for
+     */
 
    } // end Quiz Constructor
 

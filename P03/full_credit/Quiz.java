@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
  public class Quiz {
 
@@ -8,15 +9,13 @@ import java.util.Scanner;
 
      // Composition: The Question is contained entirely within the Quiz
      for(int i=0; i< questions.size(); ++i) {
+       // questions.add(new loadQuiz()); // Invoked per instructions
      } // end for
-
-     loadQuiz(); // Invoked per instructions
 
    } // end Quiz Constructor
 
    // Methods
    public double takeQuiz() {
-
 
      return 0; // Test pt
    } // end takeQuiz
@@ -32,12 +31,19 @@ import java.util.Scanner;
      3) Austin
      4) Arlington """;
 
+     ArrayList<String> guess = new ArrayList<>();
+
      Scanner scanner = new Scanner(System.in);  // Syntax for Input
-     String guess = scanner.nextLine();       // Random guess from USER
+     guess.add(scanner.nextLine());       // Random guess from USER
      String password = "Austin";  // Correct hidden answer
+     System.out.println(password.equals(guess)); // Compares value of 2 Strings
+
+     int res;
+     // Performing ternary operation
+     res = (password.equals(guess)) ? (1) : (0);
 
      System.out.print(Texas); // Prompt user
-     // q[0] = new Question (Texas, ArrayList.toString(guess), password);
+     q[0] = new Question (Texas, guess, res);
 
    } // end loadQuiz
 

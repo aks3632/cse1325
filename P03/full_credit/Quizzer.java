@@ -10,6 +10,7 @@ public class Quizzer {
     Quiz quiz = new Quiz();
 
     quiz.takeQuiz();
+    System.out.println(quiz.takeQuiz());
 
     /*
     try {

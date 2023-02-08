@@ -15,10 +15,9 @@ public class Question {
     /*
     // Data validation | Notice: Bypass rule of NO return value
     if((rightAnswer <= 0) || (rightAnswer > questionNumber)) {
-      throw new illeagaArgumentException("%s\n %s\n %s\n","Invalid tally of answers."
-                                        , "Can't exceed correct answers"
-                                        , "than there are original Questions.");
-
+      throw new IllegalArgumentException("Invalid tally of answers."
+          + "Can't exceed correct answers"
+          + "than there are original Questions.");
     } // end if
     */
 
@@ -30,9 +29,8 @@ public class Question {
 
   @Override
   public String toString() {
-    return " "; // + question + answers + rightAnswer?
+    return " " + question; // + question + answers + rightAnswer?
   }
-
 
   // Fields | 5 private fields
   private static int nextQuestionNumber = 1;  // Static field
@@ -41,6 +39,4 @@ public class Question {
   private String question;
   private ArrayList<String> answers; // OR String[] answers;
   private int rightAnswer;
-
-
 }

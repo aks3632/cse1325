@@ -1,5 +1,5 @@
 
- abstract class Product {
+ public abstract class Product {
 
    // Constructor
    public Product(String name, double cost) {

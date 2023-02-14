@@ -1,7 +1,9 @@
 
- public abstract class Product {
+ abstract class Product {
 
-   // Constructor
+   /* throw new IllegalArgumentException("\nInvalid menu choice. Good bye!");
+    * throw new IllegalArgumentException("\nInvalid menu choice. Good bye!"); */
+   // Constructor |||
    public Product(String name, double cost) {
      this.name = name;
      this.cost = cost;

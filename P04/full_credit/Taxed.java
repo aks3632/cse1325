@@ -21,6 +21,6 @@ public class Taxed extends Product {
 
   // Field
   private static double tax; // salesTaxRate???
-  public static double salesTaxRate = 0.0;
+  public static double salesTaxRate = 0.0;  // salesTax
 
 }

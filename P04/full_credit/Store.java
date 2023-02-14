@@ -29,6 +29,9 @@ public class Store {
 
     Taxed.setTaxRate(0.0825);
 
+    // Stystem.out.println(products.price());
+
+
     int input = 0;
 
     System.out.println("====================");
@@ -87,37 +90,37 @@ public class Store {
               break;
 
           case 2: // Display: 2nd choice
-              System.out.printf("Option 2: Bread ($1.99)\n" + products.get(0).toString());
+              System.out.printf("Option 2: Bread ($1.99)\n" + products.get(1).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 3: // Display: 2nd choice
-              System.out.printf("Option 3: Cheese ($.85)\n" + products.get(0).toString());
+              System.out.printf("Option 3: Cheese ($.85)\n" + products.get(2).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 4: // Display: 2nd choice
-              System.out.printf("Option 3: Eggs ($6.95)\n" + products.get(0).toString());
+              System.out.printf("Option 3: Eggs ($6.95)\n" + products.get(3).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 5: // Display: 2nd choice
-              System.out.printf("Option 3: Ice Cream ($4.95)\n" + products.get(0).toString());
+              System.out.printf("Option 3: Ice Cream ($4.95)\n" + products.get(4).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 6: // Display: 2nd choice
-              System.out.printf("Option 3: Poptarts ($3.49)\n" + products.get(0).toString());
+              System.out.printf("Option 3: Poptarts ($3.49)\n" + products.get(5).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 7: // Display: 2nd choice
-              System.out.printf("Option 3: Oreos ($5.99)\n" + products.get(0).toString());
+              System.out.printf("Option 3: Oreos ($5.99)\n" + products.get(6).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;

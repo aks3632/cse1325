@@ -24,8 +24,7 @@ public class Store {
     products.add(new Taxfree("Cheese", .85));       products.add(new Taxfree("Eggs", 6.95));
     products.add(new Taxed("IceCream", 4.95));      products.add(new Taxed("Poptarts", 3.49));
     products.add(new Taxed("Oreos", 5.99));
-    // System.out.println(products.get(0));
-    // System.out.println(products.get(0).toString());
+    // System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
 
     int input = 0;
 
@@ -36,6 +35,11 @@ public class Store {
     System.out.println("1. (M)ilk"    + products.get(0).toString());
     System.out.println("2. (B)read"   + products.get(1).toString());
     System.out.println("3. (C)heese"  + products.get(2).toString());
+    System.out.println("4. (E)ggs"    + products.get(3).toString());
+    System.out.println("5. (I)ce Cream" + products.get(4).toString());
+    System.out.println("6. (P)optarts"  + products.get(5).toString());
+    System.out.println("7. (O)reos"     + products.get(6).toString());
+
     System.out.println("4. (q)uit?\n");
     System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);

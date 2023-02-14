@@ -39,8 +39,7 @@ public class Store {
     System.out.println("5. (I)ce Cream" + products.get(4).toString());
     System.out.println("6. (P)optarts"  + products.get(5).toString());
     System.out.println("7. (O)reos"     + products.get(6).toString());
-
-    System.out.println("4. (q)uit?\n");
+    System.out.println("8. (q)uit?\n");
     System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);
 
@@ -53,14 +52,14 @@ public class Store {
         System.err.println(e.getMessage());
         System.exit(-1);
       } // end try...catch
-      if (input <0 || input > 4)
+      if (input <0 || input > 8)
       {
         throw new IllegalArgumentException("\nInvalid menu choice. Good bye!");
         // System.out.println("\n Invalid menu choice please try again");
       } // end if
       return input;
 
-    } while (input < 0 || input > 4);
+    } while (input < 0 || input > 8);
   } // end menu
 
 
@@ -96,7 +95,31 @@ public class Store {
               /* Input | Add to shoppingCart if selected */
               break;
 
-          case 4: // Gracefully terminate program
+              case 4: // Display: 2nd choice
+                  System.out.printf("Option 3: Eggs ($6.95)\n");
+                  System.out.printf("\n");
+                  /* Input | Add to shoppingCart if selected */
+                  break;
+
+                  case 5: // Display: 2nd choice
+                      System.out.printf("Option 3: Ice Cream ($4.95)\n");
+                      System.out.printf("\n");
+                      /* Input | Add to shoppingCart if selected */
+                      break;
+
+                      case 6: // Display: 2nd choice
+                          System.out.printf("Option 3: Poptarts ($3.49)\n");
+                          System.out.printf("\n");
+                          /* Input | Add to shoppingCart if selected */
+                          break;
+
+                          case 7: // Display: 2nd choice
+                              System.out.printf("Option 3: Oreos ($5.99)\n");
+                              System.out.printf("\n");
+                              /* Input | Add to shoppingCart if selected */
+                              break;
+
+          case 8: // Gracefully terminate program
               System.out.printf("Good Bye!\n");
               System.out.printf("\n");
               System.exit(-1);
@@ -104,11 +127,11 @@ public class Store {
 
           default:
               System.out.printf("%s\n%s\n", "Invalid input!",
-              "Please enter a number range (1 - 4).\n"); // Key selection is NOT an integer.
+              "Please enter a number range (1 - 8).\n"); // Key selection is NOT an integer.
               break;
         } // end switch
         /* code */
-      } while((choice != 4)); // end do..while |  || (choice != '4')
+      } while((choice != 8)); // end do..while |  || (choice != '4')
 
   } // end start()
 

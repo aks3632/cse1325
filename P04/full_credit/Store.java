@@ -15,14 +15,11 @@ public class Store {
   */
 
   public void DisplayItems() {
-    products.add(new Taxfree("Milk", 2.85));        products.add(new Taxfree("Bread", 1.99));
-    products.add(new Taxfree("Cheese", .85));       products.add(new Taxfree("Eggs", 6.95));
-    products.add(new Taxed("IceCream", 4.95));      products.add(new Taxed("Poptarts", 3.49));
-    products.add(new Taxed("Oreos", 5.99));
   }
 
 
   public static int Menu() { // Function Method
+
     int input = 0;
 
     System.out.println("====================");
@@ -59,6 +56,13 @@ public class Store {
   public void start() {
       // https://stackoverflow.com/questions/2559527/non-static-variable-cannot-be-referenced-from-a-static-context
       // can now access non-static fields
+
+      products.add(new Taxfree("Milk", 2.85));        products.add(new Taxfree("Bread", 1.99));
+      products.add(new Taxfree("Cheese", .85));       products.add(new Taxfree("Eggs", 6.95));
+      products.add(new Taxed("IceCream", 4.95));      products.add(new Taxed("Poptarts", 3.49));
+      products.add(new Taxed("Oreos", 5.99));
+      System.out.println(products.get(0));
+      System.out.println(products.get(0).toString());
 
       char choice = (char)Menu(); // Obtains function Menu
 

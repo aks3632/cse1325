@@ -1,7 +1,7 @@
 
  abstract class Product {
 
-   /* throw new IllegalArgumentException("\nInvalid menu choice. Good bye!");
+   /* Throw a runtime exception if cost is negative.
     * throw new IllegalArgumentException("\nInvalid menu choice. Good bye!"); */
    // Constructor |||
    public Product(String name, double cost) {
@@ -9,13 +9,14 @@
      this.cost = cost;
    }
 
+   /* prc$ abstract (it has no implementation in this class).
+    * It will be overridden in the subclasses.*/
    // Method
    public abstract double price(); // No implamentation
 
    @Override
    public String toString() { // Special functions
-
-     return " ";
+     return " " + name + " " + "(" + cost + ")";
    }
 
    // Fields

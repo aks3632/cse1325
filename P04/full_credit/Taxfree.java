@@ -9,7 +9,6 @@
 
    @Override
    public double price() {
-     return 1.0; // Test pt!
-
+     return 1.0 * cost; // Test pt!
    }
  }

@@ -10,13 +10,14 @@ public class Taxed extends Product {
   // Methods
   public static void setTaxRate(double salesTax) { // VOID!!!
     // return? Answer NO, because Method is static
+    salesTaxRate = salesTax;
   }
 
   // Any class derived from Product must @Override and
   // and implement price() before it can be instanced
   @Override
   public double price() {
-    return 0.0; // Test pt!
+    return cost * (1 + salesTaxRate); // Test pt!
   }
 
   // Field

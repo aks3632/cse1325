@@ -26,6 +26,8 @@ public class Store {
     products.add(new Taxed("Oreos", 5.99));
     // System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
 
+    Taxed.setTaxRate(0.0825);      
+
     int input = 0;
 
     System.out.println("====================");
@@ -33,12 +35,12 @@ public class Store {
     System.out.println("=====================\n");
     System.out.printf("Enter a choice: \n"); // Promt user
     System.out.println("1. "  + products.get(0).toString());  // (M)ilk
-    System.out.println("2. "  + products.get(1).toString());   // (B)read
-    System.out.println("3. "  + products.get(2).toString());    // (C)heese
+    System.out.println("2. "  + products.get(1).toString());  // (B)read
+    System.out.println("3. "  + products.get(2).toString());  // (C)heese
     System.out.println("4. "  + products.get(3).toString());  // (E)ggs
-    System.out.println("5. "  + products.get(4).toString());     // (I)ce Cream
-    System.out.println("6. "  + products.get(5).toString());    // (P)optarts
-    System.out.println("7. "  + products.get(6).toString()); // (O)reos
+    System.out.println("5. "  + products.get(4).toString());  // (I)ce Cream
+    System.out.println("6. "  + products.get(5).toString());  // (P)optarts
+    System.out.println("7. "  + products.get(6).toString());  // (O)reos
     System.out.println("8. (q)uit?\n");
     System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);

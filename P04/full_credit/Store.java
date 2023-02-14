@@ -32,13 +32,13 @@ public class Store {
     System.out.println("Welcome to the Store");
     System.out.println("=====================\n");
     System.out.printf("Enter a choice: \n"); // Promt user
-    System.out.println("1. "    + products.get(0).toString());  // (M)ilk
-    System.out.println("2. "   + products.get(1).toString());   // (B)read
+    System.out.println("1. "  + products.get(0).toString());  // (M)ilk
+    System.out.println("2. "  + products.get(1).toString());   // (B)read
     System.out.println("3. "  + products.get(2).toString());    // (C)heese
-    System.out.println("4. "    + products.get(3).toString());  // (E)ggs
-    System.out.println("5. " + products.get(4).toString());     // (I)ce Cream
+    System.out.println("4. "  + products.get(3).toString());  // (E)ggs
+    System.out.println("5. "  + products.get(4).toString());     // (I)ce Cream
     System.out.println("6. "  + products.get(5).toString());    // (P)optarts
-    System.out.println("7. "     + products.get(6).toString()); // (O)reos
+    System.out.println("7. "  + products.get(6).toString()); // (O)reos
     System.out.println("8. (q)uit?\n");
     System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);
@@ -84,40 +84,40 @@ public class Store {
               break;
 
           case 2: // Display: 2nd choice
-              System.out.printf("Option 2: Bread ($1.99)\n");
+              System.out.printf("Option 2: Bread ($1.99)\n" + products.get(0).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 3: // Display: 2nd choice
-              System.out.printf("Option 3: Cheese ($.85)\n");
+              System.out.printf("Option 3: Cheese ($.85)\n" + products.get(0).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
-              case 4: // Display: 2nd choice
-                  System.out.printf("Option 3: Eggs ($6.95)\n");
-                  System.out.printf("\n");
-                  /* Input | Add to shoppingCart if selected */
-                  break;
+          case 4: // Display: 2nd choice
+              System.out.printf("Option 3: Eggs ($6.95)\n" + products.get(0).toString());
+              System.out.printf("\n");
+              /* Input | Add to shoppingCart if selected */
+              break;
 
-                  case 5: // Display: 2nd choice
-                      System.out.printf("Option 3: Ice Cream ($4.95)\n");
-                      System.out.printf("\n");
-                      /* Input | Add to shoppingCart if selected */
-                      break;
+          case 5: // Display: 2nd choice
+              System.out.printf("Option 3: Ice Cream ($4.95)\n" + products.get(0).toString());
+              System.out.printf("\n");
+              /* Input | Add to shoppingCart if selected */
+              break;
 
-                      case 6: // Display: 2nd choice
-                          System.out.printf("Option 3: Poptarts ($3.49)\n");
-                          System.out.printf("\n");
-                          /* Input | Add to shoppingCart if selected */
-                          break;
+          case 6: // Display: 2nd choice
+              System.out.printf("Option 3: Poptarts ($3.49)\n" + products.get(0).toString());
+              System.out.printf("\n");
+              /* Input | Add to shoppingCart if selected */
+              break;
 
-                          case 7: // Display: 2nd choice
-                              System.out.printf("Option 3: Oreos ($5.99)\n");
-                              System.out.printf("\n");
-                              /* Input | Add to shoppingCart if selected */
-                              break;
+          case 7: // Display: 2nd choice
+              System.out.printf("Option 3: Oreos ($5.99)\n" + products.get(0).toString());
+              System.out.printf("\n");
+              /* Input | Add to shoppingCart if selected */
+              break;
 
           case 8: // Gracefully terminate program
               System.out.printf("Good Bye!\n");

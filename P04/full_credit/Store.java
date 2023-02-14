@@ -8,11 +8,6 @@ public class Store {
   private ArrayList<Product> products = new ArrayList<>();
   private ArrayList<Product> shoppingCart = new ArrayList<>();
 
-  /*
-  ArrayList<Product> products = new ArrayList<>(
-      Arrays.asList(new Product(Milk, 2.85), new Product(Bread, 1.99),   new Product(cheese, .85),
-                    new Product(Eggs, 6.95), new Product(Ice Cream, 4.95),  Product(Poptarts, 3.49)));
-  */
 
   public void DisplayItems() {
   }
@@ -24,9 +19,15 @@ public class Store {
     products.add(new Taxfree("Cheese", .85));       products.add(new Taxfree("Eggs", 6.95));
     products.add(new Taxed("IceCream", 4.95));      products.add(new Taxed("Poptarts", 3.49));
     products.add(new Taxed("Oreos", 5.99));
+    /* OR
+    ArrayList<Product> products = new ArrayList<>(
+        Arrays.asList(new Product(Milk, 2.85), new Product(Bread, 1.99),   new Product(cheese, .85),
+                      new Product(Eggs, 6.95), new Product(Ice Cream, 4.95),  Product(Poptarts, 3.49)));
+    */
+
     // System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
 
-    Taxed.setTaxRate(0.0825);      
+    Taxed.setTaxRate(0.0825);
 
     int input = 0;
 

@@ -17,7 +17,7 @@ public class Taxed extends Product {
   // and implement price() before it can be instanced
   @Override
   public double price() {
-    return cost * (1 + salesTaxRate); // Test pt!
+    return cost * (1 + salesTaxRate);
   }
 
   // Field

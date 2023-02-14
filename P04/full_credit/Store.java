@@ -18,7 +18,14 @@ public class Store {
   }
 
 
-  public static int Menu() { // Function Method
+  public int Menu() { // Function Method | Removed static from header
+
+    products.add(new Taxfree("Milk", 2.85));        products.add(new Taxfree("Bread", 1.99));
+    products.add(new Taxfree("Cheese", .85));       products.add(new Taxfree("Eggs", 6.95));
+    products.add(new Taxed("IceCream", 4.95));      products.add(new Taxed("Poptarts", 3.49));
+    products.add(new Taxed("Oreos", 5.99));
+    // System.out.println(products.get(0));
+    // System.out.println(products.get(0).toString());
 
     int input = 0;
 
@@ -26,10 +33,10 @@ public class Store {
     System.out.println("Welcome to the Store");
     System.out.println("=====================\n");
     System.out.printf("Enter a choice: \n"); // Promt user
-    System.out.printf("1. (M)ilk\n");
-    System.out.printf("2. (B)read\n");
-    System.out.printf("3. (C)chees\n");
-    System.out.printf("4. (q)uit?\n");
+    System.out.println("1. (M)ilk"    + products.get(0).toString());
+    System.out.println("2. (B)read"   + products.get(1).toString());
+    System.out.println("3. (C)heese"  + products.get(2).toString());
+    System.out.println("4. (q)uit?\n");
     System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);
 
@@ -57,12 +64,6 @@ public class Store {
       // https://stackoverflow.com/questions/2559527/non-static-variable-cannot-be-referenced-from-a-static-context
       // can now access non-static fields
 
-      products.add(new Taxfree("Milk", 2.85));        products.add(new Taxfree("Bread", 1.99));
-      products.add(new Taxfree("Cheese", .85));       products.add(new Taxfree("Eggs", 6.95));
-      products.add(new Taxed("IceCream", 4.95));      products.add(new Taxed("Poptarts", 3.49));
-      products.add(new Taxed("Oreos", 5.99));
-      System.out.println(products.get(0));
-      System.out.println(products.get(0).toString());
 
       char choice = (char)Menu(); // Obtains function Menu
 
@@ -74,7 +75,7 @@ public class Store {
         System.out.printf("\n");
         switch (choice) {
           case 1: // Dispaly: Dataset list
-              System.out.printf("Option 1: Milk ($2.85)\n");
+              System.out.println("Option 1: Milk ($2.85)" + products.get(0).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;

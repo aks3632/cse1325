@@ -28,13 +28,10 @@ public class Store {
     // System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
 
     Taxed.setTaxRate(0.0825);
+    // Option 1
     Taxfree tfree = new Taxfree("Milk", 2.85);
     tfree.price();
 
-    for(Product txCode : products)
-    System.out.println(txCode.price());
-
-    // Stystem.out.println(products.price());
 
     int input = 0;
 
@@ -42,7 +39,9 @@ public class Store {
     System.out.println("Welcome to the Store");
     System.out.println("=====================\n");
     System.out.printf("Enter a choice: \n"); // Promt user
-    System.out.println("1. "  + products.get(0).toString() + "\t" + tfree.price());  // (M)ilk
+    // Option 2
+    for(Product txCode : products) // For each loop
+    System.out.println("1. "  + products.get(0).toString() + "\t" + txCode.price());  // (M)ilk || tfree.price()
     System.out.println("2. "  + products.get(1).toString());  // (B)read
     System.out.println("3. "  + products.get(2).toString());  // (C)heese
     System.out.println("4. "  + products.get(3).toString());  // (E)ggs

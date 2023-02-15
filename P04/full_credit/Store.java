@@ -19,7 +19,6 @@ public class Store {
         Arrays.asList(new Product(Milk, 2.85), new Product(Bread, 1.99),   new Product(cheese, .85),
                       new Product(Eggs, 6.95), new Product(Ice Cream, 4.95),  Product(Poptarts, 3.49)));
     */
-    // System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
 
     Taxed.setTaxRate(0.0825);
     // Option 1
@@ -43,17 +42,16 @@ public class Store {
         break;
       } // end if
     } // end for each loop
-    /* Substituted above
-    System.out.println("0. " + products.get(0).toString());  // (M)ilk || tfree.price()
-    System.out.println("1. " + products.get(1).toString());  // (B)read
-    System.out.println("2. " + products.get(2).toString());  // (C)heese
-    System.out.println("3. " + products.get(3).toString());  // (E)ggs
-    System.out.println("4. " + products.get(4).toString());  // (I)ce Cream
-    System.out.println("5. " + products.get(5).toString());  // (P)optarts
-    System.out.println("6. " + products.get(6).toString());  // (O)reos
-    */
+    /* Substituted above | System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
+    System.out.println("0. " + products.get(0).toString());  // (M)ilk || tfree.price()   System.out.println("1. " + products.get(1).toString());  // (B)read
+    System.out.println("2. " + products.get(2).toString());  // (C)heese                  System.out.println("3. " + products.get(3).toString());  // (E)ggs
+    System.out.println("4. " + products.get(4).toString());  // (I)ce Cream               System.out.println("5. " + products.get(5).toString());  // (P)optarts
+    System.out.println("6. " + products.get(6).toString());  // (O)reos */
     System.out.println("7.  (q)uit?\n");
-    System.out.printf("> Chose a number: ");
+
+    System.out.println("\nCurrent Order");
+    System.out.println("-------------\n");
+    System.out.printf("\n> Chose a number: ");
     Scanner number = new Scanner(System.in);
 
     do {

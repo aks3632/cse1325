@@ -35,9 +35,9 @@ public class Store {
     int i = 0;
     // Option 2 | For each loop
     for(Product txCode : products) { // HINT via ArrayList
-      i++;
-      System.out.print(i);
+      System.out.print(i + ". "  + products.get(i).toString());
       System.out.println("" + "\t" + txCode.price());
+      i++;
       if(i > 6) {
         break;
       } // end if
@@ -113,25 +113,25 @@ public class Store {
               break;
 
           case 4: // Display: 2nd choice
-              System.out.printf("Option 3: Eggs ($6.95)\n" + products.get(3).toString());
+              System.out.printf("Option 4: Eggs ($6.95)\n" + products.get(3).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 5: // Display: 2nd choice
-              System.out.printf("Option 3: Ice Cream ($4.95)\n" + products.get(4).toString());
+              System.out.printf("Option 5: Ice Cream ($4.95)\n" + products.get(4).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 6: // Display: 2nd choice
-              System.out.printf("Option 3: Poptarts ($3.49)\n" + products.get(5).toString());
+              System.out.printf("Option 6: Poptarts ($3.49)\n" + products.get(5).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;
 
           case 7: // Display: 2nd choice
-              System.out.printf("Option 3: Oreos ($5.99)\n" + products.get(6).toString());
+              System.out.printf("Option 7: Oreos ($5.99)\n" + products.get(6).toString());
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               break;

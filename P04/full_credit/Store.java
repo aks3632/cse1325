@@ -32,6 +32,16 @@ public class Store {
     Taxfree tfree = new Taxfree("Milk", 2.85);
     tfree.price();
 
+    int i = 0;
+    // Option 2 | For each loop
+    for(Product txCode : products) { // HINT via ArrayList
+      i++;
+      System.out.print(i);
+      System.out.println("" + "\t" + txCode.price());
+      if(i > 6) {
+        break;
+      } // end if
+    } // end for each loop
 
     int input = 0;
 
@@ -39,9 +49,7 @@ public class Store {
     System.out.println("Welcome to the Store");
     System.out.println("=====================\n");
     System.out.printf("Enter a choice: \n"); // Promt user
-    // Option 2
-    for(Product txCode : products) // For each loop
-    System.out.println("1. "  + products.get(0).toString() + "\t" + txCode.price());  // (M)ilk || tfree.price()
+    System.out.println("1. "  + products.get(0).toString());  // (M)ilk || tfree.price()
     System.out.println("2. "  + products.get(1).toString());  // (B)read
     System.out.println("3. "  + products.get(2).toString());  // (C)heese
     System.out.println("4. "  + products.get(3).toString());  // (E)ggs

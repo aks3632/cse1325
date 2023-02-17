@@ -20,7 +20,10 @@ public class Store {
                       new Product(Eggs, 6.95), new Product(Ice Cream, 4.95),  Product(Poptarts, 3.49)));
     */
 
+    /* Remember, static methods can be called
+     from the class without an object, for example, */
     Taxed.setTaxRate(0.0825);
+
     // Option 1
     // Taxfree tfree = new Taxfree("Milk", 2.85);
     // tfree.price();
@@ -34,11 +37,11 @@ public class Store {
     // Option 2 | For each loop
     int i = 0; // index count for items
     for(Product txCode : products) { // HINT: derived via ArrayList
-      System.out.print(i + ". " + products.get(i).toString());
-      System.out.println("" + "\t\t\t" + String.format("$ %.2f", txCode.price()));
+      System.out.print(i + ") " + products.get(i).toString().strip().trim());
+      System.out.println(""+ "    " + "\t\t\t\t" + String.format("$   %.2f", txCode.price()));
       // System.out.println("" + "\t" + txCode.price());
       i++;
-      if(i > 6) {
+      if(i > 6) { // Displays Menu list (Restricts to 7 items ONLY)
         break;
       } // end if
     } // end for each loop
@@ -47,11 +50,26 @@ public class Store {
     System.out.println("2. " + products.get(2).toString());  // (C)heese                  System.out.println("3. " + products.get(3).toString());  // (E)ggs
     System.out.println("4. " + products.get(4).toString());  // (I)ce Cream               System.out.println("5. " + products.get(5).toString());  // (P)optarts
     System.out.println("6. " + products.get(6).toString());  // (O)reos */
-    System.out.println("7.  (q)uit?\n");
-
+    System.out.println("7) (q)uit?\n");
     System.out.println("\nCurrent Order");
     System.out.println("-------------\n");
-    System.out.printf("\n> Chose a number: ");
+    /* ************************************************************************************** */
+    int count = 0;
+    double sum = 0;
+    double totalPrice;
+
+    for(Product txCode : shoppingCart) { // HINT: derived via ArrayList
+      System.out.print(shoppingCart.get(count).toString().trim());
+      System.out.println("          " + "\t\t\t" + String.format("$   %.2f", txCode.price()));
+
+      sum += txCode.price();
+      count++;
+    } // end for each loop
+    /* ************************************************************************************** */
+    totalPrice = sum;
+    System.out.printf("Total pice: $%.2f\n", totalPrice);
+
+    System.out.printf("By which product? "); // System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);
 
     do {
@@ -63,14 +81,14 @@ public class Store {
         System.err.println(e.getMessage());
         System.exit(-1);
       } // end try...catch
-      if (input <0 || input > 7)
+      if (input <-1 || input > 7)
       {
         throw new IllegalArgumentException("\nInvalid menu choice. Good bye!");
         // System.out.println("\n Invalid menu choice please try again");
       } // end if
       return input;
 
-    } while (input < 0 || input > 7);
+    } while (input < -1 || input > 7);
   } // end menu
 
 
@@ -83,50 +101,56 @@ public class Store {
       do {
         Scanner scanner = new Scanner(System.in);
         choice = (char)Menu();  // Get char input | ERROR prone: choice = scanner.next().charAt(0);
-        // VOID | C++ while( getchar() != '\n' );
 
         System.out.printf("\n");
         switch (choice) {
-          case 0: // Dispaly: Dataset list
-              System.out.println("Option 0: Milk ($2.85)" + products.get(0).toString());
+          case 0:
+              System.out.println("Option 0:" + products.get(0).toString()); // Milk ($2.85)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(0));
               break;
 
           case 1: // Display: 2nd choice
-              System.out.println("Option 1: Bread ($1.99)" + products.get(1).toString());
+              System.out.println("Option 1:" + products.get(1).toString()); // Bread ($1.99)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(1));
               break;
 
           case 2: // Display: 2nd choice
-              System.out.println("Option 2: Cheese ($.85)" + products.get(2).toString());
+              System.out.println("Option 2:" + products.get(2).toString()); // Cheese ($0.85)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(2));
               break;
 
           case 3: // Display: 2nd choice
-              System.out.println("Option 3: Eggs ($6.95)" + products.get(3).toString());
+              System.out.println("Option 3:" + products.get(3).toString()); // Eggs ($6.95)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(3));
               break;
 
           case 4: // Display: 2nd choice
-              System.out.println("Option 4: Ice Cream ($4.95)" + products.get(4).toString());
+              System.out.println("Option 4:" + products.get(4).toString()); // Ice Cream ($4.95)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(4));
               break;
 
           case 5: // Display: 2nd choice
-              System.out.println("Option 5: Poptarts ($3.49)" + products.get(5).toString());
+              System.out.println("Option 5:" + products.get(5).toString()); // Poptarts ($3.49)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(5));
               break;
 
           case 6: // Display: 2nd choice
-              System.out.println("Option 6: Oreos ($5.99)" + products.get(6).toString());
+              System.out.println("Option 6:" + products.get(6).toString()); // Oreos ($5.99)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
+              shoppingCart.add(products.get(6));
               break;
 
           case 7: // Gracefully terminate program

@@ -17,31 +17,31 @@ public class Store {
     /* OR
     ArrayList<Product> products = new ArrayList<>(
         Arrays.asList(new Product(Milk, 2.85), new Product(Bread, 1.99),   new Product(cheese, .85),
-                      new Product(Eggs, 6.95), new Product(Ice Cream, 4.95),  Product(Poptarts, 3.49)));
-    */
+                      new Product(Eggs, 6.95), new Product(Ice Cream, 4.95),  Product(Poptarts, 3.49))); */
 
     /* Remember, static methods can be called
      from the class without an object, for example, */
     Taxed.setTaxRate(0.0825);
 
-    // Option 1
+    /* Option 1 */
     // Taxfree tfree = new Taxfree("Milk", 2.85);
     // tfree.price();
 
+    /* **************** Display Menu of Predefined Taxable & Tax-free Items **************** */
     int input = 0;
 
     System.out.println("====================");
     System.out.println("Welcome to the Store");
     System.out.println("=====================\n");
-    System.out.printf("Enter a choice: \n"); // Promt user
-    // Option 2 | For each loop
+    // System.out.printf("Enter a choice: \n"); // Promt user
+    /* Option 2 | For each loop */
     int i = 0; // index count for items
-    for(Product txCode : products) { // HINT: derived via ArrayList
+    for(Product txCode : products) { // HINT: derived via ArrayList | Creates Menu List
       System.out.print(i + ") " + products.get(i).toString().strip().trim());
       System.out.println(""+ "    " + "\t\t\t\t" + String.format("$   %.2f", txCode.price()));
       // System.out.println("" + "\t" + txCode.price());
       i++;
-      if(i > 6) { // Displays Menu list (Restricts to 7 items ONLY)
+      if(i > 6) { // Menu list displayed restricts to 7 items ONLY
         break;
       } // end if
     } // end for each loop
@@ -50,45 +50,55 @@ public class Store {
     System.out.println("2. " + products.get(2).toString());  // (C)heese                  System.out.println("3. " + products.get(3).toString());  // (E)ggs
     System.out.println("4. " + products.get(4).toString());  // (I)ce Cream               System.out.println("5. " + products.get(5).toString());  // (P)optarts
     System.out.println("6. " + products.get(6).toString());  // (O)reos */
-    System.out.println("7) (q)uit?\n");
-    System.out.println("\nCurrent Order");
+    System.out.println("7) (q)uit?\n"); // end Menu List
+    System.out.println("\nCurrent Order"); // 2nd Porcess begins
     System.out.println("-------------\n");
-    /* ************************************************************************************** */
+
+    /* ***************************** Display Shopping Cart List ***************************** */
+    /* **************************** Show Tally of Purchased Items *************************** */
     int count = 0;
     double sum = 0;
-    double totalPrice;
+    double totalPrice = 0;
 
     for(Product txCode : shoppingCart) { // HINT: derived via ArrayList
-      System.out.print(shoppingCart.get(count).toString().trim());
-      System.out.println("          " + "\t\t\t" + String.format("$   %.2f", txCode.price()));
+      System.out.print(shoppingCart.get(count).toString());
+      System.out.println("    " + "\t\t\t    " + String.format("$   %.2f", txCode.price()));
 
       sum += txCode.price();
       count++;
     } // end for each loop
-    /* ************************************************************************************** */
+    /* **************************** Show Tally of Purchased Items *************************** */
     totalPrice = sum;
     System.out.printf("Total pice: $%.2f\n", totalPrice);
-
-    System.out.printf("By which product? "); // System.out.printf("> Chose a number: ");
+    // Ask user to select an item to purchase
+    System.out.printf("By which product? "); // Prompt user | System.out.printf("> Chose a number: ");
     Scanner number = new Scanner(System.in);
 
     do {
 
       try
       {
-        input = Integer.parseInt(number.nextLine()); // num.nextInt();
+        input = Integer.parseInt(number.nextLine()); // Get input | num.nextInt();
       } catch (Exception e) {
         System.err.println(e.getMessage());
         System.exit(-1);
       } // end try...catch
-      if (input <-1 || input > 7)
-      {
+      if (input > 7) { // If selection item# > +7, notify via IllegalArgumentException
         throw new IllegalArgumentException("\nInvalid menu choice. Good bye!");
-        // System.out.println("\n Invalid menu choice please try again");
-      } // end if
-      return input;
+        /* code */
+      } else if (input <= -1) { // If item# < -1 (negative), then exit
+        System.out.printf("Good Bye!\n");
+        System.out.printf("\n");
+        System.exit(-1);
+        /* code */
+      } else {
+        return input;
+        /* code */
+      }
 
     } while (input < -1 || input > 7);
+    return input;
+
   } // end menu
 
 

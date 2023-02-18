@@ -16,7 +16,7 @@
 
    @Override
    public String toString() { // Special functions
-     return " " + name + " " + "($" + cost + ")";
+     return "" + name + " " + "($" + cost + ")";
    }
 
    // Fields

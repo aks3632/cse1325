@@ -92,7 +92,7 @@ public class Store {
         System.exit(-1);
         /* code */
       } else { /* Otherwise return input */
-        return input;
+        return input; // Escapes do..while loop
         /* code */
       } // end iffe
 
@@ -106,14 +106,15 @@ public class Store {
       // https://stackoverflow.com/questions/2559527/non-static-variable-cannot-be-referenced-from-a-static-context
       // can now access non-static fields
 
-      char choice = (char)Menu(); // Obtains function Menu
+      // Initialize | Equate variable to any alphabet char
+      char choice = 'A';
 
       do {
         Scanner scanner = new Scanner(System.in);
         choice = (char)Menu();  // Get char input | ERROR prone: choice = scanner.next().charAt(0);
 
         System.out.printf("\n");
-        switch (choice) {
+        switch (choice) { // (char vs int) - Slight conversion conflict
           case 0:
               System.out.println("Option 0:" + products.get(0).toString()); // Milk ($2.85)
               System.out.printf("\n");

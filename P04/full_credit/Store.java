@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Store {
-  // Fields - Declated outside methods!
+  // Fields - Declerated outside methods!
   private ArrayList<Product> products = new ArrayList<>();
   private ArrayList<Product> shoppingCart = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class Store {
     System.out.println("-------------\n");
 
     /* ***************************** Display Shopping Cart List ***************************** */
-    /* **************************** Show Tally of Purchased Items *************************** */
+    /* ************************** Calculate Sum of Purchased Items ************************** */
     int count = 0;
     double sum = 0;
     double totalPrice = 0;
@@ -83,20 +83,20 @@ public class Store {
         System.err.println(e.getMessage());
         System.exit(-1);
       } // end try...catch
-      if (input > 7) { // If selection item# > +7, notify via IllegalArgumentException
+      if (input > 7) { /* If selection item# > +7, notify via IllegalArgumentException */
         throw new IllegalArgumentException("\nInvalid menu choice. Good bye!");
         /* code */
-      } else if (input <= -1) { // If item# < -1 (negative), then exit
+      } else if (input <= -1) { /* If item# < -1 (negative), then exit */
         System.out.printf("Good Bye!\n");
         System.out.printf("\n");
         System.exit(-1);
         /* code */
-      } else {
+      } else { /* Otherwise return input */
         return input;
         /* code */
-      }
+      } // end iffe
 
-    } while (input < -1 || input > 7);
+    } while (input < -1 || input > 7); // end do..while loop
     return input;
 
   } // end menu

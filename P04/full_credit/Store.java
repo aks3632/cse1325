@@ -122,49 +122,49 @@ public class Store {
         System.out.printf("\n");
         switch (choice) { // (char vs int) - Slight conversion conflict
           case 0:
-              System.out.println("Option 0:" + products.get(0).toString()); // Milk ($2.85)
+              System.out.println("Option 0: " + products.get(0).toString()); // Milk ($2.85)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(0));
               break;
 
           case 1: // Display: 2nd choice
-              System.out.println("Option 1:" + products.get(1).toString()); // Bread ($1.99)
+              System.out.println("Option 1: " + products.get(1).toString()); // Bread ($1.99)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(1));
               break;
 
           case 2: // Display: 2nd choice
-              System.out.println("Option 2:" + products.get(2).toString()); // Cheese ($0.85)
+              System.out.println("Option 2: " + products.get(2).toString()); // Cheese ($0.85)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(2));
               break;
 
           case 3: // Display: 2nd choice
-              System.out.println("Option 3:" + products.get(3).toString()); // Eggs ($6.95)
+              System.out.println("Option 3: " + products.get(3).toString()); // Eggs ($6.95)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(3));
               break;
 
           case 4: // Display: 2nd choice
-              System.out.println("Option 4:" + products.get(4).toString()); // Ice Cream ($4.95)
+              System.out.println("Option 4: " + products.get(4).toString()); // Ice Cream ($4.95)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(4));
               break;
 
           case 5: // Display: 2nd choice
-              System.out.println("Option 5:" + products.get(5).toString()); // Poptarts ($3.49)
+              System.out.println("Option 5: " + products.get(5).toString()); // Poptarts ($3.49)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(5));
               break;
 
           case 6: // Display: 2nd choice
-              System.out.println("Option 6:" + products.get(6).toString()); // Oreos ($5.99)
+              System.out.println("Option 6: " + products.get(6).toString()); // Oreos ($5.99)
               System.out.printf("\n");
               /* Input | Add to shoppingCart if selected */
               shoppingCart.add(products.get(6));

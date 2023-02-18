@@ -54,6 +54,7 @@ public class Store {
       System.out.println("6. " + products.get(6).toString());  // (O)reos */
     } catch (RuntimeException e) {
       System.err.println("Ending progarm: " + e.getMessage());
+      System.exit(-1);
     } // end try..catch
 
     System.out.println("7) (q)uit?\n"); // end Menu List

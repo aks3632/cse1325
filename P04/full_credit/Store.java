@@ -33,23 +33,29 @@ public class Store {
     System.out.println("====================");
     System.out.println("Welcome to the Store");
     System.out.println("=====================\n");
-    // System.out.printf("Enter a choice: \n"); // Promt user
-    /* Option 2 | For each loop */
-    int i = 0; // index count for items
-    for(Product txCode : products) { // HINT: derived via ArrayList | Creates Menu List
-      System.out.print(i + ") " + products.get(i).toString().strip().trim());
-      System.out.println(""+ "    " + "\t\t\t\t" + String.format("$   %.2f", txCode.price()));
-      // System.out.println("" + "\t" + txCode.price());
-      i++;
-      if(i > 6) { // Menu list displayed restricts to 7 items ONLY
-        break;
-      } // end if
-    } // end for each loop
-    /* Substituted above | System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
-    System.out.println("0. " + products.get(0).toString());  // (M)ilk || tfree.price()   System.out.println("1. " + products.get(1).toString());  // (B)read
-    System.out.println("2. " + products.get(2).toString());  // (C)heese                  System.out.println("3. " + products.get(3).toString());  // (E)ggs
-    System.out.println("4. " + products.get(4).toString());  // (I)ce Cream               System.out.println("5. " + products.get(5).toString());  // (P)optarts
-    System.out.println("6. " + products.get(6).toString());  // (O)reos */
+
+    try {
+      // System.out.printf("Enter a choice: \n"); // Promt user
+      /* Option 2 | For each loop */
+      int i = 0; // index count for items
+      for(Product txCode : products) { // HINT: derived via ArrayList | Creates Menu List
+        System.out.print(i + ") " + products.get(i).toString().strip().trim());
+        System.out.println(""+ "    " + "\t\t\t\t" + String.format("$   %.2f", txCode.price()));
+        // System.out.println("" + "\t" + txCode.price());
+        i++;
+        if(i > 6) { // Menu list displayed restricts to 7 items ONLY
+          break;
+        } // end if
+      } // end for each loop
+      /* Substituted above | System.out.println(products.get(0)); OR System.out.println(products.get(0).toString());
+      System.out.println("0. " + products.get(0).toString());  // (M)ilk || tfree.price()   System.out.println("1. " + products.get(1).toString());  // (B)read
+      System.out.println("2. " + products.get(2).toString());  // (C)heese                  System.out.println("3. " + products.get(3).toString());  // (E)ggs
+      System.out.println("4. " + products.get(4).toString());  // (I)ce Cream               System.out.println("5. " + products.get(5).toString());  // (P)optarts
+      System.out.println("6. " + products.get(6).toString());  // (O)reos */
+    } catch (RuntimeException e) {
+      System.err.println("Ending progarm: " + e.getMessage());
+    } // end try..catch
+
     System.out.println("7) (q)uit?\n"); // end Menu List
     System.out.println("\nCurrent Order"); // 2nd Porcess begins
     System.out.println("-------------\n");

@@ -5,6 +5,9 @@
     * throw new IllegalArgumentException("\nInvalid menu choice. Good bye!"); */
    // Constructor |||
    public Product(String name, double cost) {
+     if(cost < 0) { // Validate or check data NOT negative
+       throw new RuntimeException("Bad - cost is negative!");
+     }
      this.name = name;
      this.cost = cost;
    }

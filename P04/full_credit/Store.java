@@ -118,7 +118,7 @@ public class Store {
 
       do {
         Scanner scanner = new Scanner(System.in);
-        choice = (char)Menu();  // Get char input | ERROR prone: choice = scanner.next().charAt(0);
+        choice = (char)Menu();  // Get input | Invoke function Menu()
 
         System.out.printf("\n");
         switch (choice) { // (char vs int) - Slight conversion conflict

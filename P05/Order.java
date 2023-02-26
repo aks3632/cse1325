@@ -19,7 +19,7 @@ public class Order {
     computers.add(computer);
   } // end addComputer
 
-  /* Ex)
+  /* Ex) - Enhanced!
   Order 0 for Prof Rice (george.rice@uta.edu)
 
   SuperCalc (1Z200XL)
@@ -31,7 +31,7 @@ public class Order {
   @Override
   public String toString() { // Not accurate
     // Not sure how to iterate via Options (parts) & return
-    return "" + "for " + customer.toString() + "\n\n"
+    return "" + "Order " + orderNumber + "for " + customer.toString() + "\n\n"
            + computers.toString();
            // **Not accurate - derived form computers
            // ^^^^Not sure how to iterate via Options (parts) & return

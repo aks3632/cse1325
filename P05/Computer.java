@@ -28,7 +28,7 @@ import java.util.Arrays;
 
      for(Option smpCost : options) {
        sum += smpCost.cost();
-     } // end for loop
+     } // end for:each loop
      return totalCost = sum;
    } // end cost
 
@@ -41,9 +41,23 @@ import java.util.Arrays;
    @Override
    public String toString() { // Not accurate
      // Not sure how to iterate via Options (parts) & return
+
+     StringBuilder result = new StringBuilder("" + String.format("$ %s\n", options.toString()));
+     // StringBuilder is preferred here over String because we're building up
+     //    a String in a loop. Remember, String is immutable - every change
+     //    you make creates an entire new object! StringBuider is mutable.
+     int i = 0; // index count for option items
+     for(Option smpParts : options) {
+       result.append("" + String.format("$ %s\n", options.get(i).toString()));
+       i++;
+       if(i > options.size()) { // (**Perhaps) | Restricts natural size of options items ArrayList!
+         break;
+       } // end if
+     } // end for:each loop
+
      return "" + name + " " + "(" + model + ")" + "\n"
             + "\t\t"
-            + String.format("$ %s", options.toString()); // ** Not accurate
+            + result.toString(); // ** Not accurate
    } // end toString
 
    // Method Object??

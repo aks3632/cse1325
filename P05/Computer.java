@@ -46,7 +46,7 @@ import java.util.Arrays;
             + String.format("$ %s", options.toString());
    } // end toString
 
-   // Method Object?? | Collections.sort(arraylist)
+   // Method Object??
    // https://www.tutorialspoint.com/java/java_regular_expressions.htm
    public boolean equals(Object o) {
      return true; // ** Missing Return
@@ -62,6 +62,13 @@ import java.util.Arrays;
        Complex c = (Complex)o;
        return (a == c.a) && (b == c.b);          // Compare two Complex
    }
+   */
+
+   /*
+   if(o == this) return true;               // An object is equal to itself
+   if(!(o instanceof Order)) return false;  // A different type is not equal
+   Order c = (Order)o;
+   return (customer.equals(p.customer)) && (computers.equals(p.computers));
    */
 
  } // end Computer class

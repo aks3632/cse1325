@@ -6,7 +6,7 @@
 
    /* Throw a runtime exception if email is invalid.
     * throw new IllegalArgumentException("\nInvalid email. Good bye!"); */
-   // Constructor |||
+   // Constructor ||| ***Has 3 indexOf methods
    public Customer(String name, String email) {
      this.name = name;
      this.email = email;
@@ -15,9 +15,9 @@
    // Method
    @Override
    public String toString() {
-     // Has 3 indexOf methods
+     // "Prof Rice (george.rice@uta.edu)"
      // Java Programming Tutorial 15 - String Methods (charAt, concat, contains, indexOf, lastIndexOf)
-     return "Test Pt"; // ** Missing Return
+     return "" + name + " (" + email + ")"; // ** Trial Run |Missing Return
    } // end toString
 
    // Method Matcher Object??

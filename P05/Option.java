@@ -1,4 +1,4 @@
- public class Option {
+ public class Option implements Comparable {
    // Fields
    protected String name;
    protected long cost;

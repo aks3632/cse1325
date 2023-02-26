@@ -32,21 +32,21 @@ import java.util.Arrays;
      return totalCost = sum;
    } // end cost
 
-   /*
+   /* Ex)
    SuperCalc (1Z200XL)
       Mainboard ($195.99)
       RAM ($93.28)
       SSD ($55.00)
       Case ($39.00) */
-
    @Override
    public String toString() {
-     long txCode = 22;
+     // Not sure how to iterate via Options (parts) & return
      return "" + name + " " + "(" + model + ")" + "\n"
-            + "\t\t" + String.format("$ %.2d", txCode);
+            + "\t\t"
+            + String.format("$ %s", options.toString());
    } // end toString
 
-   // Method Object??
+   // Method Object?? | Collections.sort(arraylist)
    // https://www.tutorialspoint.com/java/java_regular_expressions.htm
    public boolean equals(Object o) {
      return true; // ** Missing Return

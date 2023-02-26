@@ -39,11 +39,11 @@ import java.util.Arrays;
       SSD ($55.00)
       Case ($39.00) */
    @Override
-   public String toString() {
+   public String toString() { // Not accurate
      // Not sure how to iterate via Options (parts) & return
      return "" + name + " " + "(" + model + ")" + "\n"
             + "\t\t"
-            + String.format("$ %s", options.toString());
+            + String.format("$ %s", options.toString()); // ** Not accurate
    } // end toString
 
    // Method Object??
@@ -62,13 +62,6 @@ import java.util.Arrays;
        Complex c = (Complex)o;
        return (a == c.a) && (b == c.b);          // Compare two Complex
    }
-   */
-
-   /*
-   if(o == this) return true;               // An object is equal to itself
-   if(!(o instanceof Order)) return false;  // A different type is not equal
-   Order c = (Order)o;
-   return (customer.equals(p.customer)) && (computers.equals(p.computers));
    */
 
  } // end Computer class

@@ -59,8 +59,8 @@ import java.util.Arrays;
             + result.toString(); // ** OK
    } // end toString
 
-   // Method Object??
-   // https://www.tutorialspoint.com/java/java_regular_expressions.htm
+   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
+   @Override
    public boolean equals(Object o) {
      return true; // ** Missing Return
    } // end equals

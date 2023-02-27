@@ -28,6 +28,7 @@ import java.util.*;
    /* ************************************* REGEX ************************************* */
 
   /* https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
+  /* https://www.tutorialspoint.com/java/java_regular_expressions.htm */
   public static boolean isVAV(String email) {
 
     Pattern pattnSeq = Pattern.compile(PTTNREGEX, Pattern.CASE_INSENSITIVE); // TestPt extra parameter
@@ -55,9 +56,8 @@ import java.util.*;
      return "" + name + " (" + email + ")"; // ** Trial Run |Missing Return
    } // end toString
 
-
-   // Method Matcher Object??
-   // https://www.tutorialspoint.com/java/java_regular_expressions.htm
+   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
+   @Override
    public boolean equals(Object o) {
      return true; // ** Missing Return
    } // end equals

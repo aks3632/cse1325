@@ -24,8 +24,8 @@
      return "" + name + " " + "($" + cost/100 + ")"; // Trial Run
    } // end toString
 
-   // Method Matcher Object??
-   // https://www.tutorialspoint.com/java/java_regular_expressions.htm
+   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
+   @Override
    public boolean equals(Object o) {
      return true; // ** Missing Return
    } // end equals

@@ -29,12 +29,10 @@ public class Order {
      Case ($39) */
 
   @Override
-  public String toString() { // Not accurate
-    // Not sure how to iterate via Options (parts) & return
+  public String toString() { // ** OK (Close to accurate)
+    // Resolved | Obtained iteration of Options (parts) via Computer class!
     return "" + "Order " + orderNumber + "for " + customer.toString() + "\n\n"
-           + computers.toString();
-           // **Not accurate - derived form computers
-           // ^^^^Not sure how to iterate via Options (parts) & return
+           + computers.toString(); // ** Derived form computers
   } // end toString
 
   // Method Matcher Object??

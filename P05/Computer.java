@@ -39,14 +39,15 @@ import java.util.Arrays;
       SSD ($55.00)
       Case ($39.00) */
    @Override
-   public String toString() { // Not accurate
-     // Not sure how to iterate via Options (parts) & return
+   public String toString() { // ** OK (Close to accurate)
+     // Resolved | How to iterate via Options (parts) & return
 
      StringBuilder result = new StringBuilder("" + String.format("$ %s\n", options.toString()));
      // StringBuilder is preferred here over String because we're building up
      //    a String in a loop. Remember, String is immutable - every change
      //    you make creates an entire new object! StringBuider is mutable.
-     // for:each loop | Naturally pans through entire ArrayList!
+
+     /* for:each loop | Naturally pans through entire ArrayList! */
      int i = 0; // index count for option items
      for(Option smpParts : options) {
        result.append("" + String.format("$ %s\n", options.get(i).toString()));
@@ -55,7 +56,7 @@ import java.util.Arrays;
 
      return "" + name + " " + "(" + model + ")" + "\n"
             + "\t\t"
-            + result.toString(); // ** Not accurate
+            + result.toString(); // ** OK
    } // end toString
 
    // Method Object??

@@ -46,13 +46,11 @@ import java.util.Arrays;
      // StringBuilder is preferred here over String because we're building up
      //    a String in a loop. Remember, String is immutable - every change
      //    you make creates an entire new object! StringBuider is mutable.
+     // for:each loop | Naturally pans through entire ArrayList!
      int i = 0; // index count for option items
      for(Option smpParts : options) {
        result.append("" + String.format("$ %s\n", options.get(i).toString()));
        i++;
-       if(i > options.size()) { // (**Perhaps) | Restricts natural size of options items ArrayList!
-         break;
-       } // end if
      } // end for:each loop
 
      return "" + name + " " + "(" + model + ")" + "\n"

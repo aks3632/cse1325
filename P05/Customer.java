@@ -15,11 +15,10 @@ import java.util.*;
    public static final String PTTNREGEX = "^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$";
 
 
-   /* Throw a runtime exception if email is invalid.
-    * **** throw new IllegalArgumentException("\nInvalid email. Good bye!"); */
-   // Constructor ||| ***1st Option: Has 3 indexOf methods 2nd Option: Implore REGEX
+   /* Throw a runtime exception if email is invalid. */
+   // Constructor ||| ***(1st Option): Has 3 indexOf methods OR (2nd Option): Seek REGEX
    public Customer(String name, String email) {
-     if(email == null) { // 2nd - Twice? Validate or check data NOT invalid e-mail
+     if(isVAV(email) == false) { // **2nd x| (Twice): Validate or check data NOT invalid e-mail
        throw new IllegalArgumentException("\nInvalid email. Good bye!");
      } // end if
      this.name = name;
@@ -28,10 +27,11 @@ import java.util.*;
 
    /* ************************************* REGEX ************************************* */
 
+  /* https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
   public static boolean isVAV(String email) {
 
     Pattern pattnSeq = Pattern.compile(PTTNREGEX, Pattern.CASE_INSENSITIVE); // TestPt extra parameter
-    if(email == null) { // **1st Validate or check data NOT invalid e-mail
+    if(email == null) { // **1st | (Once): Validate or check data NOT invalid e-mail
       return false;
     } // end if
     return pattnSeq.matcher(email).matches();
@@ -44,7 +44,7 @@ import java.util.*;
    public String toString() {
 
      try {
-       isVAV(email); /// ??????
+       isVAV(email); /// Returns a boolean
      } catch(Exception e) {
        System.err.println("Ending program: " + e.getMessage());
        System.exit(-1);

@@ -40,12 +40,13 @@
    } // end toString
 
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
+   /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04 */
    @Override
    public boolean equals(Object o) {
      if(o == this) return true;                     // (1) An object is equal to itself
      if(!(o instanceof Option)) return false;       // (2) A different type is not equal
      Option c = (Option)o;                          // (3) Cast
-     return (name.equals(c.name)) && Long.valueOf(cost).equals(Long.valueOf(c.cost)); // (4) Compare two name & email |?
+     return (name.equals(c.name)) && Long.valueOf(cost).equals(Long.valueOf(c.cost)); // (4) Compare two name & cost |?
      // member Method valueOf(cost) | Converts String |& Returns Integer(Object)
    } // end equals
 
@@ -54,7 +55,7 @@
  /******************************************************************************
 
  * CSE 1320-001 Spring 2023
- * File: Customer.java,
+ * File: Option.java,
  * Author:
  * Created on: Feb 25, 2023 3:40 AM
  .*
@@ -64,6 +65,5 @@
  *******************************************************************************/
 
  /******************************************************************************
- Java Programming Tutorial 62 - Encapsulation (Lecture)
- Java Programming Tutorial 63 - Create a Getter
+ Java Programming Tutorial 13 - Numeric Methods (max, compare, valueOf, parseInt, etc)
  *******************************************************************************/

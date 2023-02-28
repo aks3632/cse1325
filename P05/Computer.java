@@ -62,8 +62,17 @@ import java.util.Arrays;
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
    @Override
    public boolean equals(Object o) {
-     return true; // ** Missing Return
+     if(o == this) return true;                         // (1) An object is equal to itself
+     if(!(o instanceof Computer)) return false;         // (2) A different type is not equal
+     Computer c = (Computer)o;                          // (3) Cast
+     return ((name.equals(c.name))
+            && (model.equals(c.model)))
+            && options.toString().equals(c.options.toString()); // (4) Compare two name & model & options.toString() |?
+
    } // end equals
+
+   // HINT: OPTION = NAME + COST via toString
+
 
    /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04
    @Override

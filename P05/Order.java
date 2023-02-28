@@ -38,15 +38,17 @@ public class Order {
   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
   @Override
   public boolean equals(Object o) {
+    if(o == this) return true;                     // (1) An object is equal to itself
     return true; // ** Missing Return
-  } // end equals
+  } // end equals ******!!!!!?????
 
-  /*
+  /* OK OK OK!!!!!!!! EXAMPLE IS FOR BELOW
   if(o == this) return true;               // An object is equal to itself
   if(!(o instanceof Order)) return false;  // A different type is not equal
   Order c = (Order)o;
   return (customer.equals(p.customer)) && (computers.equals(p.computers));
   */
+
 
 } // end class
 

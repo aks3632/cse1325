@@ -67,12 +67,8 @@ import java.util.Arrays;
      Computer c = (Computer)o;                          // (3) Cast
      return ((name.equals(c.name))
             && (model.equals(c.model)))
-            && options.toString().equals(c.options.toString()); // (4) Compare two name & model & options.toString() |?
-
-   } // end equals
-
-   // HINT: OPTION = NAME + COST via toString
-
+            && options.toString().equals(c.options.toString()); // (4) Compare three name & model & options.toString() |?
+   } // end equals | HINT: OPTION = NAME + COST via toString
 
    /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04
    @Override

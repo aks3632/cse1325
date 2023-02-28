@@ -39,13 +39,15 @@ public class Order {
   @Override
   public boolean equals(Object o) {
     if(o == this) return true;                     // (1) An object is equal to itself
-    return true; // ** Missing Return
-  } // end equals ******!!!!!?????
+    if(!(o instanceof Order)) return false; // (2) A different type is not equal
+    Order c = (Order)o; // (3) Cast
+    return (customer.equals(c.customer)) && (computers.equals(c.computers));  // (4) Compare three name & model & options.toString() |?
+  } // end equals
+  /* Old Programmer's Trick mentioned for Computer.equals won't work for Order */
 
   /* OK OK OK!!!!!!!! EXAMPLE IS FOR BELOW
   if(o == this) return true;               // An object is equal to itself
   if(!(o instanceof Order)) return false;  // A different type is not equal
-  Order c = (Order)o;
   return (customer.equals(p.customer)) && (computers.equals(p.computers));
   */
 

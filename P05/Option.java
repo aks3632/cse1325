@@ -1,9 +1,12 @@
  public class Option {
+
    // Fields
    protected String name;
    protected long cost;
 
    // Constructor
+   /* ***Option instance with $0.00 cost MUST be supported | Option costInt = new Option(); */
+   /* ^^Constructor Option in class Option cannot be applied to given types;^^ */
    public Option(String name, long cost) {
      if(cost < 0) { // Validate or check data NOT negative
        throw new IllegalArgumentException("Bad - cost is negative!");
@@ -24,12 +27,13 @@
        System.exit(-1);
      } // end try-catch
 
-     return cost; // ** Missing Return ?????????????
+     return cost; // ** TestPt ~ Resolved
    } // end cost
 
    // Method
    @Override
    public String toString() {
+
 
      // Ex) "PNY CS900 500GB Internal SSD SATA ($29.99)"
      return "" + name + " " + "($" + cost + ")"; // Trial Run
@@ -38,7 +42,11 @@
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
    @Override
    public boolean equals(Object o) {
-     return true; // ** Missing Return
+     if(o == this) return true;                     // (1) An object is equal to itself
+     if(!(o instanceof Option)) return false;     // (2) A different type is not equal
+     Option c = (Option)o;                      // (3) Cast
+     return (name.equals(c.name)) && Long.valueOf(cost).equals(Long.valueOf(c.cost)); // (4) Compare two name & email |?
+     // member Method valueOf(cost) | Converts String |& Returns Integer(Object)
    } // end equals
 
  } // end class

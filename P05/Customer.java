@@ -46,7 +46,7 @@ import java.util.*;
 
      try { /* Perform data validation on email */
        isVAV(email); // Returns a boolean
-       
+
      } catch(Exception e) {
        System.err.println("Ending program: " + e.getMessage());
        System.exit(-1);
@@ -65,8 +65,8 @@ import java.util.*;
      /* Aggregation to Order? (Customer)--<>(Order | Open diamond) */
      if(!(o instanceof Customer)) return false;     // (2) A different type is not equal
      Customer c = (Customer)o;                      // (3) Cast
-     return (name.equals(c.name)) && (email.equals(c.email)); // Compare two name & email |? (name == c.name) && (email == c.email);
-     // MAYBE CHANGE CODE ABOVE, becasue name & email are [Strings]
+     return (name.equals(c.name)) && (email.equals(c.email)); // (4) Compare two name & email |? (name == c.name) && (email == c.email);
+     // Used String Method "equals", becasue name & email are [Strings]
    } // end equals
 
  } // end class

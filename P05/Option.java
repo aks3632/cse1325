@@ -43,8 +43,8 @@
    @Override
    public boolean equals(Object o) {
      if(o == this) return true;                     // (1) An object is equal to itself
-     if(!(o instanceof Option)) return false;     // (2) A different type is not equal
-     Option c = (Option)o;                      // (3) Cast
+     if(!(o instanceof Option)) return false;       // (2) A different type is not equal
+     Option c = (Option)o;                          // (3) Cast
      return (name.equals(c.name)) && Long.valueOf(cost).equals(Long.valueOf(c.cost)); // (4) Compare two name & email |?
      // member Method valueOf(cost) | Converts String |& Returns Integer(Object)
    } // end equals

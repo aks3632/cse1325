@@ -46,6 +46,7 @@ import java.util.*;
 
      try { /* Perform data validation on email */
        isVAV(email); // Returns a boolean
+       
      } catch(Exception e) {
        System.err.println("Ending program: " + e.getMessage());
        System.exit(-1);
@@ -64,7 +65,7 @@ import java.util.*;
      /* Aggregation to Order? (Customer)--<>(Order | Open diamond) */
      if(!(o instanceof Customer)) return false;     // (2) A different type is not equal
      Customer c = (Customer)o;                      // (3) Cast
-     return (name.equals(c.name)) && (email.equals(c.email)); // Compare two name & email |? >> (name == c.name) && (email == c.email);
+     return (name.equals(c.name)) && (email.equals(c.email)); // Compare two name & email |? (name == c.name) && (email == c.email);
      // MAYBE CHANGE CODE ABOVE, becasue name & email are [Strings]
    } // end equals
 
@@ -75,7 +76,7 @@ import java.util.*;
  * CSE 1320-001 Spring 2023
  * File: Customer.java,
  * Author:
- * Created on: Feb 25, 2023 3:40 AM
+ * Created on: Feb 26, 2023 6:22 PM
  .*
  * UTA Student Name:
  * UTA ID:

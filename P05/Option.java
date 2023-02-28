@@ -6,7 +6,7 @@
    // Constructor
    public Option(String name, long cost) {
      if(cost < 0) { // Validate or check data NOT negative
-       throw new RuntimeException("Bad - cost is negative!");
+       throw new IllegalArgumentException("Bad - cost is negative!");
      }
      this.name = name;
      this.cost = cost;
@@ -14,14 +14,25 @@
 
    // Methods
    public long cost() { // Divide by 100 when printing
-     return 1; // ** Missing Return
+     try {
+       // BTY, cost is the number of cents, not dollars,
+       // so divide by 100.0 when printing.
+       cost /= 100;
+
+     } catch(Exception e) {
+       System.err.println("Ending Program: " + e.getMessage());
+       System.exit(-1);
+     } // end try-catch
+
+     return cost; // ** Missing Return ?????????????
    } // end cost
 
    // Method
    @Override
    public String toString() {
+
      // Ex) "PNY CS900 500GB Internal SSD SATA ($29.99)"
-     return "" + name + " " + "($" + cost/100 + ")"; // Trial Run
+     return "" + name + " " + "($" + cost + ")"; // Trial Run
    } // end toString
 
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */

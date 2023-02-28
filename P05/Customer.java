@@ -7,13 +7,22 @@ import java.util.*;
    // Fields
    private String name;
    private String email;
-   /*
-   https://www.geeksforgeeks.org/check-email-address-valid-not-java/
-   ^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-]
-   + )*@(?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2, 7}$ */
-   // Professor's code - PATTERN REGEX E-MAIL
-   public static final String PTTNREGEX = "^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$";
+   /* https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
+   /* ^^^^ Referenced above
+   GOOD - Partitioned
+   "^[a-zA-Z0-9_+&*-]+(?:\\."+
+   "[a-zA-Z0-9_+&*-]+)*@" +
+   "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+   "A-Z]{2,7}$";
+   ^^^^ Referenced above
+   GOOD - Identical continuous sequence
+   "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+   */
 
+   /* Professor's code - PATTERN REGEX E-MAIL | ~ "Not working" */
+   /* ^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$ */
+   // Utilized geeksforgeeks GOOD REGEX pattern for convenience
+   public static final String PTTNREGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
    /* Throw a runtime exception if email is invalid. */
    // Constructor ||| ***(1st Option): Has 3 indexOf methods OR (2nd Option): Seek REGEX

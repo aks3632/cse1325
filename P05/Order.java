@@ -4,13 +4,14 @@ public class Order {
 
   // Fields
   private static long nextOrderNumber = 0;
-  private long orderNumber = nextOrderNumber++;
+  private long orderNumber; // ** Updated to Profs code 3/1/23
   private Customer customer;
   private ArrayList<Computer> computers = new ArrayList<>();
 
   // Constructor
   public Order(Customer customer) {
     this.customer = customer;
+    this.orderNumber = nextOrderNumber++; // ** Updated to Profs code 3/1/23
   } // end Constructor
 
   // Methods
@@ -44,14 +45,6 @@ public class Order {
     return (customer.equals(c.customer)) && (computers.equals(c.computers));  // (4) Compare three name & model & options.toString() |?
   } // end equals
   /* Old Programmer's Trick mentioned for Computer.equals won't work for Order */
-
-  /* OK OK OK!!!!!!!! EXAMPLE IS FOR BELOW
-  if(o == this) return true;               // An object is equal to itself
-  if(!(o instanceof Order)) return false;  // A different type is not equal
-  return (customer.equals(p.customer)) && (computers.equals(p.computers));
-  */
-
-
 } // end class
 
 /******************************************************************************

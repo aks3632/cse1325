@@ -9,7 +9,7 @@
    /* ^^Constructor Option in class Option cannot be applied to given types;^^ */
    public Option(String name, long cost) {
      if(cost < 0) { // Validate or check data NOT negative
-       throw new IllegalArgumentException("Bad - cost is negative!");
+       throw new IllegalArgumentException("Bad - negative cost for " + name + ": " + cost + "!");
      }
      this.name = name;
      this.cost = cost;
@@ -20,7 +20,7 @@
      try {
        // BTY, cost is the number of cents, not dollars,
        // so divide by 100.0 when printing.
-       cost /= 100;
+       this.cost /= 100; // Observe
 
      } catch(Exception e) {
        System.err.println("Ending Program: " + e.getMessage());

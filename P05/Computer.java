@@ -44,8 +44,8 @@ import java.util.Arrays;
 
      StringBuilder result = new StringBuilder("" + String.format("$ %s\n", options.toString()));
      // StringBuilder is preferred here over String because we're building up
-     //    a String in a loop. Remember, String is immutable - every change
-     //    you make creates an entire new object! StringBuider is mutable.
+     // a String in a loop. Remember, String is immutable - every change
+     // you make creates an entire new object! StringBuider is mutable.
 
      /* for:each loop | Naturally pans through entire ArrayList! */
      int i = 0; // index count for option items
@@ -59,7 +59,6 @@ import java.util.Arrays;
             + result.toString(); // ** OK
    } // end toString
 
-   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
    @Override
    public boolean equals(Object o) {
      if(o == this) return true;                         // (1) An object is equal to itself
@@ -67,27 +66,17 @@ import java.util.Arrays;
      Computer c = (Computer)o;                          // (3) Cast
      return ((name.equals(c.name))
             && (model.equals(c.model)))
-            && options.toString().equals(c.options.toString()); // (4) Compare three name & model & options.toString() |?
+            && options.toString().equals(c.options.toString()); // (4) Compare three name, model and options.toString() |?
    } // end equals | HINT: OPTION = NAME + COST via toString
-
-   /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04
-   @Override
-   public boolean equals(Object o) {
-       if(o == this) return true;                // An object is equal to itself
-       if(o instanceof Double)
-           return (a == (Double) o) && b == 0;   // Compare Complex to Double
-       if(!(o instanceof Complex)) return false; // A different type is not equal
-       Complex c = (Complex)o;
-       return (a == c.a) && (b == c.b);          // Compare two Complex
-   }
-   */
+   /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04 */
+   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
 
  } // end Computer class
 
  /******************************************************************************
 
  * CSE 1320-001 Spring 2023
- * File: Customer.java,
+ * File: Computer.java,
  * Author:
  * Created on: Feb 25, 2023 10:25 PM
  .*

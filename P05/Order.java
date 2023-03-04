@@ -71,6 +71,7 @@ public class Order {
 *******************************************************************************/
 
 /******************************************************************************
-Lines 40 - 46 | equals(Object o) vs Lines 25 - 36 (Prof's very COMPLEX!!!)
-Lines 33 - 37 | Ask TA to validate mine vs BEST Prof's code is GOOD
+GOOD
+Lines ** | equals(Object o) vs Lines 25 - 36 (Prof's very COMPLEX!!!)
+Lines ** | @Override public String toString() | Updated to Prof's code
 *******************************************************************************/

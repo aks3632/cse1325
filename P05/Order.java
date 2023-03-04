@@ -30,21 +30,32 @@ public class Order {
      Case ($39) */
 
   @Override
-  public String toString() { // ** OK (Close to accurate)
-    // Resolved | Obtained iteration of Options (parts) via Computer class!
-    return "" + "Order " + orderNumber + "for " + customer.toString() + "\n\n"
-           + computers.toString(); // ** Derived form computers
+  public String toString() { // Professor Rice's code below:
+    // Resolved | Obtains iteration of Options (parts) via Computer class!
+    StringBuilder sb = new StringBuilder("Order " + orderNumber + " for " + customer);
+    for(Computer c : computers) sb.append("\n\n" + c); // ** Derived form computers
+    return sb.toString();
   } // end toString
 
-  /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
   @Override
   public boolean equals(Object o) {
-    if(o == this) return true;              // (1) An object is equal to itself
-    if(!(o instanceof Order)) return false; // (2) A different type is not equal
-    Order c = (Order)o;                     // (3) Cast
-    return (customer.equals(c.customer)) && (computers.equals(c.computers));  // (4) Compare three name & model & options.toString() |?
+
+    try {
+        if(o == this) return true;              // (1) An object is equal to itself
+        if(!(o instanceof Order)) return false; // (2) A different type is not equal
+        Order c = (Order)o;                     // (3) Cast
+        // Professor Rice's code below:
+        if(!this.customer.equals(c.customer)) return false;
+        if(this.computers.size() != c.computers.size()) return false;
+        for(int i=0; i<this.computers.size(); ++i)
+            if(!this.computers.get(i).equals(c.computers.get(i))) return false;  // (4) Compare three name & model & options.toString() |?
+        return true;
+    } catch(Exception e) {
+        return false;
+    } // end try-catch
   } // end equals
   /* Old Programmer's Trick mentioned for Computer.equals won't work for Order */
+  /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
 } // end class
 
 /******************************************************************************

@@ -53,16 +53,19 @@ import java.util.*;
    @Override
    public String toString() {
 
-     try { /* Perform data validation on email */
+     /* TA - “try-catch” within Customer class inside the toString(). - not required
+     VOID VOID VOID VOID!!
+     try { // Perform data validation on email
        isVAV(email); // Returns a boolean
 
      } catch(Exception e) {
        System.err.println("Ending program: " + e.getMessage());
        System.exit(-1);
      } // end try-catch
+     VOID VOID VOID VOID!!
+     */
 
      // "Prof Rice (george.rice@uta.edu)"
-     // Java Programming Tutorial 15 - String Methods (charAt, concat, contains, indexOf, lastIndexOf)
      return "" + name + " (" + email + ")"; // ** Trial Run |Missing Return
    } // end toString
 
@@ -70,14 +73,18 @@ import java.util.*;
    /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04 */
    @Override
    public boolean equals(Object o) {
-     if(o == this) return true;                     // (1) An object is equal to itself
-     /* Aggregation to Order? (Customer)--<>(Order | Open diamond) */
-     if(!(o instanceof Customer)) return false;     // (2) A different type is not equal
-     Customer c = (Customer)o;                      // (3) Cast
-     return (name.equals(c.name)) && (email.equals(c.email)); // (4) Compare two name & email |? (name == c.name) && (email == c.email);
-     // Used String Method "equals", becasue name & email are [Strings]
-   } // end equals
 
+     try {
+         if(o == this) return true;                     // (1) An object is equal to itself
+         /* Aggregation to Order? (Customer)--<>(Order | Open diamond) */
+         if(!(o instanceof Customer)) return false;     // (2) A different type is not equal
+         Customer c = (Customer)o;                      // (3) Cast
+         return (name.equals(c.name)) && (email.equals(c.email)); // (4) Compare two name & email |? (name == c.name) && (email == c.email);
+         // Used String Method "equals", becasue name & email are [Strings]
+     } catch(Exception e) {
+         return false;
+     } // end try-catch
+   } // end equals
  } // end class
 
  /******************************************************************************
@@ -93,6 +100,8 @@ import java.util.*;
  *******************************************************************************/
 
  /******************************************************************************
- Lines 71 - 77 | try-catch everywhere equals(Object o) + this
+ GOOD!
+ Added try-catch to equals(Object o) + this
+ Java Programming Tutorial 15 - String Methods (charAt, concat, contains, indexOf, lastIndexOf)
  Java Programming Tutorial 16 - More String Methods (toLowerCase, strip, substring, repeat, equals)
  *******************************************************************************/

@@ -19,6 +19,9 @@ import java.math.BigDecimal;
 
    // Methods
    public long cost() { // Divide by 100 when printing
+
+     /* TA says try-catch not required
+     VOID VOID VOID VOID VOID
      try {
        // BTY, cost is the number of cents, not dollars,
        // so divide by 100.0 when printing.
@@ -28,7 +31,8 @@ import java.math.BigDecimal;
        System.err.println("Ending Program: " + e.getMessage());
        System.exit(-1);
      } // end try-catch
-
+     VOID VOID VOID VOID VOID
+     */
      return this.cost; // ** TestPt ~ Resolved
    } // end cost
 
@@ -40,20 +44,24 @@ import java.math.BigDecimal;
      // return "" + name + " " + "($" + String.format("%.2f", cost / 100.0) + ")";  | Trial Run 2 Failed
      // return "" + name + " " + "($" + (Math.floor(cost * 100) / 100) + ")";       | Trial Run 3 | truncate long to two decimal places
      // https://stackoverflow.com/questions/7747469/how-can-i-truncate-a-double-to-only-two-decimal-places-in-java
-     return "" + name + " " + "($" + (Math.floor(cost * 100) / 100) + ")"; // Trial Run 3
+     return "" + name + " " + "($" + (Math.floor((cost/100) * 100) / 100) + ")"; // Trial Run 3
    } // end toString
 
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
    /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04 */
    @Override
    public boolean equals(Object o) {
-     if(o == this) return true;                     // (1) An object is equal to itself
-     if(!(o instanceof Option)) return false;       // (2) A different type is not equal
-     Option c = (Option)o;                          // (3) Cast
-     return (name.equals(c.name)) && Long.valueOf(cost).equals(Long.valueOf(c.cost)); // (4) Compare two name & cost |?
-     // member Method valueOf(cost) | Converts String |& Returns Integer(Object)
-   } // end equals
 
+     try {
+         if(o == this) return true;                     // (1) An object is equal to itself
+         if(!(o instanceof Option)) return false;       // (2) A different type is not equal
+         Option c = (Option)o;                          // (3) Cast
+         return (name.equals(c.name)) && Long.valueOf(cost).equals(Long.valueOf(c.cost)); // (4) Compare two name & cost |?
+         // member Method valueOf(cost) | Converts String |& Returns Integer(Object)
+     } catch(Exception e) {
+         return false;
+     } // end try-catch
+   } // end equals
  } // end class
 
  /******************************************************************************
@@ -69,7 +77,8 @@ import java.math.BigDecimal;
  *******************************************************************************/
 
  /******************************************************************************
- lines 21 - 30 | try-catch & getter this.cost()/= 100; ??
- line 43 | truncate ??
+ GOOD
+ Updated getter this.cost()
+ Updated truncate
  Java Programming Tutorial 13 - Numeric Methods (max, compare, valueOf, parseInt, etc)
  *******************************************************************************/

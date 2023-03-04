@@ -59,19 +59,30 @@ import java.util.Arrays;
             + result.toString(); // ** OK
    } // end toString
 
+   // Message from Prof Rice
+   // WARNING: The equals method relies on a stable toString method
+   //   that includes ALL significant fields to be compared
+   // This includes the order in which Option objects were added
+   // A better implementation would sort field options,
+   //   which would require that Option implement Comparable
+   // We'll leave that as a challenge for the enthusiastic student
    @Override
    public boolean equals(Object o) {
-     if(o == this) return true;                         // (1) An object is equal to itself
-     if(!(o instanceof Computer)) return false;         // (2) A different type is not equal
-     Computer c = (Computer)o;                          // (3) Cast
-     return this.toString().equals(c.toString());       // (4) HINT: Cheat by only using original toString()
+
+     try {
+         if(o == this) return true;                         // (1) An object is equal to itself
+         if(!(o instanceof Computer)) return false;         // (2) A different type is not equal
+         Computer c = (Computer)o;                          // (3) Cast
+         return this.toString().equals(c.toString());       // (4) HINT: Updated to Profs code | Cheat by only using original toString()
+         /* My Original Code
+          * return ((name.equals(c.name))
+          *        && (model.equals(c.model)))
+          *        && options.toString().equals(c.options.toString()); // (4) Compare three name, model and options.toString() |?
+         */
+     } catch(Exception e) {
+         return false;
+     } // end try-catch
    } // end equals | HINT: OPTION = NAME + COST via toString
-   /* My Original Code
-    * return ((name.equals(c.name))
-    *        && (model.equals(c.model)))
-    *        && options.toString().equals(c.options.toString()); // (4) Compare three name, model and options.toString() |?
-   */
-   /* Profs code | return this.toString().equals(c.toString()); */
    /* complex04 - complex07 | ~/cse1325-prof/04/code_from_slides/complex04 */
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
  } // end Computer class

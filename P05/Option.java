@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+
  public class Option {
 
    // Fields
@@ -9,7 +11,7 @@
    /* ^^Constructor Option in class Option cannot be applied to given types;^^ */
    public Option(String name, long cost) {
      if(cost < 0) { // Validate or check data NOT negative
-       throw new IllegalArgumentException("Bad - negative cost for " + name + ": " + cost + "!");
+       throw new IllegalArgumentException("Bad - negative cost for " + name + ": " + cost + "!"); // Updated code to Profs
      }
      this.name = name;
      this.cost = cost;
@@ -20,23 +22,25 @@
      try {
        // BTY, cost is the number of cents, not dollars,
        // so divide by 100.0 when printing.
-       this.cost /= 100; // Observe
+       this.cost /= 100.0; // Observe
 
      } catch(Exception e) {
        System.err.println("Ending Program: " + e.getMessage());
        System.exit(-1);
      } // end try-catch
 
-     return cost; // ** TestPt ~ Resolved
+     return this.cost; // ** TestPt ~ Resolved
    } // end cost
 
    // Method
    @Override
    public String toString() {
-
-
      // Ex) "PNY CS900 500GB Internal SSD SATA ($29.99)"
-     return "" + name + " " + "($" + cost + ")"; // Trial Run
+     // return "" + name + " " + "($" + cost + ")";                                 | Trial Run 1
+     // return "" + name + " " + "($" + String.format("%.2f", cost / 100.0) + ")";  | Trial Run 2 Failed
+     // return "" + name + " " + "($" + (Math.floor(cost * 100) / 100) + ")";       | Trial Run 3 | truncate long to two decimal places
+     // https://stackoverflow.com/questions/7747469/how-can-i-truncate-a-double-to-only-two-decimal-places-in-java
+     return "" + name + " " + "($" + (Math.floor(cost * 100) / 100) + ")"; // Trial Run 3
    } // end toString
 
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
@@ -65,5 +69,7 @@
  *******************************************************************************/
 
  /******************************************************************************
+ lines 21 - 30 | try-catch & getter this.cost()/= 100; ??
+ line 43 | truncate ??
  Java Programming Tutorial 13 - Numeric Methods (max, compare, valueOf, parseInt, etc)
  *******************************************************************************/

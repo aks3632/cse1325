@@ -39,9 +39,9 @@ public class Order {
   /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */
   @Override
   public boolean equals(Object o) {
-    if(o == this) return true;                     // (1) An object is equal to itself
+    if(o == this) return true;              // (1) An object is equal to itself
     if(!(o instanceof Order)) return false; // (2) A different type is not equal
-    Order c = (Order)o; // (3) Cast
+    Order c = (Order)o;                     // (3) Cast
     return (customer.equals(c.customer)) && (computers.equals(c.computers));  // (4) Compare three name & model & options.toString() |?
   } // end equals
   /* Old Programmer's Trick mentioned for Computer.equals won't work for Order */
@@ -60,6 +60,6 @@ public class Order {
 *******************************************************************************/
 
 /******************************************************************************
-Java Programming Tutorial 62 - Encapsulation (Lecture)
-Java Programming Tutorial 63 - Create a Getter
+Lines 40 - 46 | equals(Object o) vs Lines 25 - 36 (Prof's very COMPLEX!!!)
+Lines 33 - 37 | Ask TA to validate mine vs BEST Prof's code is GOOD
 *******************************************************************************/

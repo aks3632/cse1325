@@ -28,7 +28,7 @@ import java.util.*;
    // Constructor ||| ***(1st Option): Has 3 indexOf methods OR (2nd Option): Seek REGEX
    public Customer(String name, String email) {
      if(isVAV(email) == false) { // **2nd x| (Twice): Validate or check data NOT invalid e-mail
-       throw new IllegalArgumentException("\nInvalid email. Good bye!");
+       throw new IllegalArgumentException("\nInvalid email: " + email + "Good bye!"); // Updated to Profs codes
      } // end if
      this.name = name;
      this.email = email;
@@ -93,5 +93,6 @@ import java.util.*;
  *******************************************************************************/
 
  /******************************************************************************
+ Lines 71 - 77 | try-catch everywhere equals(Object o) + this
  Java Programming Tutorial 16 - More String Methods (toLowerCase, strip, substring, repeat, equals)
  *******************************************************************************/

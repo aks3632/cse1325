@@ -27,6 +27,7 @@ import java.awt.FlowLayout;          // layout manager for About dialog
 import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
+import javax.swing.JTextField;
 
 import store.Computer;
 import store.Customer;
@@ -235,6 +236,30 @@ public class MainWin extends JFrame {
      protected void onInsertOptionClick() {
        // name = JOptionPane.showInputDialog(this, "Name of Part");
        // cost = JOptionPane.showInputDialog(this, "Cost");
+       // name = JOptionPane.showInputDialog(this, "Name of Part");
+       // cost = JOptionPane.showInputDialog(this, "Cost");
+
+       JLabel name = new JLabel("<HTML><br/>Name</HTML>");
+       names = new JTextField(20);
+
+       JLabel cost = new JLabel("<HTML><br/>Name</HTML>");
+       costs = new JTextField(20);
+
+       // Display the dialog
+       Object[] objects = {  // Array of widgets to display
+           cost,   costs,
+           name,   names};
+       int button = JOptionPane.showConfirmDialog( // Show the dialog
+           this,
+           objects,
+           "New Cost of Parts",
+           JOptionPane.OK_CANCEL_OPTION,
+           JOptionPane.QUESTION_MESSAGE,
+           null);
+       if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data
+       JOptionPane.showMessageDialog(
+           this,
+           names.getText() + costs.getText());
 
      } // end onInsertOptionClick()
 
@@ -254,6 +279,9 @@ public class MainWin extends JFrame {
     private Store store;
     private JLabel display;
     private JLabel response;
+    private JTextField names;  // name of parts
+    private JTextField costs;  // cost
+
 
     private JLabel sticks;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display

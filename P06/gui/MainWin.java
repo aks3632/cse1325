@@ -1,3 +1,5 @@
+package gui;
+
 import javax.swing.JFrame;           // for main window
 import javax.swing.JOptionPane;      // for standard dialogs
 // import javax.swing.JDialog;          // for custom dialogs (for alternate About dialog)
@@ -26,40 +28,94 @@ import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 
+import store.Computer;
+import store.Customer;
+import store.Option;
+import store.Order;
+import store.Store;
+import store.TestStore;
+
+
+
+
 public class MainWin extends JFrame {
-    public MainWin(String title) {
+
+  // Option Two: add overriding properties to your enums if you want more control
+  public enum Modes { // https://stackoverflow.com/questions/6667243/using-enum-values-as-string-literals
+    mode1("Customers"),
+    mode2("Options:"),
+    mode3("Computers");
+
+    private String label;
+
+    private Modes(String mode) {
+        this.label = mode;
+    }
+    public String getLabel() {
+       return label;
+    }
+  };
+
+
+    public MainWin(String title) { // ** Constructor
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 200);
-        
+
         // /////// ////////////////////////////////////////////////////////////////
         // M E N U
         // Add a menu bar to the PAGE_START area of the Border Layout
 
         JMenuBar menubar = new JMenuBar();
-        
+
         JMenu     file       = new JMenu("File");
         JMenuItem anew       = new JMenuItem("New Game");
         JMenuItem quit       = new JMenuItem("Quit");
-        JMenu     help       = new JMenu("Help");
-        JMenuItem rules      = new JMenuItem("Rules");
-        JMenuItem about      = new JMenuItem("About");
-        
-        anew .addActionListener(event -> onNewGameClick());
-        quit .addActionListener(event -> onQuitClick());
+        /* ***************************** NEW MENU ***************************** */
+        JMenu     insert           = new JMenu("Insert");
+        JMenuItem insertCustomer   = new JMenuItem("Customer");
+        JMenuItem insertOption     = new JMenuItem("Option");
+        JMenuItem insertComputer   = new JMenuItem("Computer");
+        JMenu     view             = new JMenu("View");
+        JMenuItem viewCustomers    = new JMenuItem(Modes.mode1.getLabel()); // "Customers"
+        JMenuItem viewOptions      = new JMenuItem(Modes.mode2.getLabel()); // "Options:"
+        JMenuItem viewComputers    = new JMenuItem(Modes.mode3.getLabel()); // "Computers"
+        /* ***************************** NEW MENU ***************************** */
+        JMenu     help             = new JMenu("Help");
+        JMenuItem rules            = new JMenuItem("Rules");
+        JMenuItem about            = new JMenuItem("About");
+
+        anew            .addActionListener(event -> onNewGameClick());
+        quit            .addActionListener(event -> onQuitClick());
+        /* ************************** ACTION LISTNER ************************** */
+        insertCustomer  .addActionListener(event -> onInsertCustomerClick());
+        insertOption    .addActionListener(event -> onInsertOptionClick());
+        insertComputer  .addActionListener(event -> onInsertComputerClick());
+        viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));  // onViewClick(Record.CUSTOMER)
+        viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));    // onViewClick(Record.OPTION)
+        viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));  // onViewClick(Record.COMPUTER)
+        /* ************************** ACTION LISTNER ************************** */
         rules.addActionListener(event -> onRulesClick());
         about.addActionListener(event -> onAboutClick());
 
-        
+
         file.add(anew);
         file.add(quit);
+        insert.add(insertCustomer); // New
+        insert.add(insertOption);
+        insert.add(insertComputer);
+        view.add(viewCustomers);
+        view.add(viewOptions);
+        view.add(viewComputers); // New
         help.add(rules);
         help.add(about);
-        
+
         menubar.add(file);
+        menubar.add(insert);
+        menubar.add(view);
         menubar.add(help);
         setJMenuBar(menubar);
-        
+/*
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
@@ -72,10 +128,10 @@ public class MainWin extends JFrame {
           anewB.setBorder(null);
           toolbar.add(anewB);
           anewB.addActionListener(event -> onNewGameClick());
-        
+
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
-        
+
         // Create the 3 buttons using the icons provided
         ImageIcon ii = new ImageIcon("button1.png");
         button1  = new JButton(new ImageIcon("button1.png"));
@@ -95,9 +151,9 @@ public class MainWin extends JFrame {
           button3.setToolTipText("Select three sticks");
           toolbar.add(button3);
           button3.addActionListener(event -> onButtonClick(3));
-        
+
         toolbar.add(Box.createHorizontalStrut(25));
-        
+
         // Create a toggle button to enable or disable the computer player
         computerPlayer = new JToggleButton(new ImageIcon("freepik_robot.png"));
           computerPlayer.setActionCommand("Enable computer player");
@@ -108,7 +164,7 @@ public class MainWin extends JFrame {
 
         // "Horizontal glue" expands as much as possible, pushing the "X" to the right
         toolbar.add(Box.createHorizontalGlue());
-        
+
         // Create a custom Quit button (not available in Swing stock icons)
         JButton quitB  = new JButton("X");
           quitB.setActionCommand("Quit");
@@ -119,8 +175,8 @@ public class MainWin extends JFrame {
         toolbar.addSeparator();
 
         getContentPane().add(toolbar, BorderLayout.PAGE_START);
-        
-        
+*/
+
         // /////////////////////////// ////////////////////////////////////////////
         // S T I C K S   D I S P L A Y
         // Provide a text entry box to show the remaining sticks
@@ -132,37 +188,23 @@ public class MainWin extends JFrame {
         // Provide a status bar for game messages
         msg = new JLabel();
         add(msg, BorderLayout.PAGE_END);
-        
+
         // Make everything in the JFrame visible
         setVisible(true);
-        
+
         // Start a new game
         onNewGameClick();
-    }
-    
+    } // END CONSTRUCTOR
+    /* ************************************* END CONSTRUCTOR ************************************* */
+
     // Listeners
-    
+
     protected void onNewGameClick() {         // Create a new game
-        nim = new Nim();
-        setSticks();
+        sto = new Store();
+        // setSticks();
         msg.setFont(new JLabel().getFont());    // Reset to default font
     }
-    
-    protected void onButtonClick(int button) {  // Select 1, 2, or 3 sticks from pile
-        try {
-            // Catch the "impossible" out of sticks exception
-            nim.takeSticks(button);
-            setSticks();
-        } catch(Exception e) {
-            sticks.setText("FAIL: " + e.getMessage() + ", start new game");
-        }
-    }
-            
-    protected void onComputerPlayerClick() {   // Enable / disable computer player
-        setSticks();
-        // Java Swing requires action to visually indicate enabled / disabled button
-        computerPlayer.setBorder(computerPlayer.isSelected() ? BorderFactory.createLineBorder(Color.black) : null);
-    }
+
     protected void onRulesClick() {             // Show the rules
         String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
             "The two players alternate taking 1 to 3 sticks from the pile.\n" +
@@ -177,7 +219,7 @@ public class MainWin extends JFrame {
             logo = new JLabel(new ImageIcon(myPicture));
         } catch(IOException e) {
         }
-        
+
         JLabel title = new JLabel("<html>"
           + "<p><font size=+4>Nim</font></p>"
           + "<p>Version 1.4J</p>"
@@ -192,99 +234,34 @@ public class MainWin extends JFrame {
           + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
           + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
           + "</html>");
-          
-         JOptionPane.showMessageDialog(this, 
+
+         JOptionPane.showMessageDialog(this,
              new Object[]{logo, title, artists},
              "The Game of Nim",
              JOptionPane.PLAIN_MESSAGE
          );
      }
 
-/*
-    // This is an alternate About dialog using JDialog instead of JOptionPane
-    
-    protected void onAboutClick() {                 // Display About dialog
-        JDialog about = new JDialog();
-        about.setLayout(new FlowLayout());
-        about.setTitle("The Game of Nim");
-        
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
-            JLabel logo = new JLabel(new ImageIcon(myPicture));
-            about.add(logo);
-        } catch(IOException e) {
-        }
-        
-        JLabel title = new JLabel("<html>"
-          + "<p><font size=+4>Nim</font></p>"
-          + "</html>");
-        about.add(title);
+     /* ****************** START NEW LISTNERS PROTECTED ****************** */
 
-        JLabel artists = new JLabel("<html>"
-          + "<p>Version 1.4J</p>"
-          + "<p>Copyright 2017-2023 by George F. Rice</p>"
-          + "<p>Licensed under Gnu GPL 3.0</p>"
-          + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-          + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-          + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-          + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
-          + "</html>");
-        about.add(artists);
+     protected void onInsertCustomerClick() { }
+     protected void onInsertOptionClick() { }
+     protected void onInsertComputerClick() { }
+     protected void onViewClick() { }
 
-        JButton ok = new JButton("OK");
-        ok.addActionListener(event -> about.setVisible(false));
-        about.add(ok);
-        
-        about.setSize(450,400);
-        about.setVisible(true);
-     }
-*/
+     private enum Record {CUSTOMER, OPTION, COMPUTER, ORDER}
+     // Display from 2021 Maybe?
+
+     /* ******************* END NEW LISTNERS PROTECTED ******************* */
+
+
     protected void onQuitClick() {System.exit(0);}   // Exit the game
 
-    private void setSticks() {              // Update display, robot move
-        // s collects the status message
-        String s = "";
-        
-        // If the robot is enabled and it's their turn, move the robot
-        if(nim.sticksLeft() > 0) {
-            if(computerPlayer.isSelected() && nim.currentPlayer() == 2) {
-                int move = 1;
-                try {
-                    move = nim.optimalMove();
-                } catch(Exception e) {
-                    System.err.println("Invalid optimal move: " + e.getMessage());
-                }
-                s += "Robot plays " + move + ", ";
-                nim.takeSticks(move);
-            }
-        }
-        
-        // Report who's turn it is, or (if all sticks gone) who won
-        
-        if (nim.sticksLeft() > 0) {
-            s += "Player " + nim.currentPlayer() + "'s turn";
-        } else {
-            s += "Player " + nim.currentPlayer() +  " wins!";
-            msg.setFont(new Font("SansSerif", Font.BOLD, 18));
-        }
-        
-        // Display the collected status on the status bar
-        msg.setText(s);
 
-        // Update the visual display of sticks
-        s = "";
-        for(int i=0; i<nim.sticksLeft(); ++i) s += ("| ");
-        s += "  (" + (nim.sticksLeft()) + " sticks)";
-        sticks.setText(s);
 
-        // Set sensitivity of the human stick selectors so user can't make an illegal move
-        button1.setEnabled(nim.sticksLeft() > 0);
-        button2.setEnabled(nim.sticksLeft() > 1);
-        button3.setEnabled(nim.sticksLeft() > 2);
-    }
-    
-    private Nim nim;
-    
+    private Store sto;
+    private JLabel display;
+
     private JLabel sticks;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display
     private JButton button1;                // Button to select 1 stick

@@ -85,7 +85,7 @@ public class MainWin extends JFrame {
         JMenuItem rules            = new JMenuItem("Rules");
         JMenuItem about            = new JMenuItem("About");
 
-        anew            .addActionListener(event -> onNewGameClick());
+        // anew            .addActionListener(event -> onNewGameClick());
         quit            .addActionListener(event -> onQuitClick());
         /* ************************** ACTION LISTNER ************************** */
         insertCustomer  .addActionListener(event -> onInsertCustomerClick());
@@ -193,17 +193,11 @@ public class MainWin extends JFrame {
         setVisible(true);
 
         // Start a new game
-        onNewGameClick();
+        // onNewGameClick();
     } // END CONSTRUCTOR
     /* ************************************* END CONSTRUCTOR ************************************* */
 
     // Listeners
-
-    protected void onNewGameClick() {         // Create a new game
-        sto = new Store();
-        // setSticks();
-        msg.setFont(new JLabel().getFont());    // Reset to default font
-    }
 
     protected void onRulesClick() {             // Show the rules
         String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
@@ -247,7 +241,7 @@ public class MainWin extends JFrame {
      protected void onInsertCustomerClick() { }
      protected void onInsertOptionClick() { }
      protected void onInsertComputerClick() { }
-     protected void onViewClick() { }
+     protected void onViewClick(Record record) { }
 
      private enum Record {CUSTOMER, OPTION, COMPUTER, ORDER}
      // Display from 2021 Maybe?
@@ -259,7 +253,7 @@ public class MainWin extends JFrame {
 
 
 
-    private Store sto;
+    // private Store store;
     private JLabel display;
 
     private JLabel sticks;                  // Display of sticks on game board

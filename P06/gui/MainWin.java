@@ -69,7 +69,6 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
 
         JMenu     file       = new JMenu("File");
-        JMenuItem anew       = new JMenuItem("New Game");
         JMenuItem quit       = new JMenuItem("Quit");
         /* ***************************** NEW MENU ***************************** */
         JMenu     insert           = new JMenu("Insert");
@@ -82,10 +81,8 @@ public class MainWin extends JFrame {
         JMenuItem viewComputers    = new JMenuItem(Modes.mode3.getLabel()); // "Computers"
         /* ***************************** NEW MENU ***************************** */
         JMenu     help             = new JMenu("Help");
-        JMenuItem rules            = new JMenuItem("Rules");
         JMenuItem about            = new JMenuItem("About");
 
-        // anew            .addActionListener(event -> onNewGameClick());
         quit            .addActionListener(event -> onQuitClick());
         /* ************************** ACTION LISTNER ************************** */
         insertCustomer  .addActionListener(event -> onInsertCustomerClick());
@@ -95,11 +92,9 @@ public class MainWin extends JFrame {
         viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));    // onViewClick(Record.OPTION)
         viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));  // onViewClick(Record.COMPUTER)
         /* ************************** ACTION LISTNER ************************** */
-        rules.addActionListener(event -> onRulesClick());
         about.addActionListener(event -> onAboutClick());
 
 
-        file.add(anew);
         file.add(quit);
         insert.add(insertCustomer); // New
         insert.add(insertOption);
@@ -107,7 +102,6 @@ public class MainWin extends JFrame {
         view.add(viewCustomers);
         view.add(viewOptions);
         view.add(viewComputers); // New
-        help.add(rules);
         help.add(about);
 
         menubar.add(file);
@@ -120,14 +114,6 @@ public class MainWin extends JFrame {
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
         JToolBar toolbar = new JToolBar("Nim Controls");
-
-        // Add a New Game stock icon
-        JButton anewB  = new JButton(UIManager.getIcon("FileView.fileIcon"));
-          anewB.setActionCommand("New Game");
-          anewB.setToolTipText("Create a new game, discarding any in progress");
-          anewB.setBorder(null);
-          toolbar.add(anewB);
-          anewB.addActionListener(event -> onNewGameClick());
 
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
@@ -192,20 +178,11 @@ public class MainWin extends JFrame {
         // Make everything in the JFrame visible
         setVisible(true);
 
-        // Start a new game
-        // onNewGameClick();
     } // END CONSTRUCTOR
     /* ************************************* END CONSTRUCTOR ************************************* */
 
     // Listeners
 
-    protected void onRulesClick() {             // Show the rules
-        String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
-            "The two players alternate taking 1 to 3 sticks from the pile.\n" +
-            "The goal is to force your opponent to take the last stick (called misère rules).\n" +
-            "If the computer button is up, it's a two player game. If down, the computer is always Player 2.)";
-        JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
-    }
     protected void onAboutClick() {                 // Display About dialog
         JLabel logo = null;
         try {
@@ -236,10 +213,31 @@ public class MainWin extends JFrame {
          );
      }
 
-     /* ****************** START NEW LISTNERS PROTECTED ****************** */
 
-     protected void onInsertCustomerClick() { }
-     protected void onInsertOptionClick() { }
+     /* ****************** START NEW LISTNERS PROTECTED ****************** */
+     String name;
+     String email;
+     long cost;
+
+     protected void onInsertCustomerClick() {
+       try {
+           name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
+           email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
+       } catch(Exception e) {
+           System.err.println("Invalid " + e.getMessage());
+           System.exit(-1);
+       } // end try-catch
+
+       Customer customer = new Customer(name, email);
+       store.add(customer);
+     } // end onInsertCustomerClick()
+
+     protected void onInsertOptionClick() {
+       // name = JOptionPane.showInputDialog(this, "Name of Part");
+       // cost = JOptionPane.showInputDialog(this, "Cost");
+
+     } // end onInsertOptionClick()
+
      protected void onInsertComputerClick() { }
      protected void onViewClick(Record record) { }
 
@@ -253,8 +251,9 @@ public class MainWin extends JFrame {
 
 
 
-    // private Store store;
+    private Store store;
     private JLabel display;
+    private JLabel response;
 
     private JLabel sticks;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display

@@ -22,19 +22,6 @@ import java.math.BigDecimal;
    // Methods
    public long cost() { // Divide by 100 when printing
 
-     /* TA says try-catch not required
-     VOID VOID VOID VOID VOID
-     try {
-       // BTY, cost is the number of cents, not dollars,
-       // so divide by 100.0 when printing.
-       this.cost /= 100.0; // Observe
-
-     } catch(Exception e) {
-       System.err.println("Ending Program: " + e.getMessage());
-       System.exit(-1);
-     } // end try-catch
-     VOID VOID VOID VOID VOID
-     */
      return this.cost; // ** TestPt ~ Resolved
    } // end cost
 

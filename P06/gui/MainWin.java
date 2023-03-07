@@ -167,9 +167,8 @@ public class MainWin extends JFrame {
         // /////////////////////////// ////////////////////////////////////////////
         // S T I C K S   D I S P L A Y
         // Provide a text entry box to show the remaining sticks
-        sticks = new JLabel();
-        sticks.setFont(new Font("SansSerif", Font.BOLD, 18));
-        add(sticks, BorderLayout.CENTER);
+
+
 
         // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
         // Provide a status bar for game messages
@@ -236,8 +235,6 @@ public class MainWin extends JFrame {
      protected void onInsertOptionClick() {
        // name = JOptionPane.showInputDialog(this, "Name of Part");
        // cost = JOptionPane.showInputDialog(this, "Cost");
-       // name = JOptionPane.showInputDialog(this, "Name of Part");
-       // cost = JOptionPane.showInputDialog(this, "Cost");
 
        JLabel name = new JLabel("<HTML><br/>Name</HTML>");
        names = new JTextField(20);
@@ -259,7 +256,9 @@ public class MainWin extends JFrame {
        if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data
        JOptionPane.showMessageDialog(
            this,
-           names.getText() + costs.getText());
+           names.getText() + " ("+ Integer.valueOf(costs.getText()) + ")" );
+
+           pack();
 
      } // end onInsertOptionClick()
 

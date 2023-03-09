@@ -28,6 +28,8 @@ import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 import javax.swing.JTextField;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import store.Computer;
 import store.Customer;
@@ -44,7 +46,7 @@ public class MainWin extends JFrame {
   // Option Two: add overriding properties to your enums if you want more control
   public enum Modes { // https://stackoverflow.com/questions/6667243/using-enum-values-as-string-literals
     mode1("Customers"),
-    mode2("Options:"),
+    mode2("Options"),
     mode3("Computers");
 
     private String label;
@@ -56,6 +58,9 @@ public class MainWin extends JFrame {
        return label;
     }
   };
+
+  // Fields - Declerated outside methods!
+  private ArrayList<String> computerList = new ArrayList<>(); // Empty ArrayList of Object Computer
 
 
     public MainWin(String title) { // ** Constructor
@@ -168,12 +173,20 @@ public class MainWin extends JFrame {
         // S T I C K S   D I S P L A Y
         // Provide a text entry box to show the remaining sticks
 
+        computerList.add("HP Pavillion"); // , "1Z200XL"
+        computerList.add("Dell Vigor");   // , "200MXG"
+        computerList.add("LG Light");     // , "PZ750ii"
+
+        int i = 0;
+
+        for(String cpu : computerList) {
+          add(computerList.get(i), BorderLayout.CENTER);
+          i++;
+        } // end for-each
 
 
         // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
         // Provide a status bar for game messages
-        msg = new JLabel();
-        add(msg, BorderLayout.PAGE_END);
 
         // Make everything in the JFrame visible
         setVisible(true);
@@ -220,26 +233,26 @@ public class MainWin extends JFrame {
      long cost;
 
      protected void onInsertCustomerClick() {
-       try {
+       //try {
            name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
            email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
-       } catch(Exception e) {
-           System.err.println("Invalid " + e.getMessage());
-           System.exit(-1);
-       } // end try-catch
+       //} catch(Exception e) {
+           //System.err.println("Invalid " + e.getMessage());
+           //System.exit(-1);
+       //} // end try-catch
 
        Customer customer = new Customer(name, email);
-       store.add(customer);
+       //store.add(customer);
      } // end onInsertCustomerClick()
 
      protected void onInsertOptionClick() {
-       // name = JOptionPane.showInputDialog(this, "Name of Part");
-       // cost = JOptionPane.showInputDialog(this, "Cost");
+       int places = 2;
+       double scale = Math.pow(10, places);
 
        JLabel name = new JLabel("<HTML><br/>Name</HTML>");
        names = new JTextField(20);
 
-       JLabel cost = new JLabel("<HTML><br/>Name</HTML>");
+       JLabel cost = new JLabel("<HTML><br/>Cost</HTML>");
        costs = new JTextField(20);
 
        // Display the dialog
@@ -256,9 +269,12 @@ public class MainWin extends JFrame {
        if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data
        JOptionPane.showMessageDialog(
            this,
-           names.getText() + " ("+ Integer.valueOf(costs.getText()) + ")" );
-
-           pack();
+           names.getText() + " ("+ (long)(100 * (Math.round((Double.valueOf(costs.getText())) * scale) / scale)) + ")" );
+           // (A) https://stackoverflow.com/questions/36604943/how-do-i-convert-a-jtextfield-string-to-a-double
+           // (1) Double.valueOf(costs.getText())      | Converts String |& Returns Integer(Object)
+           // (2) Double.parseDouble(costs.getText())  | Converst String |& Returns int (Primitive)
+           // (B) https://www.baeldung.com/java-round-decimal-number
+           // (3) Math.round(value * scale) / scale    | Truncates value
 
      } // end onInsertOptionClick()
 
@@ -281,7 +297,6 @@ public class MainWin extends JFrame {
     private JTextField names;  // name of parts
     private JTextField costs;  // cost
 
-
     private JLabel sticks;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display
     private JButton button1;                // Button to select 1 stick
@@ -290,3 +305,20 @@ public class MainWin extends JFrame {
     private JToggleButton computerPlayer;   // Button to enable robot
 
 }
+
+/******************************************************************************
+
+* CSE 1320-001 Spring 2023
+* File: Option.java,
+* Author:
+* Created on: Feb 25, 2023 3:40 AM
+.*
+* UTA Student Name:
+* UTA ID:
+
+*******************************************************************************/
+
+/******************************************************************************
+member Method valueOf(cost) | Converts String |& Returns Integer(Object)
+Java Programming Tutorial 13 - Numeric Methods (max, compare, valueOf, parseInt, etc)
+*******************************************************************************/

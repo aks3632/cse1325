@@ -28,8 +28,11 @@ import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import store.Computer;
 import store.Customer;
@@ -39,9 +42,11 @@ import store.Store;
 import store.TestStore;
 
 
-
-
 public class MainWin extends JFrame {
+
+  /* Professor's code - PATTERN REGEX E-MAIL | ~ "Not working" | ^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$ */
+  /* Utilized geeksforgeeks GOOD REGEX pattern for convenience | https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
+  public static final String PTTNREGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
   // Option Two: add overriding properties to your enums if you want more control
   public enum Modes { // https://stackoverflow.com/questions/6667243/using-enum-values-as-string-literals
@@ -83,7 +88,7 @@ public class MainWin extends JFrame {
         JMenuItem insertComputer   = new JMenuItem("Computer");
         JMenu     view             = new JMenu("View");
         JMenuItem viewCustomers    = new JMenuItem(Modes.mode1.getLabel()); // "Customers"
-        JMenuItem viewOptions      = new JMenuItem(Modes.mode2.getLabel()); // "Options:"
+        JMenuItem viewOptions      = new JMenuItem(Modes.mode2.getLabel()); // "Options"
         JMenuItem viewComputers    = new JMenuItem(Modes.mode3.getLabel()); // "Computers"
         /* ***************************** NEW MENU ***************************** */
         JMenu     help             = new JMenu("Help");
@@ -94,25 +99,25 @@ public class MainWin extends JFrame {
         insertCustomer  .addActionListener(event -> onInsertCustomerClick());
         insertOption    .addActionListener(event -> onInsertOptionClick());
         insertComputer  .addActionListener(event -> onInsertComputerClick());
-        viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));  // onViewClick(Record.CUSTOMER)
-        viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));    // onViewClick(Record.OPTION)
-        viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));  // onViewClick(Record.COMPUTER)
+        viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));
+        viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));
+        viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));
         /* ************************** ACTION LISTNER ************************** */
         about.addActionListener(event -> onAboutClick());
 
 
         file.add(quit);
         insert.add(insertCustomer); // New
-        insert.add(insertOption);
-        insert.add(insertComputer);
-        view.add(viewCustomers);
-        view.add(viewOptions);
-        view.add(viewComputers); // New
+        insert.add(insertOption);   // New
+        insert.add(insertComputer); // New
+        view.add(viewCustomers);    // New
+        view.add(viewOptions);      // New
+        view.add(viewComputers);    // New
         help.add(about);
 
         menubar.add(file);
-        menubar.add(insert);
-        menubar.add(view);
+        menubar.add(insert);        // New
+        menubar.add(view);          // New
         menubar.add(help);
         setJMenuBar(menubar);
 /*
@@ -172,17 +177,15 @@ public class MainWin extends JFrame {
         // /////////////////////////// ////////////////////////////////////////////
         // S T I C K S   D I S P L A Y
         // Provide a text entry box to show the remaining sticks
+        sticks = new JLabel();
+        sticks.setFont(new Font("SansSerif", Font.BOLD, 18));
+        add(sticks, BorderLayout.CENTER);
+
 
         computerList.add("HP Pavillion"); // , "1Z200XL"
         computerList.add("Dell Vigor");   // , "200MXG"
         computerList.add("LG Light");     // , "PZ750ii"
 
-        int i = 0;
-
-        for(String cpu : computerList) {
-          add(computerList.get(i), BorderLayout.CENTER);
-          i++;
-        } // end for-each
 
 
         // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
@@ -193,6 +196,29 @@ public class MainWin extends JFrame {
 
     } // END CONSTRUCTOR
     /* ************************************* END CONSTRUCTOR ************************************* */
+
+    static void checkEmail(String email) {
+      if(isVAV(email) == false) {
+        throw new IllegalArgumentException("\nInvalid email: " + String.format("%s %s\n", email, "Good Bye!!"));
+      } else {
+        System.out.println("Access granted: " + email + " is valid");
+      } // end ife
+    } // end checkEmail
+
+    /* ****************************************** REGEX ****************************************** */
+
+   /* https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
+   /* https://www.tutorialspoint.com/java/java_regular_expressions.htm */
+   public static boolean isVAV(String email) {
+
+     Pattern pattnSeq = Pattern.compile(PTTNREGEX, Pattern.CASE_INSENSITIVE); // TestPt extra parameter
+     if(email == null) { // **1st | (Once): Validate or check data NOT invalid e-mail
+       return false;
+     } // end if
+     return pattnSeq.matcher(email).matches();
+   } // end isVAV
+
+   /* ****************************************** REGEX ****************************************** */
 
     // Listeners
 
@@ -226,23 +252,25 @@ public class MainWin extends JFrame {
          );
      }
 
-
      /* ****************** START NEW LISTNERS PROTECTED ****************** */
+
      String name;
      String email;
      long cost;
 
      protected void onInsertCustomerClick() {
-       //try {
+       try {
            name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
            email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
-       //} catch(Exception e) {
-           //System.err.println("Invalid " + e.getMessage());
-           //System.exit(-1);
-       //} // end try-catch
+           checkEmail(email);
+       } catch(Exception e) {
+           System.err.println(e.getMessage());
+           // System.exit(-1);
+       } // end try-catch
 
-       Customer customer = new Customer(name, email);
-       //store.add(customer);
+       Customer customer = new Customer(name, email); // Customer constructor
+       store = new Store(name);                       // Instance a new Store
+       store.add(customer);                           // Pass new Customer to Store's add method
      } // end onInsertCustomerClick()
 
      protected void onInsertOptionClick() {
@@ -256,17 +284,20 @@ public class MainWin extends JFrame {
        costs = new JTextField(20);
 
        // Display the dialog
+       // ~/cse1325-prof/13/code_from_slides/AnimalJOptionPane.java
        Object[] objects = {  // Array of widgets to display
            cost,   costs,
            name,   names};
        int button = JOptionPane.showConfirmDialog( // Show the dialog
-           this,
-           objects,
-           "New Cost of Parts",
-           JOptionPane.OK_CANCEL_OPTION,
-           JOptionPane.QUESTION_MESSAGE,
-           null);
-       if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data
+           this,                          // Component parentComponent
+           objects,                       // Object message
+           "New Cost of Parts",           // [String title
+           JOptionPane.OK_CANCEL_OPTION,  // int optionType | OK_CANCEL_OPTION
+           JOptionPane.QUESTION_MESSAGE,  // [int messageType | QUESTION_MESSAGE
+           null);                         // Image
+       if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data | responseType: OK_OPTION
+       System.out.println(button);
+
        JOptionPane.showMessageDialog(
            this,
            names.getText() + " ("+ (long)(100 * (Math.round((Double.valueOf(costs.getText())) * scale) / scale)) + ")" );
@@ -278,7 +309,46 @@ public class MainWin extends JFrame {
 
      } // end onInsertOptionClick()
 
-     protected void onInsertComputerClick() { }
+     protected void onInsertComputerClick() {
+       JLabel compOpt = new JLabel("Computer Options");
+
+       // Store.java | public Object[] options() {
+       Object[] options = {store.options()};
+       compOpts = new JComboBox<Object>(options);
+
+       JLabel name = new JLabel("<HTML>/br/>name</HTML>");
+       names = new JTextField(20);
+
+       JLabel model = new JLabel("<HTML>/br/>name</HTML>");
+       models = new JTextField(20);
+
+       Object[] objects = {
+           compOpt, compOpts,
+           name, names,
+           model, models};
+       int button = JOptionPane.showConfirmDialog(
+           this,
+           objects,
+           "New Computer",
+           JOptionPane.YES_NO_CANCEL_OPTION,
+           JOptionPane.PLAIN_MESSAGE,
+           null);
+        if(button == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(
+                this,
+                compOpts.getSelectedItem());
+        Computer computer = new Computer((String)names.getText(), (String)models.getText());
+        computer.addOption(options);  // add to the Computer object
+      } else if (button == JOptionPane.NO_OPTION) {
+        store.add(computer.addOption(options));          // Pass new Computer to Store's add method
+      } else break;
+       // Customer customer = new Customer(name, email); // Customer constructor
+       // store = new Store(name);                       // Instance a new Store
+       // store.add(customer);
+       //
+     } // end onInsertComputerClick()
+
+
      protected void onViewClick(Record record) { }
 
      private enum Record {CUSTOMER, OPTION, COMPUTER, ORDER}
@@ -290,12 +360,13 @@ public class MainWin extends JFrame {
     protected void onQuitClick() {System.exit(0);}   // Exit the game
 
 
-
     private Store store;
     private JLabel display;
     private JLabel response;
     private JTextField names;  // name of parts
     private JTextField costs;  // cost
+    private JComboBox compOpts;
+    private JTextField models;
 
     private JLabel sticks;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display

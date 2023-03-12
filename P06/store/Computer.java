@@ -10,7 +10,7 @@ public class Computer {
   private ArrayList<Option> options = new ArrayList<>();
 
   // Constructor - No data validation required here!
-  Computer(String name, String model) {
+  public Computer(String name, String model) {
     this.name = name;
     this.model = model;
   } // end Constructor

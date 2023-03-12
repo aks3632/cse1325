@@ -294,10 +294,8 @@ public class MainWin extends JFrame {
            "New Cost of Parts",           // [String title
            JOptionPane.OK_CANCEL_OPTION,  // int optionType | OK_CANCEL_OPTION
            JOptionPane.QUESTION_MESSAGE,  // [int messageType | QUESTION_MESSAGE
-           null);                         // Image
+           null);                         // [Icon icon]
        if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data | responseType: OK_OPTION
-       System.out.println(button);
-
        JOptionPane.showMessageDialog(
            this,
            names.getText() + " ("+ (long)(100 * (Math.round((Double.valueOf(costs.getText())) * scale) / scale)) + ")" );
@@ -312,38 +310,44 @@ public class MainWin extends JFrame {
      protected void onInsertComputerClick() {
        JLabel compOpt = new JLabel("Computer Options");
 
-       // Store.java | public Object[] options() {
-       Object[] options = {store.options()};
-       compOpts = new JComboBox<Object>(options);
+       // (A) Obtain an Object[] array of Option objects from store
+       // (1) Store.java | public Object[] options() { etc...
+       // (B) Instance a JComboBox,
+       // (1) Pass the Object[] array retrieved from store as the constructor parameter
+       Object[] options = store.options();      // A | 1
+       compOpts = new JComboBox<Object>(options); // B | 1
 
        JLabel name = new JLabel("<HTML>/br/>name</HTML>");
        names = new JTextField(20);
 
-       JLabel model = new JLabel("<HTML>/br/>name</HTML>");
+       JLabel model = new JLabel("<HTML>/br/>model</HTML>");
        models = new JTextField(20);
 
-       Object[] objects = {
+       Object[] objects = { // Array of widgets to display
            compOpt, compOpts,
            name, names,
            model, models};
        int button = JOptionPane.showConfirmDialog(
-           this,
-           objects,
-           "New Computer",
-           JOptionPane.YES_NO_CANCEL_OPTION,
-           JOptionPane.PLAIN_MESSAGE,
-           null);
-        if(button == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(
-                this,
-                compOpts.getSelectedItem());
-        Computer computer = new Computer((String)names.getText(), (String)models.getText());
-        computer.addOption(options);  // add to the Computer object
+           this,                              // Component parentComponent
+           objects,                           // Object message
+           "Another Option",                  // [String title
+           JOptionPane.YES_NO_CANCEL_OPTION,  // int optionType
+           JOptionPane.PLAIN_MESSAGE,         // [int messageType,
+           null);                             // [Icon icon]
+
+        String str1 = names.getText();
+        String str2 = models.getText();
+        Computer computer = new Computer(str1, str2); // Computer constructor
+        Object data = compOpts.getSelectedItem();
+        /* User selects an Option via JComboBox */
+        /* JComboBox's getSelectedItem() method obtains data */
+
+        if(button == JOptionPane.YES_OPTION) { // If OK clicked, show data | responseType: YES_OPTION
+          computer.addOption((Option) data);
+
       } else if (button == JOptionPane.NO_OPTION) {
-        store.add(computer.addOption(options));          // Pass new Computer to Store's add method
-      } else break;
-       // Customer customer = new Customer(name, email); // Customer constructor
-       // store = new Store(name);                       // Instance a new Store
+        store.add(computer);          // Pass the Computer object built up to store's add method
+      } else System.exit(0); // (button == JOptionPane.CANCEL_OPTION)
        // store.add(customer);
        //
      } // end onInsertComputerClick()
@@ -365,7 +369,7 @@ public class MainWin extends JFrame {
     private JLabel response;
     private JTextField names;  // name of parts
     private JTextField costs;  // cost
-    private JComboBox compOpts;
+    private JComboBox<Object> compOpts;
     private JTextField models;
 
     private JLabel sticks;                  // Display of sticks on game board

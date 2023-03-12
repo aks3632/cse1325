@@ -308,50 +308,65 @@ public class MainWin extends JFrame {
      } // end onInsertOptionClick()
 
      protected void onInsertComputerClick() {
-       JLabel compOpt = new JLabel("Computer Options");
+       //try {
+           JLabel compOpt = new JLabel("Computer Options");
 
-       // (A) Obtain an Object[] array of Option objects from store
-       // (1) Store.java | public Object[] options() { etc...
-       // (B) Instance a JComboBox,
-       // (1) Pass the Object[] array retrieved from store as the constructor parameter
-       Object[] options = store.options();      // A | 1
-       compOpts = new JComboBox<Object>(options); // B | 1
+           // (A) Obtain an Object[] array of Option objects from store
+           // (1) Store.java | public Object[] options() { etc...
+           // (B) Instance a JComboBox,
+           // (1) Pass the Object[] array retrieved from store as the constructor parameter
+           // Object[] options = {store.options()};      // A | 1
+           compOpts = new JComboBox<Object>(store.options()); // B | 1
 
-       JLabel name = new JLabel("<HTML>/br/>name</HTML>");
-       names = new JTextField(20);
+           JLabel name = new JLabel("<HTML>/br/>name</HTML>");
+           names = new JTextField(20);
 
-       JLabel model = new JLabel("<HTML>/br/>model</HTML>");
-       models = new JTextField(20);
+           JLabel model = new JLabel("<HTML>/br/>model</HTML>");
+           models = new JTextField(20);
 
-       Object[] objects = { // Array of widgets to display
-           compOpt, compOpts,
-           name, names,
-           model, models};
-       int button = JOptionPane.showConfirmDialog(
-           this,                              // Component parentComponent
-           objects,                           // Object message
-           "Another Option",                  // [String title
-           JOptionPane.YES_NO_CANCEL_OPTION,  // int optionType
-           JOptionPane.PLAIN_MESSAGE,         // [int messageType,
-           null);                             // [Icon icon]
+           Object[] objects1 = { // Array of widgets to display
+               name, names,
+               model, models};
+           int button1 = JOptionPane.showConfirmDialog(
+               this,                              // Component parentComponent
+               objects1,                          // Object message
+               "New Computer",                    // [String title
+               JOptionPane.OK_CANCEL_OPTION,      // int optionType
+               JOptionPane.PLAIN_MESSAGE,         // [int messageType,
+               null                               // [Icon icon]
+            );
+            String str1 = names.getText();
+            String str2 = models.getText();
+            Computer computer = new Computer(str1, str2); // Computer constructor
+            Object data = compOpts.getSelectedItem();
+            /* User selects an Option via JComboBox */
+            /* JComboBox's getSelectedItem() method obtains data */
+            int optionsAdded = 0; // Don't add computers with no options
+            Object[] objects2 = { // Array of widgets to display
+                compOpt, compOpts};
 
-        String str1 = names.getText();
-        String str2 = models.getText();
-        Computer computer = new Computer(str1, str2); // Computer constructor
-        Object data = compOpts.getSelectedItem();
-        /* User selects an Option via JComboBox */
-        /* JComboBox's getSelectedItem() method obtains data */
-
-        if(button == JOptionPane.YES_OPTION) { // If OK clicked, show data | responseType: YES_OPTION
-          computer.addOption((Option) data);
-
-      } else if (button == JOptionPane.NO_OPTION) {
-        store.add(computer);          // Pass the Computer object built up to store's add method
-      } else System.exit(0); // (button == JOptionPane.CANCEL_OPTION)
-       // store.add(customer);
-       //
+            do {  // Profs code
+              int button2 = JOptionPane.showConfirmDialog(
+                  this,                         // Component parentComponent
+                  objects2,                     // Object message
+                  "Another Option?",            // [String title
+                  JOptionPane.YES_NO_OPTION,    // int optionType
+                  JOptionPane.PLAIN_MESSAGE,    // [int messageType,
+                  null);                        // [Icon icon]
+              if(button2 != JOptionPane.YES_OPTION) break; // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
+              computer.addOption((Option) data);
+              ++optionsAdded;
+            } while (button2.equals(JOptionPane.YES_OPTION)); // ????????? end do-while
+            if(optionsAdded > 0) {
+              store.add(computer);          // Pass the Computer object built up to store's add method
+              // onViewClick(Record.COMPUTER);
+            } // end if
+       //} catch(NullPointerException e) {
+       //} catch(Exception e) {
+           //JOptionPane.showMessageDialog(this, e,
+           //"Computer Not Created", JOptionPane.ERROR_MESSAGE);
+       //}
      } // end onInsertComputerClick()
-
 
      protected void onViewClick(Record record) { }
 

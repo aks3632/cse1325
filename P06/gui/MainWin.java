@@ -199,7 +199,7 @@ public class MainWin extends JFrame {
 
     static void checkEmail(String email) {
       if(isVAV(email) == false) {
-        throw new IllegalArgumentException("\nInvalid email: " + String.format("%s %s\n", email, "Good Bye!!"));
+        throw new IllegalArgumentException("\nInvalid email: " + String.format("%s %s\n", email, "Good Bye!"));
       } else {
         System.out.println("Access granted: " + email + " is valid");
       } // end ife
@@ -308,20 +308,12 @@ public class MainWin extends JFrame {
      } // end onInsertOptionClick()
 
      protected void onInsertComputerClick() {
-       //try {
-           JLabel compOpt = new JLabel("Computer Options");
+       try {
 
-           // (A) Obtain an Object[] array of Option objects from store
-           // (1) Store.java | public Object[] options() { etc...
-           // (B) Instance a JComboBox,
-           // (1) Pass the Object[] array retrieved from store as the constructor parameter
-           // Object[] options = {store.options()};      // A | 1
-           compOpts = new JComboBox<Object>(store.options()); // B | 1
-
-           JLabel name = new JLabel("<HTML>/br/>name</HTML>");
+           JLabel name = new JLabel("<HTML><br/>Name</HTML>");
            names = new JTextField(20);
 
-           JLabel model = new JLabel("<HTML>/br/>model</HTML>");
+           JLabel model = new JLabel("<HTML><br/>Model</HTML>");
            models = new JTextField(20);
 
            Object[] objects1 = { // Array of widgets to display
@@ -332,40 +324,50 @@ public class MainWin extends JFrame {
                objects1,                          // Object message
                "New Computer",                    // [String title
                JOptionPane.OK_CANCEL_OPTION,      // int optionType
-               JOptionPane.PLAIN_MESSAGE,         // [int messageType,
-               null                               // [Icon icon]
-            );
+               JOptionPane.QUESTION_MESSAGE,      // [int messageType,
+               null);                             // [Icon icon]
             String str1 = names.getText();
             String str2 = models.getText();
             Computer computer = new Computer(str1, str2); // Computer constructor
-            Object data = compOpts.getSelectedItem();
-            /* User selects an Option via JComboBox */
-            /* JComboBox's getSelectedItem() method obtains data */
-            int optionsAdded = 0; // Don't add computers with no options
-            Object[] objects2 = { // Array of widgets to display
-                compOpt, compOpts};
 
+            JLabel compOpt = new JLabel("Computer Options");
+            // (A) Obtain an Object[] array of Option objects from store
+            // (1) Store.java | public Object[] options() { etc...
+            // (B) Instance a JComboBox,
+            // (1) Pass the Object[] array retrieved from store as the constructor parameter
+            // Object[] options = {store.options()};      // A | 1
+            compOpts = new JComboBox<Object>(store.options()); // B | 1
+
+            int optionsAdded = 0; // Don't add computers with no options
+            Object data;
+            Object[] objects2 = { // An Array of widget to display
+                compOpt, compOpts};
             do {  // Profs code
               int button2 = JOptionPane.showConfirmDialog(
                   this,                         // Component parentComponent
                   objects2,                     // Object message
                   "Another Option?",            // [String title
-                  JOptionPane.YES_NO_OPTION,    // int optionType
-                  JOptionPane.PLAIN_MESSAGE,    // [int messageType,
-                  null);                        // [Icon icon]
+                  JOptionPane.YES_NO_OPTION);   // int optionType
+                  //JOptionPane.PLAIN_MESSAGE,    // [int messageType,
+                  //null);                        // [Icon icon]
+
+              /* User selects an Option via JComboBox */
+              /* JComboBox's getSelectedItem() method obtains data */
+              data = compOpts.getSelectedItem();
+
               if(button2 != JOptionPane.YES_OPTION) break; // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
               computer.addOption((Option) data);
               ++optionsAdded;
-            } while (button2.equals(JOptionPane.YES_OPTION)); // ????????? end do-while
+            } while (button2.equals(JOptionPane.OK_OPTION)); // ???????????? end do-while(true)
             if(optionsAdded > 0) {
-              store.add(computer);          // Pass the Computer object built up to store's add method
-              // onViewClick(Record.COMPUTER);
+              store.add(computer);  // Pass the Computer object built up to store's add method
+              //onViewClick(Record.COMPUTER);
             } // end if
-       //} catch(NullPointerException e) {
-       //} catch(Exception e) {
-           //JOptionPane.showMessageDialog(this, e,
-           //"Computer Not Created", JOptionPane.ERROR_MESSAGE);
-       //}
+       } catch(NullPointerException e) {
+       } catch(Exception e) {
+           JOptionPane.showMessageDialog(this, e,
+           "Computer Not Created", JOptionPane.ERROR_MESSAGE);
+       }
      } // end onInsertComputerClick()
 
      protected void onViewClick(Record record) { }

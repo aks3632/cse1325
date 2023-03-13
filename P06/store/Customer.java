@@ -9,28 +9,21 @@ import java.util.*;
    // Fields
    private String name;
    private String email;
-   /* https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
-   /* ^^^^ Referenced above
-   GOOD - Partitioned
-   "^[a-zA-Z0-9_+&*-]+(?:\\."+
-   "[a-zA-Z0-9_+&*-]+)*@" +
-   "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-   "A-Z]{2,7}$";
-   ^^^^ Referenced above
-   GOOD - Identical continuous sequence
-   "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-   */
-
+   /* ********************************************************************************* */
    /* Professor's code - PATTERN REGEX E-MAIL | ~ "Not working" */
-   /* ^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$ */
-   // Utilized geeksforgeeks GOOD REGEX pattern for convenience
+   /* BAD - "^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$" | Continuous sequence */
+   /* ********************************************************************************* */
+   /* Referenced & Utilized geeksforgeeks GOOD REGEX pattern for convenience */
+   /* https://www.geeksforgeeks.org/check-email-address-valid-not-java/ */
+   /* GOOD - "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"; | Continuous sequence */
+   /* ********************************************************************************* */
    public static final String PTTNREGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
    /* Throw a runtime exception if email is invalid. */
    // Constructor ||| ***(1st Option): Has 3 indexOf methods OR (2nd Option): Seek REGEX
    public Customer(String name, String email) {
      if(isVAV(email) == false) { // **2nd x| (Twice): Validate or check data NOT invalid e-mail
-       throw new IllegalArgumentException("\nInvalid email: " + email + " Good Bye!"); // Updated to Profs codes
+       throw new IllegalArgumentException("\nInvalid email: " + email + " Good Bye!!"); // Updated to Profs codes
      } // end if
      this.name = name;
      this.email = email;
@@ -54,19 +47,7 @@ import java.util.*;
    // Method
    @Override
    public String toString() {
-
-     /* TA - “try-catch” within Customer class inside the toString(). - not required
-     VOID VOID VOID VOID!!
-     try { // Perform data validation on email
-       isVAV(email); // Returns a boolean
-
-     } catch(Exception e) {
-       System.err.println("Ending program: " + e.getMessage());
-       System.exit(-1);
-     } // end try-catch
-     VOID VOID VOID VOID!!
-     */
-
+     // Per TA - “try-catch” - NOT required
      // "Prof Rice (george.rice@uta.edu)"
      return "" + name + " (" + email + ")"; // ** Trial Run |Missing Return
    } // end toString

@@ -64,9 +64,6 @@ public class MainWin extends JFrame {
     }
   };
 
-  // Fields - Declerated outside methods!
-  private ArrayList<String> computerList = new ArrayList<>(); // Empty ArrayList of Object Computer
-
 
     public MainWin(String title) { // ** Constructor
         super(title);
@@ -119,7 +116,10 @@ public class MainWin extends JFrame {
         menubar.add(insert);        // New
         menubar.add(view);          // New
         menubar.add(help);
+
         setJMenuBar(menubar);
+
+
 /*
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
@@ -175,26 +175,21 @@ public class MainWin extends JFrame {
 */
 
         // /////////////////////////// ////////////////////////////////////////////
-        // S T I C K S   D I S P L A Y
+        // D I S P L A Y
         // Provide a text entry box to show the remaining sticks
-        sticks = new JLabel();
-        sticks.setFont(new Font("SansSerif", Font.BOLD, 18));
-        add(sticks, BorderLayout.CENTER);
-
-
-        computerList.add("HP Pavillion"); // , "1Z200XL"
-        computerList.add("Dell Vigor");   // , "200MXG"
-        computerList.add("LG Light");     // , "PZ750ii"
-
-
-
-        // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
-        // Provide a status bar for game messages
+        display = new JLabel();
+        display.setFont(new Font("Courier New", Font.BOLD, 18));
+        display.setVerticalAlignment(JLabel.TOP);
+        add(display, BorderLayout.CENTER);
 
         // Make everything in the JFrame visible
         setVisible(true);
 
+        // Start a new store
+        store = new Store("ELSA Prime");  // Instance a new Store
+
     } // END CONSTRUCTOR
+
     /* ************************************* END CONSTRUCTOR ************************************* */
 
     static void checkEmail(String email) {
@@ -222,7 +217,7 @@ public class MainWin extends JFrame {
 
     // Listeners
 
-    protected void onAboutClick() {                 // Display About dialog
+    protected void onAboutClick() { // Display About dialog
         JLabel logo = null;
         try {
             BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
@@ -233,7 +228,7 @@ public class MainWin extends JFrame {
         JLabel title = new JLabel("<html>"
           + "<p><font size=+4>Nim</font></p>"
           + "<p>Version 1.4J</p>"
-           + "</html>",
+          + "</html>",
           SwingConstants.CENTER);
 
         JLabel artists = new JLabel("<html>"
@@ -258,58 +253,71 @@ public class MainWin extends JFrame {
      String email;
      long cost;
 
-     protected void onInsertCustomerClick() {
+     protected void onInsertCustomerClick() { // Revised to Professor's code | NullPointerException
        try {
            name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
            email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
            checkEmail(email);
-       } catch(Exception e) {
-           System.err.println(e.getMessage());
-           // System.exit(-1);
-       } // end try-catch
+           Customer customer = new Customer(name, email); // Customer constructor
+           store.add(customer);           // Pass new Customer to Store's add method
+           onViewClick(Record.CUSTOMER);  // Invoke call
 
-       Customer customer = new Customer(name, email); // Customer constructor
-       store = new Store(name);                       // Instance a new Store
-       store.add(customer);                           // Pass new Customer to Store's add method
+       } catch(NullPointerException e) {
+       } catch(Exception e) {
+           JOptionPane.showMessageDialog(this, e,
+               "Customer Not Created", JOptionPane.ERROR_MESSAGE);
+           System.err.println(e.getMessage());
+           // System.exit(-1); | Avoid exiting program
+       } // end try-catch
      } // end onInsertCustomerClick()
 
      protected void onInsertOptionClick() {
-       int places = 2;
-       double scale = Math.pow(10, places);
+       try {
+           int places = 2;
+           double scale = Math.pow(10, places);
 
-       JLabel name = new JLabel("<HTML><br/>Name</HTML>");
-       names = new JTextField(20);
+           JLabel name = new JLabel("<HTML><br/>Option Name</HTML>");
+           names = new JTextField(20);
 
-       JLabel cost = new JLabel("<HTML><br/>Cost</HTML>");
-       costs = new JTextField(20);
+           JLabel cost = new JLabel("<HTML><br/>Option Cost</HTML>");
+           costs = new JTextField(20);
 
-       // Display the dialog
-       // ~/cse1325-prof/13/code_from_slides/AnimalJOptionPane.java
-       Object[] objects = {  // Array of widgets to display
-           cost,   costs,
-           name,   names};
-       int button = JOptionPane.showConfirmDialog( // Show the dialog
-           this,                          // Component parentComponent
-           objects,                       // Object message
-           "New Cost of Parts",           // [String title
-           JOptionPane.OK_CANCEL_OPTION,  // int optionType | OK_CANCEL_OPTION
-           JOptionPane.QUESTION_MESSAGE,  // [int messageType | QUESTION_MESSAGE
-           null);                         // [Icon icon]
-       if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data | responseType: OK_OPTION
-       JOptionPane.showMessageDialog(
-           this,
-           names.getText() + " ("+ (long)(100 * (Math.round((Double.valueOf(costs.getText())) * scale) / scale)) + ")" );
-           // (A) https://stackoverflow.com/questions/36604943/how-do-i-convert-a-jtextfield-string-to-a-double
-           // (1) Double.valueOf(costs.getText())      | Converts String |& Returns Integer(Object)
-           // (2) Double.parseDouble(costs.getText())  | Converst String |& Returns int (Primitive)
-           // (B) https://www.baeldung.com/java-round-decimal-number
-           // (3) Math.round(value * scale) / scale    | Truncates value
-
+           // Display the dialog
+           // ~/cse1325-prof/13/code_from_slides/AnimalJOptionPane.java
+           Object[] objects = {  // Array of widgets to display
+               cost,   costs,
+               name,   names};
+           int button = JOptionPane.showConfirmDialog( // Show the dialog
+               this,                          // Component parentComponent
+               objects,                       // Object message
+               "New Cost of Options Parts",           // [String title
+               JOptionPane.OK_CANCEL_OPTION,  // int optionType | OK_CANCEL_OPTION
+               JOptionPane.QUESTION_MESSAGE,  // [int messageType | QUESTION_MESSAGE
+               null);                         // [Icon icon]
+           if(button == JOptionPane.OK_OPTION)  // If OK clicked, show data | responseType: OK_OPTION
+           JOptionPane.showMessageDialog(
+               this,
+               names.getText() + " ("+ (long)(100 * (Math.round((Double.valueOf(costs.getText())) * scale) / scale)) + ")" );
+               // (A) https://stackoverflow.com/questions/36604943/how-do-i-convert-a-jtextfield-string-to-a-double
+               // (1) Double.valueOf(costs.getText())      | Converts String |& Returns Integer(Object)
+               // (2) Double.parseDouble(costs.getText())  | Converst String |& Returns int (Primitive)
+               // (B) https://www.baeldung.com/java-round-decimal-number
+               // (3) Math.round(value * scale) / scale    | Truncates value
+            String str1 = names.getText();
+            long num1 = (long)(100 * (Math.round((Double.valueOf(costs.getText())) * scale) / scale));
+            Option option = new Option(str1, num1); // Option constructor
+            store.add(option);          // Pass new Option to Store's add method
+            onViewClick(Record.OPTION); // Invoke call
+       } catch(NullPointerException e) {
+       } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, e,
+                "Customer Not Created", JOptionPane.ERROR_MESSAGE);
+            System.err.println(e.getMessage());
+       } // end try-catch
      } // end onInsertOptionClick()
 
      protected void onInsertComputerClick() {
        try {
-
            JLabel name = new JLabel("<HTML><br/>Name</HTML>");
            names = new JTextField(20);
 
@@ -326,23 +334,23 @@ public class MainWin extends JFrame {
                JOptionPane.OK_CANCEL_OPTION,      // int optionType
                JOptionPane.QUESTION_MESSAGE,      // [int messageType,
                null);                             // [Icon icon]
-            String str1 = names.getText();
-            String str2 = models.getText();
-            Computer computer = new Computer(str1, str2); // Computer constructor
+            String str2 = names.getText();
+            String str3 = models.getText();
+            Computer computer = new Computer(str2, str3); // Computer constructor
 
             JLabel compOpt = new JLabel("Computer Options");
             // (A) Obtain an Object[] array of Option objects from store
             // (1) Store.java | public Object[] options() { etc...
             // (B) Instance a JComboBox,
             // (1) Pass the Object[] array retrieved from store as the constructor parameter
-            // Object[] options = {store.options()};      // A | 1
-            compOpts = new JComboBox<Object>(store.options()); // B | 1
+            // Object[] options = {store.options()};            // A | 1
+            compOpts = new JComboBox<Object>(store.options());  // B | 1
 
             int optionsAdded = 0; // Don't add computers with no options
             Object data;
             Object[] objects2 = { // An Array of widget to display
                 compOpt, compOpts};
-            do {  // Profs code
+            do {  // Revised to Professor's code
               int button2 = JOptionPane.showConfirmDialog(
                   this,                         // Component parentComponent
                   objects2,                     // Object message
@@ -355,39 +363,83 @@ public class MainWin extends JFrame {
               /* JComboBox's getSelectedItem() method obtains data */
               data = compOpts.getSelectedItem();
 
-              if(button2 != JOptionPane.YES_OPTION) break; // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
-              computer.addOption((Option) data);
-              ++optionsAdded;
-            } while (button2.equals(JOptionPane.OK_OPTION)); // ???????????? end do-while(true)
+              if(button2 != JOptionPane.YES_OPTION) break;  // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
+              computer.addOption((Option) data);            // Cast converts Object to Option
+              ++optionsAdded;                               // button2 equals YES_OPTION; therefore, continue ++count
+            } while (true); // end do-while(true)
             if(optionsAdded > 0) {
               store.add(computer);  // Pass the Computer object built up to store's add method
-              //onViewClick(Record.COMPUTER);
+              onViewClick(Record.COMPUTER); // Invoke call
             } // end if
        } catch(NullPointerException e) {
        } catch(Exception e) {
            JOptionPane.showMessageDialog(this, e,
-           "Computer Not Created", JOptionPane.ERROR_MESSAGE);
-       }
+               "Computer Not Created", JOptionPane.ERROR_MESSAGE);
+           System.err.println(e.getMessage());
+           // System.exit(-1); | Avoid exiting program
+       } // end try-catch
      } // end onInsertComputerClick()
 
-     protected void onViewClick(Record record) { }
+     protected void onViewClick(Record record) {  // >> Professor's code <<
+       String header = null;
+       Object[] list = null;
 
-     private enum Record {CUSTOMER, OPTION, COMPUTER, ORDER}
+       switch (record.asInt()) {
+         case 1:  // CUSTOMER if record == Record.CUSTOMER
+            header = "Our Beloved Customers";
+            list = store.customers();
+            break;
+         case 2:  // OPTION if record == Record.OPTION
+            header = "Options for our SuperComputers";
+            list = store.options();
+            break;
+         case 3:  // COMPUTER if record == Record.COMPUTER
+            header = "Computers for Sale - Cheap!";
+            list = store.computers();
+            break;
+         case 4:  // Order if record == Record.ORDER
+            header = "Orders Placed to Date";
+            list = store.orders();
+            break;
+       } // end switch
+       StringBuilder sb = new StringBuilder("<html><p><font size=+2>"
+                   + header + "</font><p></br>\n<ol>\n");
+       for(Object i : list) sb.append("<li>" + i.toString().replaceAll("<","&lt;")
+                                                           .replaceAll(">", "&gt;")
+                                                           .replaceAll("\n", "<br/>") + "</li>\n");
+       sb.append("<ol></html>");
+       display.setText(sb.toString());
+     } // end onViewClick(Record record) | ^^ Revised to Professor's code ^^
+
+     private enum Record {CUSTOMER(1), OPTION(2), COMPUTER(3), ORDER(4);
+
+         // Attribute for the integer representing this record
+         private final int recordID;
+
+         // Constructor for setting the attribute
+         private Record(int recordID) {
+           this.recordID = recordID;
+         }
+
+         // Method that returns the associated record ID sequence for a specific record
+         public int asInt() {
+           return recordID;
+         }
+     } // enum - Type
      // Display from 2021 Maybe?
 
      /* ******************* END NEW LISTNERS PROTECTED ******************* */
-
 
     protected void onQuitClick() {System.exit(0);}   // Exit the game
 
 
     private Store store;
-    private JLabel display;
+    private JLabel display;     // Main data display
     private JLabel response;
-    private JTextField names;  // name of parts
-    private JTextField costs;  // cost
+    private JTextField names;   // name of parts
+    private JTextField costs;   // cost
     private JComboBox<Object> compOpts;
-    private JTextField models;
+    private JTextField models;  // model
 
     private JLabel sticks;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display

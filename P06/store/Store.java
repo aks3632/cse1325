@@ -26,7 +26,7 @@ public class Store {
     public void add(Option option) {
         if(!options.contains(option)) options.add(option);
     }
-    public Object[] options() {
+    public Object[] options() { // Getter
         return this.options.toArray();
     }
 
@@ -36,7 +36,7 @@ public class Store {
     public void add(Computer computer) {
         if(!computers.contains(computer)) computers.add(computer);
     }
-    public Object[] computers() {
+    public Object[] computers() { // Getter
         return this.computers.toArray();
     }
 
@@ -46,7 +46,7 @@ public class Store {
     public void add(Order order) {
         if(!orders.contains(order)) orders.add(order);
     }
-    public Object[] orders() {
+    public Object[] orders() {  // Getter
         return this.orders.toArray();
     }
 

@@ -130,6 +130,7 @@ public class MainWin extends JFrame {
       toolbar.add(Box.createHorizontalStrut(25));
 
       // Create the 3 buttons using the icons provided | Naming scheme of buttons is consistant
+      // <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
       JButton buttonAddCust = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/add_user.png"));
         buttonAddCust.setActionCommand("Insert Customer");
         buttonAddCust.setToolTipText("Insert Customer");
@@ -144,6 +145,7 @@ public class MainWin extends JFrame {
         toolbar.add(buttonAddOpt);
         buttonAddOpt.addActionListener(event -> onInsertOptionClick());
 
+      // <a href="https://www.flaticon.com/free-icons/laptop" title="laptop icons">Laptop icons created by Freepik - Flaticon</a>
       JButton buttonAddComp = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/add_laptop.png"));
         buttonAddComp.setActionCommand("Insert Computer");
         buttonAddComp.setToolTipText("Insert Computer");
@@ -153,6 +155,7 @@ public class MainWin extends JFrame {
       toolbar.add(Box.createHorizontalStrut(25));
 
       // Create the 3 buttons using the icons provided | Naming scheme of buttons is consistant
+      // <a href="https://www.flaticon.com/free-icons/leadership" title="leadership icons">Leadership icons created by Vectors Tank - Flaticon</a>
       JButton buttonViewCusts = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_clients.png"));
         buttonViewCusts.setActionCommand("View Customers");
         buttonViewCusts.setToolTipText("View Customers");
@@ -165,6 +168,7 @@ public class MainWin extends JFrame {
         toolbar.add(buttonViewOpts);
         buttonViewOpts.addActionListener(event -> onViewClick(Record.OPTION));
 
+      // <a href="https://www.flaticon.com/free-icons/computers" title="computers icons">Computers icons created by Freepik - Flaticon</a>
       JButton buttonViewComps = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_computers.png"));
         buttonViewComps.setActionCommand("View Computers");
         buttonViewComps.setToolTipText("View Computers");
@@ -239,18 +243,39 @@ public class MainWin extends JFrame {
       }
 
       JLabel title = new JLabel("<html>"
-        + "<p><font size=+4>Nim</font></p>"
-        + "<p>Version 1.4J</p>"
+        + "<p><font size=+4>ELSA</font></p>"
+        + "<P>Exceptional Laptops and Supercomputers Always</p>"
+        + "<p>Version 0.2J</p>"
         + "</html>",
         SwingConstants.CENTER);
 
       JLabel artists = new JLabel("<html>"
+        + "<br><p> Ali Senkayi (aks3632@mavs.uta.edu)</p>"
+        + "<p>CSE 1325-001-Object Oriented Programming</p></br>"
+
         + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
         + "<p>Licensed under Gnu GPL 3.0</p><br/>"
-        + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-        + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-        + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-        + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
+
+        + "<p>[xx_Image] by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
+        + "<p><font size=-2>https://www.flaticon.com/</font></p>"
+
+        + "<br/><p>Add Customer icon based on work created by Freepik per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/user title=user icons</font></p><br/>"
+
+        + "<br/><p>View Customers icon based on work created by Vectors Tank per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/leadership title=leadership icons</font></p><br/>"
+
+        + "<br/><p>Add Option icon based on work created by ~ xx_N/A per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/ ~ title=xx_N/A_add_chip</font></p><br/>"
+
+        + "<br/><p>View Options icon based on work created by ~ xx_N/A per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/ ~ title=xx_N/A_view_networks icons</font></p><br/>"
+
+        + "<br/><p>Add Computer icon based on work created by Freepik per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/laptop title=laptop icons</font></p><br/>"
+
+        + "<br/><p>View Computers icon based on work created by Freepik per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/computers title=computers icons</font></p><br/>"
         + "</html>");
 
        JOptionPane.showMessageDialog(this,

@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 
    // Methods
    public long cost() { // Divide by 100 when printing
-
      return this.cost; // ** TestPt ~ Resolved
    } // end cost
 
@@ -33,7 +32,7 @@ import java.math.BigDecimal;
      // return "" + name + " " + "($" + String.format("%.2f", cost / 100.0) + ")";  | Trial Run 2 Failed
      // return "" + name + " " + "($" + (Math.floor(cost * 100) / 100) + ")";       | Trial Run 3 | truncate long to two decimal places
      // https://stackoverflow.com/questions/7747469/how-can-i-truncate-a-double-to-only-two-decimal-places-in-java
-     return "" + name + " " + "($" + (Math.floor((cost/100) * 100) / 100) + ")"; // Trial Run 3
+     return "" + name + " " + "($" + (Math.floor((cost/100) * 100) / 100) + ")"; // Trial Run 3 | Divide by 100 when printing
    } // end toString
 
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */

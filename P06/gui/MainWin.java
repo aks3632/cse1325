@@ -457,9 +457,9 @@ public class MainWin extends JFrame {
   private JButton buttonAddCust;        // Button to select 1 stick
   private JButton buttonAddOpt;         // Button to select 2 sticks
   private JButton buttonAddComp;        // Button to select 3 sticks
-  private JButton buttonViewCusts;       // Button to select 1 stick
-  private JButton buttonViewOpts;        // Button to select 2 sticks
-  private JButton buttonViewComps;       // Button to select 3 sticks
+  private JButton buttonViewCusts;      // Button to select 1 stick
+  private JButton buttonViewOpts;       // Button to select 2 sticks
+  private JButton buttonViewComps;      // Button to select 3 sticks
 
 }
 

@@ -153,23 +153,23 @@ public class MainWin extends JFrame {
       toolbar.add(Box.createHorizontalStrut(25));
 
       // Create the 3 buttons using the icons provided | Naming scheme of buttons is consistant
-      JButton buttonViewCust = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_clients.png"));
-        buttonViewCust.setActionCommand("View Customers");
-        buttonViewCust.setToolTipText("View Customers");
-        toolbar.add(buttonViewCust);
-        buttonViewCust.addActionListener(event -> onViewClick(Record.CUSTOMER));
+      JButton buttonViewCusts = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_clients.png"));
+        buttonViewCusts.setActionCommand("View Customers");
+        buttonViewCusts.setToolTipText("View Customers");
+        toolbar.add(buttonViewCusts);
+        buttonViewCusts.addActionListener(event -> onViewClick(Record.CUSTOMER));
 
-      JButton buttonViewOpt = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_networks.png"));
-        buttonViewOpt.setActionCommand("View Options");
-        buttonViewOpt.setToolTipText("View Options");
-        toolbar.add(buttonViewOpt);
-        buttonViewOpt.addActionListener(event -> onViewClick(Record.OPTION));
+      JButton buttonViewOpts = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_networks.png"));
+        buttonViewOpts.setActionCommand("View Options");
+        buttonViewOpts.setToolTipText("View Options");
+        toolbar.add(buttonViewOpts);
+        buttonViewOpts.addActionListener(event -> onViewClick(Record.OPTION));
 
-      JButton buttonViewComp = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_computers.png"));
-        buttonViewComp.setActionCommand("View Computers");
-        buttonViewComp.setToolTipText("View Computers");
-        toolbar.add(buttonViewComp);
-        buttonViewComp.addActionListener(event -> onViewClick(Record.COMPUTER));
+      JButton buttonViewComps = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P06/gui/resources/view_computers.png"));
+        buttonViewComps.setActionCommand("View Computers");
+        buttonViewComps.setToolTipText("View Computers");
+        toolbar.add(buttonViewComps);
+        buttonViewComps.addActionListener(event -> onViewClick(Record.COMPUTER));
 
 
       // "Horizontal glue" expands as much as possible, pushing the "X" to the right
@@ -446,22 +446,20 @@ public class MainWin extends JFrame {
   protected void onQuitClick() {System.exit(0);}   // Exit the game
 
 
-  private Store store;
-  private JLabel display;     // Main data display
-  private JLabel response;
-  private JTextField names;   // name of parts
-  private JTextField costs;   // cost
-  private JComboBox<Object> compOpts;
-  private JTextField models;  // model
+  private Store store;                  // New Store
+  private JLabel display;               // Main data display
+  private JLabel response;              // N/A
+  private JTextField names;             // name of parts
+  private JTextField costs;             // cost
+  private JComboBox<Object> compOpts;   // JComboBox via Computer Options
+  private JTextField models;            // model
 
-  private JLabel sticks;                  // Display of sticks on game board
-  private JLabel msg;                     // Status message display
-  private JButton buttonAddCust;          // Button to select 1 stick
-  private JButton buttonAddOpt;           // Button to select 2 sticks
-  private JButton buttonAddComp;          // Button to select 3 sticks
-  private JButton buttonViewCust;          // Button to select 1 stick
-  private JButton buttonViewOpt;           // Button to select 2 sticks
-  private JButton buttonViewComp;          // Button to select 3 sticks
+  private JButton buttonAddCust;        // Button to select 1 stick
+  private JButton buttonAddOpt;         // Button to select 2 sticks
+  private JButton buttonAddComp;        // Button to select 3 sticks
+  private JButton buttonViewCusts;       // Button to select 1 stick
+  private JButton buttonViewOpts;        // Button to select 2 sticks
+  private JButton buttonViewComps;       // Button to select 3 sticks
 
 }
 

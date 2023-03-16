@@ -244,10 +244,18 @@ public class MainWin extends JFrame {
 
       JLabel title = new JLabel("<html>"
         + "<p><font size=+4>ELSA</font></p>"
-        + "<P>Exceptional Laptops and Supercomputers Always</p>"
-        + "<p>Version 0.2J</p>"
         + "</html>",
         SwingConstants.CENTER);
+
+      JLabel subtitle = new JLabel("<html>"
+        + "<P>Exceptional Laptops and Supercomputers Always</p>"
+        + "</html>",
+        SwingConstants.CENTER);
+
+      JLabel version = new JLabel("<html>"
+        + "<p>Version 0.2J</p>"
+        + "</html>",
+        + SwingConstants.CENTER);
 
       JLabel artists = new JLabel("<html>"
         + "<br><p> Ali Senkayi (aks3632@mavs.uta.edu)</p>"
@@ -279,8 +287,8 @@ public class MainWin extends JFrame {
         + "</html>");
 
        JOptionPane.showMessageDialog(this,
-           new Object[]{logo, title, artists},
-           "The Game of Nim",
+           new Object[]{logo, title, subtitle, version, artists},
+           "ELSA",
            JOptionPane.PLAIN_MESSAGE
        );
    }

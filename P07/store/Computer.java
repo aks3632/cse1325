@@ -43,9 +43,9 @@ public class Computer {
   public String toString() { // ** OK (Close to accurate)
     // Resolved | How to iterate via Options (parts) & return
 
-    /* Empty String resolves issue of reduncancy
-    printing ArrayList's elements inside brackets. */
-    StringBuilder result = new StringBuilder(""); 
+    /* Empty String resolves issue of reduncancy printing
+       original ArrayList's elements inside brackets. */
+    StringBuilder result = new StringBuilder("");
     // StringBuilder is preferred here over String because we're building up
     // a String in a loop. Remember, String is immutable - every change
     // you make creates an entire new object! StringBuider is mutable.

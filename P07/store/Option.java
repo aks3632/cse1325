@@ -27,12 +27,11 @@ import java.math.BigDecimal;
    // Method
    @Override
    public String toString() {
+     int dollars = (int)cost / 100;
+     int cents = (int)cost % 100;
+
      // Ex) "PNY CS900 500GB Internal SSD SATA ($29.99)"
-     // return "" + name + " " + "($" + cost + ")";                                 | Trial Run 1
-     // return "" + name + " " + "($" + String.format("%.2f", cost / 100.0) + ")";  | Trial Run 2 Failed
-     // return "" + name + " " + "($" + (Math.floor(cost * 100) / 100) + ")";       | Trial Run 3 | truncate long to two decimal places
-     // https://stackoverflow.com/questions/7747469/how-can-i-truncate-a-double-to-only-two-decimal-places-in-java
-     return "" + name + " " + "($" + (Math.floor((cost/100) * 100) / 100) + ")"; // Trial Run 3 | Divide by 100 when printing
+     return "" + name + " " + "($" + dollars + "." + ((cents < 10) ? "0" : "") + cents +")"; // Trial Run 3 | Divide by 100 when printing
    } // end toString
 
    /* https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object) */

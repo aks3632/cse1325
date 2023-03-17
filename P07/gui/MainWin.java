@@ -78,7 +78,10 @@ public class MainWin extends JFrame {
       JMenuBar menubar = new JMenuBar();
 
       JMenu     file       = new JMenu("File");
+      /* ***************************** NEW MENU ***************************** */
+      /* ***************************** NEW MENU ***************************** */
       JMenuItem quit       = new JMenuItem("Quit");
+      /* ***************************** NEW MENU ***************************** */
       /* ***************************** NEW MENU ***************************** */
       JMenu     insert           = new JMenu("Insert");
       JMenuItem insertCustomer   = new JMenuItem("Customer");
@@ -88,34 +91,35 @@ public class MainWin extends JFrame {
       JMenuItem viewCustomers    = new JMenuItem(Modes.mode1.getLabel()); // "Customers"
       JMenuItem viewOptions      = new JMenuItem(Modes.mode2.getLabel()); // "Options"
       JMenuItem viewComputers    = new JMenuItem(Modes.mode3.getLabel()); // "Computers"
-      /* ***************************** NEW MENU ***************************** */
       JMenu     help             = new JMenu("Help");
       JMenuItem about            = new JMenuItem("About");
 
-      quit            .addActionListener(event -> onQuitClick());
+      quit            .addActionListener(event -> onQuitClick());                 // OK
       /* ************************** ACTION LISTNER ************************** */
-      insertCustomer  .addActionListener(event -> onInsertCustomerClick());
-      insertOption    .addActionListener(event -> onInsertOptionClick());
-      insertComputer  .addActionListener(event -> onInsertComputerClick());
-      viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));
-      viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));
-      viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));
       /* ************************** ACTION LISTNER ************************** */
+      insertCustomer  .addActionListener(event -> onInsertCustomerClick());       // OK
+      insertOption    .addActionListener(event -> onInsertOptionClick());         // OK
+      insertComputer  .addActionListener(event -> onInsertComputerClick());       // OK
+      viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));  // OK
+      viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));    // OK
+      viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));  // OK
       about.addActionListener(event -> onAboutClick());
 
 
       file.add(quit);
-      insert.add(insertCustomer); // New
-      insert.add(insertOption);   // New
-      insert.add(insertComputer); // New
-      view.add(viewCustomers);    // New
-      view.add(viewOptions);      // New
-      view.add(viewComputers);    // New
+      /* ******************************* FILE ******************************* */
+      /* ******************************* FILE ******************************* */
+      insert.add(insertCustomer); // OK
+      insert.add(insertOption);   // OK
+      insert.add(insertComputer); // OK
+      view.add(viewCustomers);    // OK
+      view.add(viewOptions);      // OK
+      view.add(viewComputers);    // OK
       help.add(about);
 
       menubar.add(file);
-      menubar.add(insert);        // New
-      menubar.add(view);          // New
+      menubar.add(insert);        // OK
+      menubar.add(view);          // OK
       menubar.add(help);
 
       setJMenuBar(menubar);

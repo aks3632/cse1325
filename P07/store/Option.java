@@ -1,6 +1,9 @@
 package store;
 
 import java.math.BigDecimal;
+import java.io.IOException;     // reports an error reading from a file
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
 
  public class Option {
 
@@ -18,6 +21,18 @@ import java.math.BigDecimal;
      this.name = name;
      this.cost = cost;
    } // end Constructor
+
+   /* Save method writes object's fields to a file */
+   public void save(BufferedWriter bw) throws IOException {
+     bw.write(name + '\n');
+     bw.write("" + cost + '\n');
+   }
+
+   /* Constructor recreates objects form a file */
+   public Option(BufferedReader br) throws IOException {
+     this.name = br.readLine();
+     this.cost = Integer.parseInt(br.readLine());
+   }
 
    // Methods
    public long cost() { // Divide by 100 when printing

@@ -20,6 +20,8 @@ import javax.imageio.ImageIO;        // loads an image from a file
 
 import java.io.File;                 // opens a file
 import java.io.IOException;          // reports an error reading from a file
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import java.awt.BorderLayout;        // layout manager for main window
 import java.awt.FlowLayout;          // layout manager for About dialog

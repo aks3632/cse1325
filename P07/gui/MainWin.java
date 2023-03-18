@@ -20,6 +20,8 @@ import javax.imageio.ImageIO;        // loads an image from a file
 
 import java.io.File;                 // opens a file
 import java.io.IOException;          // reports an error reading from a file
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
@@ -81,10 +83,14 @@ public class MainWin extends JFrame {
 
       JMenu     file       = new JMenu("File");
       /* ***************************** NEW MENU ***************************** */
+      JMenuItem anew       = new JMenuItem("New Game File");
+      JMenuItem open       = new JMenuItem("Open");
       /* ***************************** NEW MENU ***************************** */
       JMenuItem quit       = new JMenuItem("Quit");
-      /* ***************************** NEW MENU ***************************** */
-      /* ***************************** NEW MENU ***************************** */
+      /* ******************************* SAVE ******************************* */
+      JMenuItem save       = new JMenuItem("Save");
+      JMenuItem saveas     = new JMenuItem("Save As");
+      /* ******************************* SAVE ******************************* */
       JMenu     insert           = new JMenu("Insert");
       JMenuItem insertCustomer   = new JMenuItem("Customer");
       JMenuItem insertOption     = new JMenuItem("Option");
@@ -96,18 +102,24 @@ public class MainWin extends JFrame {
       JMenu     help             = new JMenu("Help");
       JMenuItem about            = new JMenuItem("About");
 
+      /* ************************** ACTION LISTNER ************************** */
+      anew            .addActionListener(event -> onNewClick());
+      open            .addActionListener(event -> onOpenClick());
+      save            .addActionListener(event -> onSaveClick());
+      saveas          .addActionListener(event -> onSaveAsClick());
+      /* ************************** ACTION LISTNER ************************** */
       quit            .addActionListener(event -> onQuitClick());                 // OK
-      /* ************************** ACTION LISTNER ************************** */
-      /* ************************** ACTION LISTNER ************************** */
       insertCustomer  .addActionListener(event -> onInsertCustomerClick());       // OK
       insertOption    .addActionListener(event -> onInsertOptionClick());         // OK
       insertComputer  .addActionListener(event -> onInsertComputerClick());       // OK
       viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));  // OK
       viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));    // OK
       viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));  // OK
-      about.addActionListener(event -> onAboutClick());
+      about           .addActionListener(event -> onAboutClick());
 
 
+      file.add(anew);
+      file.add(open);
       file.add(quit);
       /* ******************************* FILE ******************************* */
       /* ******************************* FILE ******************************* */
@@ -301,6 +313,12 @@ public class MainWin extends JFrame {
 
    /* ****************** START NEW LISTNERS PROTECTED ****************** */
 
+
+   protected void onNewClick() { }
+   protected void onOpenClick() { }
+   protected void onSaveClick() { }
+   protected void onSaveAsClick() { }
+
    String name;
    String email;
    long cost;
@@ -492,6 +510,7 @@ public class MainWin extends JFrame {
   private JTextField costs;             // cost
   private JComboBox<Object> compOpts;   // JComboBox via Computer Options
   private JTextField models;            // model
+  private File filename;
 
   private JButton buttonAddCust;        // Button to select 1
   private JButton buttonAddOpt;         // Button to select 2

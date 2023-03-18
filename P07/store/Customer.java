@@ -3,6 +3,9 @@ package store;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.*;
+import java.io.IOException;     // reports an error reading from a file
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
  public class Customer {
 
@@ -28,6 +31,19 @@ import java.util.*;
      this.name = name;
      this.email = email;
    } // end Constructor
+
+   /* Save method writes the objec's fields to a file */
+   public void save(BufferedWriter bw) throws IOException { // Save Method
+     bw.write(name  + '\n');       // write to String
+     bw.write(email + '\n');
+     bw.write(PTTNREGEX + '\n');
+   }
+
+   /* Constructor recreates the object from a file */
+   public Customer(BufferedReader br) throws IOException { // Constructor
+     this.name = br.readLine();
+     this.email = br.readLine();
+   }
 
    /* ************************************* REGEX ************************************* */
 

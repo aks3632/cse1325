@@ -19,26 +19,25 @@ public class Order {
     this.orderNumber = nextOrderNumber++; // ** Updated to Profs code 3/1/23
   } // end Constructor
 
-  /* Save method writes the objec's fields to a file */
+  /* Save method writes the object's fields to a file */
   public void save(BufferedWriter bw) throws IOException {
     bw.write("" + nextOrderNumber + '\n');
     bw.write("" + orderNumber + '\n');
     customer.save(bw);                    // Instance own Class
-    bw.write(computers.size() + '\n');     // A) Write the # of elements |& determine Size of ArrayList
+    bw.write(computers.size() + '\n');    // A) Write the # of elements |& determine Size of ArrayList
     for(Computer computer : computers) {  // B) Write each element in ArrayList via for-each loop
       computer.save(bw);
     } // end for-each
-
   } // end save
 
+  /* Constructor recreates an object from a file */
   public Order(BufferedReader br) throws IOException {
     this.nextOrderNumber = Long.parseLong(br.readLine());
     this.orderNumber = Long.parseLong(br.readLine());
     customer = new Customer(br);                // Instance own Class
     int size = Integer.parseInt(br.readLine()); // Size of ArrayList
     while(size-- > 0 ) computers.add(new Computer(br)); // Recreate and add each element in ArrayList via while loop
-  }
-
+  } // end Constructor
 
   // Methods
   /* addComputer simply adds its parameter to the computers field. */

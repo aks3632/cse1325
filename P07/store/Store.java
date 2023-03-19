@@ -18,7 +18,9 @@ public class Store {
 
     /* Save method writes the objec's fields to a file */
     public void save(BufferedWriter bw) throws IOException {
+
       bw.write(name + '\n');
+
       bw.write(customers.size() + '\n');    // A) 1st write # of elements here
       for(Customer customer : customers) {  // B) Write each element in ArrayList via for-each loop
         customer.save(bw);
@@ -39,6 +41,32 @@ public class Store {
         order.save(bw);
       } // end for-each
     } // end save
+
+    /* Constructor recreates an object from a file */
+    public Store(BufferedReader br) throws IOException {
+
+      this.name = br.readLine();
+
+      int size = Integer.parseInt(br.readLine()); // A) 1st read # of elements here
+      while(size-- > 0) {                         // B) Read & add each element in ArrayList via while loop
+        customers.add(new Customer(br));
+      } // end while
+
+      size = Integer.parseInt(br.readLine());     // A) 1st read # of elements here
+      while(size-- > 0) {                         // B) Read & add each element in ArrayList via while loop
+        options.add(new Option(br));
+      } // end while
+
+      size = Integer.parseInt(br.readLine());     // A) 1st read # of elements here
+      while(size-- > 0) {                         // B) Read & add each element in ArrayList via while loop
+        computers.add(new Computer(br));
+      } // end while
+
+      size = Integer.parseInt(br.readLine());     // A) 1st read # of elements here
+      while(size-- > 0) {                         // B) Read & add each element in ArrayList via while loop
+        orders.add(new Order(br));
+      } // end while
+    } // end Constructor
 
     // ///////////////////////////////////////////////////////////
     // Customers

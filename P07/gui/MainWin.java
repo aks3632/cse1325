@@ -103,7 +103,7 @@ public class MainWin extends JFrame {
       JMenuItem about            = new JMenuItem("About");
 
       /* ************************** ACTION LISTNER ************************** */
-      anew            .addActionListener(event -> onNewClick());
+      anew            .addActionListener(event -> onNewClick());          //  onNewClick() creates a new file, therfore; just store = new Store - SEARCH SLIDES!!
       open            .addActionListener(event -> onOpenClick());
       save            .addActionListener(event -> onSaveClick());
       saveas          .addActionListener(event -> onSaveAsClick());

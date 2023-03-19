@@ -2,6 +2,9 @@ package store;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.IOException;     // reports an error reading from a file
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
 
 public class Computer {
   // Fields - ArrayList<Option> Declerated & Initialized outside methods!
@@ -13,6 +16,24 @@ public class Computer {
   public Computer(String name, String model) {
     this.name = name;
     this.model = model;
+  } // end Constructor
+
+  /* Save method writes object fields to file */
+  public void save(BufferedWriter bw) throws IOException {
+    bw.write(name + '\n');
+    bw.write(model + '\n');
+    bw.write(options.size() + '\n');  // A) Write the # of elements in ArrayList
+    for(Option opt : options) {       // B) Write each element in ArrayList via for-each loop
+      opt.save(bw);
+    } // end for-each
+  } // end save
+
+  /* Constructor recreates an object from a file */
+  public Computer(BufferedReader br) throws IOException {
+    this.name = br.readLine();
+    this.model = br.readLine();
+    int size = Integer.parseInt(br.readLine());     // A) 1st read # of elements |& determine Size of ArrayList
+    while(size-- > 0) options.add(new Option(br));  // B) Recreate & add each element in ArrayList via while loop
   } // end Constructor
 
   // Method

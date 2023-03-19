@@ -37,13 +37,13 @@ import java.io.BufferedWriter;
      bw.write(name  + '\n');       // write to String
      bw.write(email + '\n');
      bw.write(PTTNREGEX + '\n');
-   }
+   } // end save
 
    /* Constructor recreates the object from a file */
    public Customer(BufferedReader br) throws IOException { // Constructor
      this.name = br.readLine();
      this.email = br.readLine();
-   }
+   } // end Constructor
 
    /* ************************************* REGEX ************************************* */
 

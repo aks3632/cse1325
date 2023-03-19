@@ -1,13 +1,16 @@
 package store;
 
 import java.util.ArrayList;
+import java.io.IOException;     // reports an error reading from a file
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
 
 public class Order {
 
   // Fields
   private static long nextOrderNumber = 0;
-  private long orderNumber; // ** Updated to Profs code 3/1/23
-  private Customer customer;
+  private long orderNumber;   // ** Updated to Profs code 3/1/23
+  private Customer customer;  // A class we wrote
   private ArrayList<Computer> computers = new ArrayList<>();
 
   // Constructor
@@ -15,6 +18,27 @@ public class Order {
     this.customer = customer;
     this.orderNumber = nextOrderNumber++; // ** Updated to Profs code 3/1/23
   } // end Constructor
+
+  /* Save method writes the objec's fields to a file */
+  public void save(BufferedWriter bw) throws IOException {
+    bw.write("" + nextOrderNumber + '\n');
+    bw.write("" + orderNumber + '\n');
+    customer.save(bw);                    // Instance own Class
+    bw.write(computers.size() + '\n');     // A) Write the # of elements |& determine Size of ArrayList
+    for(Computer computer : computers) {  // B) Write each element in ArrayList via for-each loop
+      computer.save(bw);
+    } // end for-each
+
+  } // end save
+
+  public Order(BufferedReader br) throws IOException {
+    this.nextOrderNumber = Long.parseLong(br.readLine());
+    this.orderNumber = Long.parseLong(br.readLine());
+    customer = new Customer(br);                // Instance own Class
+    int size = Integer.parseInt(br.readLine()); // Size of ArrayList
+    while(size-- > 0 ) computers.add(new Computer(br)); // Recreate and add each element in ArrayList via while loop
+  }
+
 
   // Methods
   /* addComputer simply adds its parameter to the computers field. */

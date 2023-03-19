@@ -26,13 +26,13 @@ import java.io.BufferedReader;
    public void save(BufferedWriter bw) throws IOException {
      bw.write(name + '\n');
      bw.write("" + cost + '\n');
-   }
+   } // end save
 
    /* Constructor recreates objects form a file */
    public Option(BufferedReader br) throws IOException {
      this.name = br.readLine();
-     this.cost = Integer.parseInt(br.readLine());
-   }
+     this.cost = Long.parseLong(br.readLine());
+   } // end Constructor
 
    // Methods
    public long cost() { // Divide by 100 when printing

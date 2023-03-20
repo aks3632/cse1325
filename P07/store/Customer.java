@@ -2,7 +2,7 @@ package store;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.*;
+// import java.util.*;
 import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -36,7 +36,7 @@ import java.io.BufferedWriter;
    public void save(BufferedWriter bw) throws IOException { // Save Method
      bw.write(name  + '\n');       // write to String
      bw.write(email + '\n');
-     bw.write(PTTNREGEX + '\n');
+     // bw.write(PTTNREGEX + '\n');
    } // end save
 
    /* Constructor recreates the object from a file */

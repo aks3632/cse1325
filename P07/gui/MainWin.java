@@ -74,7 +74,7 @@ public class MainWin extends JFrame {
   };
 
   private String NAME = "Elsa";
-  private String VERSION = "1.3J";
+  private String VERSION = "1.4J";
   private String FILE_VERSION = "1.0";
   private String MAGIC_COOKIE = "Store☏"; // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
 
@@ -110,7 +110,7 @@ public class MainWin extends JFrame {
       JMenuItem about            = new JMenuItem("About");
 
       /* ************************** ACTION LISTNER ************************** */
-      anew            .addActionListener(event -> onNewClick());          // onNewClick() creates a new file, therfore; just store = new Store - SEARCH SLIDES!!
+      anew            .addActionListener(event -> onNewClick());          // onNewClick() creates a new file | store = new Store
       open            .addActionListener(event -> onOpenClick());         // Open - JFileChooser
       save            .addActionListener(event -> onSaveClick());         // Save
       saveas          .addActionListener(event -> onSaveAsClick());       // Save As - JFileChooser
@@ -271,13 +271,13 @@ public class MainWin extends JFrame {
 
   /* ****************** START NEW LISTNERS PROTECTED ****************** */
 
-  protected void onNewClick() {       // Create a new Store - OK
-    store = new Store("ELSA Prime");  // Instance a new Store
+  protected void onNewClick() {      // Create a new Store - OK
+      store = new Store("ELSA Prime");       // << Instance a new Store | store = new Store("ELSA Prime");
   } // END
 
   protected void onOpenClick() {      // Create a new game(store) - OK
       final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
-      FileFilter storeFiles = new FileNameExtensionFilter("Store files", "ppl");
+      FileFilter storeFiles = new FileNameExtensionFilter("Store files", "ppm"); // Ext. *.ppm (parts per million)
       fc.addChoosableFileFilter(storeFiles);         // Add "Store file" filter
       fc.setFileFilter(storeFiles);                  // Show Store files only by default
 
@@ -287,11 +287,11 @@ public class MainWin extends JFrame {
 
           try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
               String magicCookie = br.readLine();
-              if(!magicCookie.equals(MAGIC_COOKIE)) throw new RuntimeException("Not a Nim file");
+              if(!magicCookie.equals(MAGIC_COOKIE)) throw new RuntimeException("Not a Store file");
               String fileVersion = br.readLine();
-              if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible Nim file format");
+              if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible Store file format");
 
-              store = new Store(br);                   // Open a new game
+              store = new Store(br);                   // Open a new file
           } catch (Exception e) {
               JOptionPane.showMessageDialog(this,"Unable to open " + filename + '\n' + e,
                   "Failed", JOptionPane.ERROR_MESSAGE);
@@ -299,9 +299,31 @@ public class MainWin extends JFrame {
       }
   } // END
 
-  protected void onSaveClick() { } // <<<<<<<<<<<<<<<<<< NEXT!!!!!
+  protected void onSaveClick() {              // Create a new game
+      try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+          bw.write(MAGIC_COOKIE + '\n');
+          bw.write(FILE_VERSION + '\n');
+          store.save(bw);
+      } catch (Exception e) {
+          JOptionPane.showMessageDialog(this, "Unable to open " + filename + '\n' + e,
+              "Failed", JOptionPane.ERROR_MESSAGE);
+      }
+  } // END
 
-  protected void onSaveAsClick() {}
+  protected void onSaveAsClick() {             // Create a new game
+      final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
+      FileFilter storeFiles = new FileNameExtensionFilter("Store files", "ppm"); // Ext. *.ppm (parts per million)
+      fc.addChoosableFileFilter(storeFiles);         // Add "Store file" filter
+      fc.setFileFilter(storeFiles);                  // Show Store files only by default
+
+      int result = fc.showSaveDialog(this);        // Run dialog, return button clicked
+      if (result == JFileChooser.APPROVE_OPTION) { // Also CANCEL_OPTION and ERROR_OPTION
+          filename = fc.getSelectedFile();         // Obtain the selected File object
+          if(!filename.getAbsolutePath().endsWith(".ppm"))  // Ensure it ends with ".ppm"
+              filename = new File(filename.getAbsolutePath() + ".ppm"); // Ext. *.ppm (parts per million)
+          onSaveClick();                           // Delegate to Save method
+      }
+  } // END
 
   /* ****************** END NEW LISTNERS PROTECTED ******************* */
 
@@ -314,7 +336,7 @@ public class MainWin extends JFrame {
       }
 
       JLabel title = new JLabel("<html>"
-        + "<p><font size=+4>ELSA</font></p>"
+        + "<p><font size=+4>" + NAME + "</font></p>"
         + "</html>",
         SwingConstants.CENTER);
 
@@ -324,7 +346,7 @@ public class MainWin extends JFrame {
         SwingConstants.CENTER);
 
       JLabel version = new JLabel("<html>"
-        + "<p>Version 0.2J</p>"
+        + "<p>Version " + VERSION + "</p>"
         + "</html>",
         + SwingConstants.CENTER);
 
@@ -356,6 +378,7 @@ public class MainWin extends JFrame {
         + "<br/><p>View Computers icon based on work created by Freepik per the Flaticon License</p>"
         + "<p><font size=-2>https://www.flaticon.com/free-icons/computers title=computers icons</font></p><br/>"
         + "</html>");
+        // <a href="https://www.flaticon.com/free-icons/files-and-folders" title="files-and-folders icons">Files-and-folders icons created by Taufik - Flaticon</a>
         // <a href="https://www.flaticon.com/free-icons/online-purchase" title="online purchase icons">Online purchase icons created by Futuer - Flaticon</a> chipStore
 
        JOptionPane.showMessageDialog(this,
@@ -365,14 +388,11 @@ public class MainWin extends JFrame {
        );
    }
 
-   String name;
-   String email;
-   long cost;
 
    protected void onInsertCustomerClick() { // Revised to Professor's code | NullPointerException
      try {
-         name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
-         email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
+         String name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
+         String email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
          checkEmail(email);
          Customer customer = new Customer(name, email); // Customer constructor
          store.add(customer);           // Pass new Customer to Store's add method
@@ -558,12 +578,14 @@ public class MainWin extends JFrame {
   private JTextField models;            // model
   private File filename;
 
+  /*
   private JButton buttonAddCust;        // Button to select 1
   private JButton buttonAddOpt;         // Button to select 2
   private JButton buttonAddComp;        // Button to select 3
   private JButton buttonViewCusts;      // Button to select 4
   private JButton buttonViewOpts;       // Button to select 5
   private JButton buttonViewComps;      // Button to select 6
+  */
 
 } // end class MainWin
 

@@ -18,6 +18,10 @@ import javax.swing.SwingConstants;   // useful values for Swing method calls
 
 import javax.imageio.ImageIO;        // loads an image from a file
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.io.File;                 // opens a file
 import java.io.IOException;          // reports an error reading from a file
 import java.io.BufferedReader;
@@ -69,11 +73,16 @@ public class MainWin extends JFrame {
     }
   };
 
+  private String NAME = "Elsa";
+  private String VERSION = "1.3J";
+  private String FILE_VERSION = "1.0";
+  private String MAGIC_COOKIE = "Store☏"; // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
 
   public MainWin(String title) { // ** Constructor
       super(title);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setSize(400, 200);
+      filename = new File("untitled.ppm"); // Replace untitled.nim with ext. *.ppm (parts per million)
 
       // /////// ////////////////////////////////////////////////////////////////
       // M E N U
@@ -81,16 +90,14 @@ public class MainWin extends JFrame {
 
       JMenuBar menubar = new JMenuBar();
 
-      JMenu     file       = new JMenu("File");
+      JMenu     file             = new JMenu("File");
       /* ***************************** NEW MENU ***************************** */
-      JMenuItem anew       = new JMenuItem("New Game File");
-      JMenuItem open       = new JMenuItem("Open");
-      /* ***************************** NEW MENU ***************************** */
-      JMenuItem quit       = new JMenuItem("Quit");
-      /* ******************************* SAVE ******************************* */
-      JMenuItem save       = new JMenuItem("Save");
-      JMenuItem saveas     = new JMenuItem("Save As");
-      /* ******************************* SAVE ******************************* */
+      JMenuItem anew             = new JMenuItem("A-New File");           // A-New
+      JMenuItem open             = new JMenuItem("Open");                 // Open - JFileChooser | GOOD
+      JMenuItem save             = new JMenuItem("Save");                 // Save
+      JMenuItem saveas           = new JMenuItem("Save As");              // Save As - JFileChooser
+      /* ***************************** OPEN/SAVE **************************** */
+      JMenuItem quit             = new JMenuItem("Quit");
       JMenu     insert           = new JMenu("Insert");
       JMenuItem insertCustomer   = new JMenuItem("Customer");
       JMenuItem insertOption     = new JMenuItem("Option");
@@ -103,10 +110,10 @@ public class MainWin extends JFrame {
       JMenuItem about            = new JMenuItem("About");
 
       /* ************************** ACTION LISTNER ************************** */
-      anew            .addActionListener(event -> onNewClick());          //  onNewClick() creates a new file, therfore; just store = new Store - SEARCH SLIDES!!
-      open            .addActionListener(event -> onOpenClick());
-      save            .addActionListener(event -> onSaveClick());
-      saveas          .addActionListener(event -> onSaveAsClick());
+      anew            .addActionListener(event -> onNewClick());          // onNewClick() creates a new file, therfore; just store = new Store - SEARCH SLIDES!!
+      open            .addActionListener(event -> onOpenClick());         // Open - JFileChooser
+      save            .addActionListener(event -> onSaveClick());         // Save
+      saveas          .addActionListener(event -> onSaveAsClick());       // Save As - JFileChooser
       /* ************************** ACTION LISTNER ************************** */
       quit            .addActionListener(event -> onQuitClick());                 // OK
       insertCustomer  .addActionListener(event -> onInsertCustomerClick());       // OK
@@ -118,11 +125,13 @@ public class MainWin extends JFrame {
       about           .addActionListener(event -> onAboutClick());
 
 
-      file.add(anew);
-      file.add(open);
+      /* ******************************* FILE ******************************* */
+      file.add(anew);     // A-New
+      file.add(open);     // Open
+      file.add(save);     // Save
+      file.add(saveas);   // Save As
+      /* ******************************* FILE ******************************* */
       file.add(quit);
-      /* ******************************* FILE ******************************* */
-      /* ******************************* FILE ******************************* */
       insert.add(insertCustomer); // OK
       insert.add(insertOption);   // OK
       insert.add(insertComputer); // OK
@@ -143,6 +152,14 @@ public class MainWin extends JFrame {
       // T O O L B A R
       // Add a toolbar to the PAGE_START region below the menu
       JToolBar toolbar = new JToolBar("ELSA Controls");
+
+      // [T] Add a New Game stock icon
+      JButton anewB  = new JButton(UIManager.getIcon("FileView.fileIcon"));
+        anewB.setActionCommand("New Game");
+        anewB.setToolTipText("Create a new game, discarding any in progress");
+        anewB.setBorder(null);
+        toolbar.add(anewB);
+        anewB.addActionListener(event -> onNewClick());
 
       // A "horizontal strut" is just a space of the specified pixel width
       toolbar.add(Box.createHorizontalStrut(25));
@@ -221,7 +238,7 @@ public class MainWin extends JFrame {
       setVisible(true);
 
       // Start a new store
-      store = new Store("ELSA Prime");  // Instance a new Store
+      onNewClick();
 
   } // END CONSTRUCTOR
 
@@ -251,6 +268,42 @@ public class MainWin extends JFrame {
   /* ****************************************** REGEX ****************************************** */
 
   // Listeners
+
+  /* ****************** START NEW LISTNERS PROTECTED ****************** */
+
+  protected void onNewClick() {       // Create a new Store - OK
+    store = new Store("ELSA Prime");  // Instance a new Store
+  } // END
+
+  protected void onOpenClick() {      // Create a new game(store) - OK
+      final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
+      FileFilter storeFiles = new FileNameExtensionFilter("Store files", "ppl");
+      fc.addChoosableFileFilter(storeFiles);         // Add "Store file" filter
+      fc.setFileFilter(storeFiles);                  // Show Store files only by default
+
+      int result = fc.showOpenDialog(this);         // Run dialog, return button clicked
+      if (result == JFileChooser.APPROVE_OPTION) {  // Also CANCEL_OPTION and ERROR_OPTION
+          filename = fc.getSelectedFile();          // Obtain the selected File object
+
+          try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+              String magicCookie = br.readLine();
+              if(!magicCookie.equals(MAGIC_COOKIE)) throw new RuntimeException("Not a Nim file");
+              String fileVersion = br.readLine();
+              if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible Nim file format");
+
+              store = new Store(br);                   // Open a new game
+          } catch (Exception e) {
+              JOptionPane.showMessageDialog(this,"Unable to open " + filename + '\n' + e,
+                  "Failed", JOptionPane.ERROR_MESSAGE);
+           }
+      }
+  } // END
+
+  protected void onSaveClick() { } // <<<<<<<<<<<<<<<<<< NEXT!!!!!
+
+  protected void onSaveAsClick() {}
+
+  /* ****************** END NEW LISTNERS PROTECTED ******************* */
 
   protected void onAboutClick() { // Display About dialog
       JLabel logo = null;
@@ -303,6 +356,7 @@ public class MainWin extends JFrame {
         + "<br/><p>View Computers icon based on work created by Freepik per the Flaticon License</p>"
         + "<p><font size=-2>https://www.flaticon.com/free-icons/computers title=computers icons</font></p><br/>"
         + "</html>");
+        // <a href="https://www.flaticon.com/free-icons/online-purchase" title="online purchase icons">Online purchase icons created by Futuer - Flaticon</a> chipStore
 
        JOptionPane.showMessageDialog(this,
            new Object[]{logo, title, subtitle, version, artists},
@@ -310,14 +364,6 @@ public class MainWin extends JFrame {
            JOptionPane.PLAIN_MESSAGE
        );
    }
-
-   /* ****************** START NEW LISTNERS PROTECTED ****************** */
-
-
-   protected void onNewClick() { }
-   protected void onOpenClick() { }
-   protected void onSaveClick() { }
-   protected void onSaveAsClick() { }
 
    String name;
    String email;

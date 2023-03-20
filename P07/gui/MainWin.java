@@ -153,10 +153,10 @@ public class MainWin extends JFrame {
       // Add a toolbar to the PAGE_START region below the menu
       JToolBar toolbar = new JToolBar("ELSA Controls");
 
-      // [T] Add a New Game stock icon
-      JButton anewB  = new JButton(UIManager.getIcon("FileView.fileIcon"));
-        anewB.setActionCommand("New Game");
-        anewB.setToolTipText("Create a new game, discarding any in progress");
+      // [OR] Replace ImageIcon([String filename, [String description]]) with UIManager.getIcon("FileView.fileIcon")
+      JButton anewB  = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/new_Document.png"));
+        anewB.setActionCommand("New File");
+        anewB.setToolTipText("Create a New File for New Merchant");
         anewB.setBorder(null);
         toolbar.add(anewB);
         anewB.addActionListener(event -> onNewClick());

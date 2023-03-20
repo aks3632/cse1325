@@ -92,7 +92,7 @@ public class MainWin extends JFrame {
 
       JMenu     file             = new JMenu("File");
       /* ***************************** NEW MENU ***************************** */
-      JMenuItem anew             = new JMenuItem("A-New File");           // A-New
+      JMenuItem anew             = new JMenuItem("New File");           // A-New
       JMenuItem open             = new JMenuItem("Open");                 // Open - JFileChooser | GOOD
       JMenuItem save             = new JMenuItem("Save");                 // Save
       JMenuItem saveas           = new JMenuItem("Save As");              // Save As - JFileChooser
@@ -272,7 +272,8 @@ public class MainWin extends JFrame {
   /* ****************** START NEW LISTNERS PROTECTED ****************** */
 
   protected void onNewClick() {      // Create a new Store - OK
-      store = new Store("ELSA Prime");       // << Instance a new Store | store = new Store("ELSA Prime");
+      String ePrime = JOptionPane.showInputDialog(this, "Store Name", "Input", JOptionPane.PLAIN_MESSAGE);
+      store = new Store(ePrime);       // << Instance a new Store | store = new Store("ELSA Prime");
   } // END
 
   protected void onOpenClick() {      // Create a new game(store) - OK

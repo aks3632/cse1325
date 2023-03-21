@@ -24,7 +24,7 @@ public class Order {
     bw.write("" + nextOrderNumber + '\n');
     bw.write("" + orderNumber + '\n');
     customer.save(bw);                    // Instance own Class
-    bw.write(computers.size() + '\n');    // A) Write the # of elements |& determine Size of ArrayList
+    bw.write("" + computers.size() + '\n');    // A) Write the # of elements |& determine Size of ArrayList
     for(Computer computer : computers) {  // B) Write each element in ArrayList via for-each loop
       computer.save(bw);
     } // end for-each

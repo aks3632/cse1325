@@ -22,7 +22,7 @@ public class Computer {
   public void save(BufferedWriter bw) throws IOException {
     bw.write(name + '\n');
     bw.write(model + '\n');
-    bw.write(options.size() + '\n');  // A) Write the # of elements in ArrayList
+    bw.write("" + options.size() + '\n');  // A) Write the # of elements in ArrayList
     for(Option opt : options) {       // B) Write each element in ArrayList via for-each loop
       opt.save(bw);
     } // end for-each

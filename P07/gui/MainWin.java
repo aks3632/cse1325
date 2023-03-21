@@ -164,14 +164,32 @@ public class MainWin extends JFrame {
       // A "horizontal strut" is just a space of the specified pixel width
       toolbar.add(Box.createHorizontalStrut(25));
 
+      JButton buttonOpen = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/openFile-management.png"));
+        buttonOpen.setActionCommand("Open File");   // Designates name/word/title on button
+        buttonOpen.setToolTipText("Open File");     // Hovering over button displays silhouette text description
+        toolbar.add(buttonOpen);  // Add to toolbar
+        buttonOpen.addActionListener(event -> onOpenClick());
+
+      JButton buttonSave = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/saveFile_download.png"));
+        buttonSave.setActionCommand("Save File");
+        buttonSave.setToolTipText("Save File");
+        toolbar.add(buttonSave);
+        buttonSave.addActionListener(event -> onSaveClick());
+
+      JButton buttonSaveAs = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/saveAsFile_download.png"));
+        buttonSaveAs.setActionCommand("Save As");
+        buttonSaveAs.setToolTipText("Save As");
+        toolbar.add(buttonSaveAs);
+        buttonSaveAs.addActionListener(event -> onSaveAsClick());
+
+      toolbar.add(Box.createHorizontalStrut(25));
+
       // Create the 3 buttons using the icons provided | Naming scheme of buttons is consistant
       // <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
       JButton buttonAddCust = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/add_user.png"));
         buttonAddCust.setActionCommand("Insert Customer");
         buttonAddCust.setToolTipText("Insert Customer");
-        JLabel plus = new JLabel(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/plus.png"));
-        plus.setBounds(0,0,50,50);
-        toolbar.add(buttonAddCust, plus);
+        toolbar.add(buttonAddCust);
         buttonAddCust.addActionListener(event -> onInsertCustomerClick());
 
       JButton buttonAddOpt = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/add_chip.png"));
@@ -272,7 +290,10 @@ public class MainWin extends JFrame {
   /* ****************** START NEW LISTNERS PROTECTED ****************** */
 
   protected void onNewClick() {      // Create a new Store - OK
-      String ePrime = JOptionPane.showInputDialog(this, "Store Name", "Input", JOptionPane.PLAIN_MESSAGE);
+      String ePrime = (String)JOptionPane.showInputDialog(this, "Store Name", "Input", JOptionPane.PLAIN_MESSAGE
+      , new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/new_chipStore.png")
+      , null
+      , null);
       store = new Store(ePrime);       // << Instance a new Store | store = new Store("ELSA Prime");
   } // END
 
@@ -379,8 +400,12 @@ public class MainWin extends JFrame {
         + "<br/><p>View Computers icon based on work created by Freepik per the Flaticon License</p>"
         + "<p><font size=-2>https://www.flaticon.com/free-icons/computers title=computers icons</font></p><br/>"
         + "</html>");
-        // <a href="https://www.flaticon.com/free-icons/files-and-folders" title="files-and-folders icons">Files-and-folders icons created by Taufik - Flaticon</a>
-        // <a href="https://www.flaticon.com/free-icons/online-purchase" title="online purchase icons">Online purchase icons created by Futuer - Flaticon</a> chipStore
+        // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
+        // <a href="https://www.flaticon.com/free-icons/files-and-folders" title="files-and-folders icons">Files-and-folders icons created by Taufik - Flaticon</a> | new_Document.png
+        // <a href="https://www.flaticon.com/free-icons/online-purchase" title="online purchase icons">Online purchase icons created by Futuer - Flaticon</a> | new_chipStore
+        // <a href="https://www.flaticon.com/free-icons/open-folder" title="open folder icons">Open folder icons created by justicon - Flaticon</a> | openFile-management
+        // <a href="https://www.flaticon.com/free-icons/download" title="download icons">Download icons created by Freepik - Flaticon</a> | saveFile_download
+        // <a href="https://www.flaticon.com/free-icons/installer" title="installer icons">Installer icons created by Freepik - Flaticon</a> | saveAsFile_download
 
        JOptionPane.showMessageDialog(this,
            new Object[]{logo, title, subtitle, version, artists},

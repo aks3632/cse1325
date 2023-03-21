@@ -21,23 +21,23 @@ public class Store {
 
       bw.write(name + '\n');
 
-      bw.write("" + customers.size() + '\n');    // A) 1st write # of elements here
-      for(Customer customer : customers) {  // B) Write each element in ArrayList via for-each loop
+      bw.write("" + customers.size() + '\n');   // A) 1st write # of elements here
+      for(Customer customer : customers) {      // B) Write each element in ArrayList via for-each loop
         customer.save(bw);
       } // end for-each
 
-      bw.write("" + options.size() + '\n');      // A) 1st write # of elements here
-      for(Option option : options) {        // B) Write each element in ArrayList via for-each loop
+      bw.write("" + options.size() + '\n');     // A) 1st write # of elements here
+      for(Option option : options) {            // B) Write each element in ArrayList via for-each loop
         option.save(bw);
       } // end for-each
 
-      bw.write("" + computers.size() + '\n');    // A) 1st write # of elements here
-      for(Computer computer : computers) {  // B) Write each element in ArrayList via for-each loop
+      bw.write("" + computers.size() + '\n');   // A) 1st write # of elements here
+      for(Computer computer : computers) {      // B) Write each element in ArrayList via for-each loop
         computer.save(bw);
       } // end for-each
 
-      bw.write("" + orders.size() + '\n');        // A) 1st write # of elements here
-      for(Order order : orders) {            // B) Write each element in ArrayList via for-each loop
+      bw.write("" + orders.size() + '\n');      // A) 1st write # of elements here
+      for(Order order : orders) {               // B) Write each element in ArrayList via for-each loop
         order.save(bw);
       } // end for-each
     } // end save

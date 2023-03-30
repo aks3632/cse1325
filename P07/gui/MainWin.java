@@ -49,6 +49,9 @@ import store.Option;
 import store.Order;
 import store.Store;
 import store.TestStore;
+import gui.art.Line;
+import gui.art.Canvas;
+import gui.art.Spirograph;
 
 
 public class MainWin extends JFrame {
@@ -80,8 +83,8 @@ public class MainWin extends JFrame {
 
   public MainWin(String title) { // ** Constructor
       super(title);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setSize(400, 200);
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      this.setSize(400, 200);
       filename = new File("untitled.ppm"); // Replace untitled.nim with ext. *.ppm (parts per million)
 
       // /////// ////////////////////////////////////////////////////////////////
@@ -155,8 +158,8 @@ public class MainWin extends JFrame {
 
       // [OR] Replace ImageIcon([String filename, [String description]]) with UIManager.getIcon("FileView.fileIcon")
       JButton anewB  = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/new_Document.png"));
-        anewB.setActionCommand("New File");
-        anewB.setToolTipText("Create a New File for New Merchant");
+        anewB.setActionCommand("New File");         // Designates name/word/title on button
+        anewB.setToolTipText("Create a New File for New Merchant"); // Hovering over button displays silhouette text description
         anewB.setBorder(null);
         toolbar.add(anewB);
         anewB.addActionListener(event -> onNewClick());
@@ -253,7 +256,7 @@ public class MainWin extends JFrame {
       add(display, BorderLayout.CENTER);
 
       // Make everything in the JFrame visible
-      setVisible(true);
+        setVisible(true);   // Show the main window
 
       // Start a new store
       onNewClick();
@@ -350,9 +353,14 @@ public class MainWin extends JFrame {
   /* ****************** END NEW LISTNERS PROTECTED ******************* */
 
   protected void onAboutClick() { // Display About dialog
+      Canvas canvas = new Canvas();
+      // add(new Canvas());  // Put the drawing surface in the window
+      pack();             // Auto-resize to Canvas.getPreferredSize()
+
       JLabel logo = null;
+      BufferedImage myPicture = null;
       try {
-          BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+          myPicture = ImageIO.read(new File("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/network-hub.png"));
           logo = new JLabel(new ImageIcon(myPicture));
       } catch(IOException e) {
       }
@@ -399,18 +407,36 @@ public class MainWin extends JFrame {
 
         + "<br/><p>View Computers icon based on work created by Freepik per the Flaticon License</p>"
         + "<p><font size=-2>https://www.flaticon.com/free-icons/computers title=computers icons</font></p><br/>"
+
+        + "<br/><p>New Document icon based on work created by Taufik per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/files-and-folders title=files-and-folders icons</font></p><br/>"
+
+        + "<br/><p>New ChipStore icon based on work created by by Futuer per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/online-purchase title=online purchase icons</font></p><br/>"
+
+        + "<br/><p>Open File Management icon based on work created by justicon per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/open-folder title=open folder icons</font></p><br/>"
+
+        + "<br/><p>Save File Download icon based on work created by Freepik per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/download title=download icons</font></p><br/>"
+
+        + "<br/><p>Save As File Download icon based on work created by Freepik per the Flaticon License</p>"
+        + "<p><font size=-2>https://www.flaticon.com/free-icons/installer title=installer icons</font></p><br/>"
+
         + "</html>");
         // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
-        // <a href="https://www.flaticon.com/free-icons/files-and-folders" title="files-and-folders icons">Files-and-folders icons created by Taufik - Flaticon</a> | new_Document.png
-        // <a href="https://www.flaticon.com/free-icons/online-purchase" title="online purchase icons">Online purchase icons created by Futuer - Flaticon</a> | new_chipStore
-        // <a href="https://www.flaticon.com/free-icons/open-folder" title="open folder icons">Open folder icons created by justicon - Flaticon</a> | openFile-management
-        // <a href="https://www.flaticon.com/free-icons/download" title="download icons">Download icons created by Freepik - Flaticon</a> | saveFile_download
-        // <a href="https://www.flaticon.com/free-icons/installer" title="installer icons">Installer icons created by Freepik - Flaticon</a> | saveAsFile_download
 
-       JOptionPane.showMessageDialog(this,
-           new Object[]{logo, title, subtitle, version, artists},
-           "ELSA",
-           JOptionPane.PLAIN_MESSAGE
+        // ImageIcon image = new ImageIcon(myPicture);
+
+        JOptionPane.showOptionDialog(
+            this,
+            new Object[]{add(new Canvas().add(logo)), title, subtitle, version, artists},
+            "ELSA",
+            JOptionPane.OK_OPTION,
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            null, // Object[] options
+            null  // Object initialValue
        );
    }
 

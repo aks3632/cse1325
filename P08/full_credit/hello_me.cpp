@@ -1,6 +1,12 @@
 #include <iostream>
+#include <sstream>
 
-main(int argc, char** argv) {
-  std::cout << "Hello " << "Ali Senkayi!" << std::endl;
+
+int main(int argc, char** argv) { // function main begins programs execution
+
+  std::string name{"Aliya"};
+
+  std::cout << "Hello, " << name << "!" << std::endl;
+
   return 0;
-}
+} // end main()

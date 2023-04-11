@@ -1,5 +1,6 @@
 #include "item.h"
 
+#include <exception>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -19,7 +20,10 @@
   // Java "" + name + " " + "($" + cost + ")";
   std::string Item::to_string() {
     // Item item{"Cookies", 195};
-    std::string str = _name + " ($ " + std::to_string(_price) + ")";
+    int dollars = (int)_price / 100;
+    int cents = (int)_price % 100;
+
+    std::string str = _name + " ($ " + std::to_string(dollars) + "." + ((cents < 10) ? "0" : "") + std::to_string(cents) +")";
     return str;
   }
 

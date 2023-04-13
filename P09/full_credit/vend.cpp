@@ -1,3 +1,6 @@
+#include "item.h"
+#include "vending_machine.h"
+
 #include <iostream>
 #include <sstream>
 
@@ -11,5 +14,7 @@ int main(int argc, char** argv) {
   std::cout << "Welcome to UTA Vending" << std::endl;
   std::cout << "======================" << std::endl;
 
-  std::cout << "This is main!" << "Item = " << item.to_string() << std::ends;
+  Vending_Machine vm;
+
+  std::cout << "This is main! " << "Item = " << vm.menu();
 }

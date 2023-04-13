@@ -6,7 +6,7 @@
 #include <string>
 
   // The constructor stores the name parameter into the _name private variable
-  //                    and the price parameter into the _price private variable
+  //                      & the price parameter into the _price private variable
   Item::Item(std::string name, int price) : _name{name}, _price{price} {
     if(_price < 0) { // Validate or check data NOT negative
       throw std::runtime_error("Invalid - price is negative!" + std::to_string(_price));

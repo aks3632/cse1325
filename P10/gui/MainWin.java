@@ -368,6 +368,7 @@ public class MainWin extends JFrame {
           JOptionPane.showMessageDialog(this, "Unable to open " + filename + '\n' + e,
               "Failed", JOptionPane.ERROR_MESSAGE);
       }
+      setDirty(false);                      // << ^^Prof's code
   } // END
 
   protected void onSaveAsClick() {             // Create a new game
@@ -485,7 +486,7 @@ public class MainWin extends JFrame {
 
    // VERY IMPORTANT CHANGE MADE BY PROF - CONSIDER ENHANCEMENTS example UnifiedDialog!!!
    protected void onInsertCustomerClick() { // Revised to Professor's code | NullPointerException
-     try {
+     try { // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
          String name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
          String email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.PLAIN_MESSAGE);
          checkEmail(email);
@@ -615,34 +616,34 @@ public class MainWin extends JFrame {
    } // end onInsertComputerClick() |  ^^ Revised to Professor's code ^^
 
    protected void onInsertOrderClick() {
-     // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
-     String name = JOptionPane.showInputDialog(this, "Customer Name", "Inquire Customer", JOptionPane.QUESTION_MESSAGE);
-     String email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.QUESTION_MESSAGE);
-     Customer custOrd = new Customer(name, email);
-     if (custOrd != null) {
-       Order order = new Order(custOrd);
-     }
-     if(custOrd == null) {
-       int n = JOptionPane.showConfirmDialog(
-           this,
-           "Would you like to create a new customer order? ",
-           "Question",
-           JOptionPane.YES_NO_OPTION,
-           JOptionPane.QUESTION_MESSAGE);
 
      try {
-         checkEmail(email);
+         // Select (or create) a Customer
+         Object data;
+         Object[] customers = store.customers();
+         if(customers.length == 0) {
+             onInsertCustomerClick();
+             customers = store.customers();
+             if(customers.length == 0) return;
+         }
+         data = customers[0];       // Initial customer
+         if(customers.length > 1) { // A few customers
+             JLabel label = new JLabel("Order for which Customer?");
+             JComboBox<Object> cb = new JComboBox<>(customers);
+             int button = JOptionPane.showConfirmDialog(this, new Object[]{label, cb}, "New Order",
+                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+             if(button != JOptionPane.OK_OPTION) return;
+             data = cb.getSelectedItem();
+         }
+
+         Order order = new Order((Customer) data);
 
      } catch(NullPointerException e) {
      } catch(Exception e) {
+         JOptionPane.showMessageDialog(this, e,
+             "Order Not Created", JOptionPane.ERROR_MESSAGE);
+         System.err.println(e.getMessage());
      }
-     if (n == JOptionPane.YES_OPTION) {
-       onInsertCustomerClick();
-     } // end if
-     if (n == JOptionPane.NO_OPTION) {
-       response.setText("No customer created");
-     } // end if
-   } // end if
    } // end onInsertOrderClick()
 
    protected void onViewClick(Record record) {  // >> Professor's code <<

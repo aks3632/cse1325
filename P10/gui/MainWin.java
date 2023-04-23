@@ -82,6 +82,7 @@ public class MainWin extends JFrame {
   private String VERSION = "1.4J";
   private String FILE_VERSION = "1.0";
   private String MAGIC_COOKIE = "Store☏"; // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
+  private final String DEFAULT_STORE_NAME = "New " + NAME + " Store";
 
   public MainWin(String title) { // ** Constructor
       super(title);
@@ -99,14 +100,15 @@ public class MainWin extends JFrame {
       /* ***************************** NEW MENU ***************************** */
       JMenuItem anew             = new JMenuItem("New File");           // A-New
       JMenuItem open             = new JMenuItem("Open");                 // Open - JFileChooser | GOOD
-      JMenuItem save             = new JMenuItem("Save");                 // Save
-      JMenuItem saveas           = new JMenuItem("Save As");              // Save As - JFileChooser
+                save             = new JMenuItem("Save");                 // Save
+                saveAs           = new JMenuItem("Save As");              // Save As - JFileChooser
       /* ***************************** OPEN/SAVE **************************** */
       JMenuItem quit             = new JMenuItem("Quit");
       JMenu     insert           = new JMenu("Insert");
       JMenuItem insertCustomer   = new JMenuItem("Customer");
       JMenuItem insertOption     = new JMenuItem("Option");
       JMenuItem insertComputer   = new JMenuItem("Computer");
+      JMenuItem insertOrder      = new JMenuItem("Order");
       JMenu     view             = new JMenu("View");
       JMenuItem viewCustomers    = new JMenuItem(Modes.mode1.getLabel()); // "Customers"
       JMenuItem viewOptions      = new JMenuItem(Modes.mode2.getLabel()); // "Options"
@@ -119,12 +121,13 @@ public class MainWin extends JFrame {
       anew            .addActionListener(event -> onNewClick());          // onNewClick() creates a new file | store = new Store
       open            .addActionListener(event -> onOpenClick());         // Open - JFileChooser
       save            .addActionListener(event -> onSaveClick());         // Save
-      saveas          .addActionListener(event -> onSaveAsClick());       // Save As - JFileChooser
+      saveAs          .addActionListener(event -> onSaveAsClick());       // Save As - JFileChooser
       /* ************************** ACTION LISTNER ************************** */
       quit            .addActionListener(event -> onQuitClick());                 // OK
       insertCustomer  .addActionListener(event -> onInsertCustomerClick());       // OK
       insertOption    .addActionListener(event -> onInsertOptionClick());         // OK
       insertComputer  .addActionListener(event -> onInsertComputerClick());       // OK
+      insertOrder     .addActionListener(event -> onInsertOrderClick());       // OK
       viewCustomers   .addActionListener(event -> onViewClick(Record.CUSTOMER));  // OK
       viewOptions     .addActionListener(event -> onViewClick(Record.OPTION));    // OK
       viewComputers   .addActionListener(event -> onViewClick(Record.COMPUTER));  // OK
@@ -136,12 +139,13 @@ public class MainWin extends JFrame {
       file.add(anew);     // A-New
       file.add(open);     // Open
       file.add(save);     // Save
-      file.add(saveas);   // Save As
+      file.add(saveAs);   // Save As
       /* ******************************* FILE ******************************* */
       file.add(quit);
       insert.add(insertCustomer); // OK
       insert.add(insertOption);   // OK
       insert.add(insertComputer); // OK
+      insert.add(insertOrder); // OK
       view.add(viewCustomers);    // OK
       view.add(viewOptions);      // OK
       view.add(viewComputers);    // OK
@@ -178,13 +182,13 @@ public class MainWin extends JFrame {
         toolbar.add(buttonOpen);  // Add to toolbar
         buttonOpen.addActionListener(event -> onOpenClick());
 
-      JButton buttonSave = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/saveFile_download.png"));
+      buttonSave = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/saveFile_download.png"));
         buttonSave.setActionCommand("Save File");
         buttonSave.setToolTipText("Save File");
         toolbar.add(buttonSave);
         buttonSave.addActionListener(event -> onSaveClick());
 
-      JButton buttonSaveAs = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/saveAsFile_download.png"));
+      buttonSaveAs = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/saveAsFile_download.png"));
         buttonSaveAs.setActionCommand("Save As");
         buttonSaveAs.setToolTipText("Save As");
         toolbar.add(buttonSaveAs);
@@ -212,6 +216,13 @@ public class MainWin extends JFrame {
         buttonAddComp.setToolTipText("Insert Computer");
         toolbar.add(buttonAddComp);
         buttonAddComp.addActionListener(event -> onInsertComputerClick());
+
+      // ??
+      JButton buttonAddOrder = new JButton(new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P10/gui/resources/add_shopping_cart.png"));
+        buttonAddOrder.setActionCommand("Insert Order");
+        buttonAddOrder.setToolTipText("Insert Order");
+        toolbar.add(buttonAddOrder);
+        buttonAddOrder.addActionListener(event -> onInsertOrderClick());
 
       toolbar.add(Box.createHorizontalStrut(25));
 
@@ -243,8 +254,6 @@ public class MainWin extends JFrame {
         toolbar.add(buttonViewOrder);
         buttonViewOrder.addActionListener(event -> onViewClick(Record.ORDER));
 
-
-
       // "Horizontal glue" expands as much as possible, pushing the "X" to the right
       toolbar.add(Box.createHorizontalGlue());
 
@@ -272,7 +281,7 @@ public class MainWin extends JFrame {
         setVisible(true);   // Show the main window
 
       // Start a new store
-      onNewClick();
+      onNewClick(DEFAULT_STORE_NAME); // << Prof's code
 
   } // END CONSTRUCTOR
 
@@ -304,13 +313,23 @@ public class MainWin extends JFrame {
   // Listeners
 
   /* ****************** START NEW LISTNERS PROTECTED ****************** */
-
-  protected void onNewClick() {      // Create a new Store - OK
-      String ePrime = (String)JOptionPane.showInputDialog(this, "Store Name", "Input", JOptionPane.PLAIN_MESSAGE
-      , new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/new_chipStore.png")
-      , null
-      , null);
-      store = new Store(ePrime);       // << Instance a new Store | store = new Store("ELSA Prime");
+  protected void onNewClick() {onNewClick("");} // << Prof's code
+  protected void onNewClick(String name) {         // Create a new Store - OK
+      String ePrime = " ";
+      if(name.isEmpty()) {              // Enhanced to Professor Rice's code below:
+          ePrime = (String)JOptionPane.showInputDialog(
+          this                          // (1)
+          , "Store Name"                // (2)
+          , DEFAULT_STORE_NAME          // (3)
+          , JOptionPane.PLAIN_MESSAGE   // (4)
+          , new ImageIcon("/media/sf_vmh_share3RD/2023/Practice/cse1325/P07/gui/resources/new_chipStore.png") // (6)
+          , null                        // (6)
+          , null);                      // (7)
+          if(name.isEmpty()) name = DEFAULT_STORE_NAME;
+      }
+      store = new Store(ePrime);        // << Instance a new Store | store = new Store("ELSA Prime");
+      onViewClick(Record.CUSTOMER);     // << Prof's code
+      setDirty(false);                  // << Prof's code
   } // END
 
   protected void onOpenClick() {      // Create a new game(store) - OK
@@ -329,7 +348,9 @@ public class MainWin extends JFrame {
               String fileVersion = br.readLine();
               if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible Store file format");
 
-              store = new Store(br);                   // Open a new file
+              store = new Store(br);                // Open a new store
+              onViewClick(Record.CUSTOMER);         // << Update the user interface
+              setDirty(false);                      // << ^^Prof's code
           } catch (Exception e) {
               JOptionPane.showMessageDialog(this,"Unable to open " + filename + '\n' + e,
                   "Failed", JOptionPane.ERROR_MESSAGE);
@@ -342,6 +363,7 @@ public class MainWin extends JFrame {
           bw.write(MAGIC_COOKIE + '\n');
           bw.write(FILE_VERSION + '\n');
           store.save(bw);
+          setDirty(false); // << Added AKS
       } catch (Exception e) {
           JOptionPane.showMessageDialog(this, "Unable to open " + filename + '\n' + e,
               "Failed", JOptionPane.ERROR_MESSAGE);
@@ -454,7 +476,14 @@ public class MainWin extends JFrame {
        );
    }
 
+   private void setDirty(boolean isDirty) { // Professor's code below:
+       save.setEnabled(isDirty);
+       //saveAs.setEnabled(isDirty);
+       buttonSave.setEnabled(isDirty);
+       //buttonSaveAs.setEnabled(isDirty);
+   }; // ^^Prof's code
 
+   // VERY IMPORTANT CHANGE MADE BY PROF - CONSIDER ENHANCEMENTS example UnifiedDialog!!!
    protected void onInsertCustomerClick() { // Revised to Professor's code | NullPointerException
      try {
          String name = JOptionPane.showInputDialog(this, "Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
@@ -519,6 +548,8 @@ public class MainWin extends JFrame {
    } // end onInsertOptionClick()
 
    protected void onInsertComputerClick() {
+     // Load the icon if available
+     ImageIcon icon = null;
      try {
          JLabel name = new JLabel("<HTML><br/>Name</HTML>");
          names = new JTextField(20);
@@ -539,7 +570,7 @@ public class MainWin extends JFrame {
           String str2 = names.getText();
           String str3 = models.getText();
           Computer computer = new Computer(str2, str3); // Computer constructor
-
+          /* ****************** JComboBox ******************* */
           JLabel compOpt = new JLabel("Computer Options");
           // (A) Obtain an Object[] array of Option objects from store
           // (1) Store.java | public Object[] options() { etc...
@@ -547,7 +578,7 @@ public class MainWin extends JFrame {
           // (1) Pass the Object[] array retrieved from store as the constructor parameter
           // Object[] options = {store.options()};            // A | 1
           compOpts = new JComboBox<Object>(store.options());  // B | 1
-
+          /* ^^**************** JComboBox *****************^^ */
           int optionsAdded = 0; // Don't add computers with no options
           Object data;
           Object[] objects2 = { // An Array of widget to display
@@ -557,9 +588,9 @@ public class MainWin extends JFrame {
                 this,                         // Component parentComponent
                 objects2,                     // Object message
                 "Another Option?",            // [String title
-                JOptionPane.YES_NO_OPTION);   // int optionType
-                //JOptionPane.PLAIN_MESSAGE,    // [int messageType,
-                //null);                        // [Icon icon]
+                JOptionPane.YES_NO_OPTION,    // int optionType
+                JOptionPane.PLAIN_MESSAGE,    // [int messageType,
+                icon);                        // [Icon icon]
 
             /* User selects an Option via JComboBox */
             /* JComboBox's getSelectedItem() method obtains data */
@@ -568,10 +599,11 @@ public class MainWin extends JFrame {
             if(button2 != JOptionPane.YES_OPTION) break;  // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
             computer.addOption((Option) data);            // Cast converts Object to Option
             ++optionsAdded;                               // button2 equals YES_OPTION; therefore, continue ++count
-          } while (true); // end do-while(true)
+          } while (true); // end do-while()
           if(optionsAdded > 0) {
             store.add(computer);  // Pass the Computer object built up to store's add method
             onViewClick(Record.COMPUTER); // Invoke call
+            setDirty(true);       // Added 4/22/2023 11:39 PM
           } // end if
      } catch(NullPointerException e) {
      } catch(Exception e) {
@@ -581,6 +613,37 @@ public class MainWin extends JFrame {
          // System.exit(-1); | Avoid exiting program
      } // end try-catch
    } // end onInsertComputerClick() |  ^^ Revised to Professor's code ^^
+
+   protected void onInsertOrderClick() {
+     // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
+     String name = JOptionPane.showInputDialog(this, "Customer Name", "Inquire Customer", JOptionPane.QUESTION_MESSAGE);
+     String email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.QUESTION_MESSAGE);
+     Customer custOrd = new Customer(name, email);
+     if (custOrd != null) {
+       Order order = new Order(custOrd);
+     }
+     if(custOrd == null) {
+       int n = JOptionPane.showConfirmDialog(
+           this,
+           "Would you like to create a new customer order? ",
+           "Question",
+           JOptionPane.YES_NO_OPTION,
+           JOptionPane.QUESTION_MESSAGE);
+
+     try {
+         checkEmail(email);
+
+     } catch(NullPointerException e) {
+     } catch(Exception e) {
+     }
+     if (n == JOptionPane.YES_OPTION) {
+       onInsertCustomerClick();
+     } // end if
+     if (n == JOptionPane.NO_OPTION) {
+       response.setText("No customer created");
+     } // end if
+   } // end if
+   } // end onInsertOrderClick()
 
    protected void onViewClick(Record record) {  // >> Professor's code <<
      String header = null;
@@ -635,14 +698,22 @@ public class MainWin extends JFrame {
   protected void onQuitClick() {System.exit(0);}   // Exit the game
 
 
-  private Store store;                  // New Store
+  private Store store;                  // he current Elsa store
   private JLabel display;               // Main data display
-  private JLabel response;              // N/A
-  private JTextField names;             // name of parts
-  private JTextField costs;             // cost
-  private JComboBox<Object> compOpts;   // JComboBox via Computer Options
-  private JTextField models;            // model
+
   private File filename;
+
+  private JMenuItem save;
+  private JMenuItem saveAs;
+  private JButton buttonSave;
+  private JButton buttonSaveAs;
+
+
+  private JLabel response;              // N/A
+  private JTextField names;             // Name of parts
+  private JTextField costs;             // Cost
+  private JComboBox<Object> compOpts;   // JComboBox via Computer Options
+  private JTextField models;            // Model
 
   /*
   private JButton buttonAddCust;        // Button to select 1

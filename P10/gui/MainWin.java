@@ -615,28 +615,75 @@ public class MainWin extends JFrame {
      } // end try-catch
    } // end onInsertComputerClick() |  ^^ Revised to Professor's code ^^
 
-   protected void onInsertOrderClick() {
-
+   protected void onInsertOrderClick() { // Entirely Professor's code below:
+   // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
+     // Load the icon if available
+     ImageIcon icon = null;
      try {
          // Select (or create) a Customer
-         Object data;
+         Object data1;
          Object[] customers = store.customers();
-         if(customers.length == 0) {
-             onInsertCustomerClick();
-             customers = store.customers();
+         if(customers.length == 0) {        // If no Customer objects exist,
+             onInsertCustomerClick();       // call onInsertCustomerClick(), so user can create one.
+             customers = store.customers(); // If no Customer is created, return
              if(customers.length == 0) return;
          }
-         data = customers[0];       // Initial customer
-         if(customers.length > 1) { // A few customers
+         data1 = customers[0];       // Initial customer object exists, use without consent.
+         if(customers.length > 1) { // Two or more customer objects exist.
              JLabel label = new JLabel("Order for which Customer?");
              JComboBox<Object> cb = new JComboBox<>(customers);
-             int button = JOptionPane.showConfirmDialog(this, new Object[]{label, cb}, "New Order",
-                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+             int button = JOptionPane.showConfirmDialog(
+                 this,                          // Component parentComponent
+                 new Object[]{label, cb},       // Object message
+                 "New Order",                   // [String title
+                 JOptionPane.OK_CANCEL_OPTION,  // int optionType
+                 JOptionPane.PLAIN_MESSAGE,     // [int messageType,
+                 icon);                         // [Icon icon]
              if(button != JOptionPane.OK_OPTION) return;
-             data = cb.getSelectedItem();
+
+             /* User selects an Option via JComboBox */
+             /* JComboBox's getSelectedItem() method obtains data */
+             data1 = cb.getSelectedItem();
          }
 
-         Order order = new Order((Customer) data);
+         Order order = new Order((Customer) data1); // Instance an Order || Order constructor
+         /* ****************** JComboBox ******************* */
+         JLabel compOrd = new JLabel("Computer");
+         // (A) Obtain an Object[] array of Order objects from store
+         // (1) Store.java | public Object[] orders() { etc...
+         // (B) Instance a JComboBox,
+         // (1) Pass the Object[] array retrieved from store as the constructor parameter
+         // Object[] options = {store.orders()};              // A | 1
+         compOrds = new JComboBox<Object>(store.computers()); // B | 1
+         /* ****************** JComboBox ******************* */
+         Object data2;
+         int ordersAdded = 0;   // Don't add computers with no order
+         Object[] objects2 = {  // An Array of widget to display
+             compOrd, compOrds};
+          // Dialog shows the current order with a JComboBox listing available Computer products.
+          do {
+            int button2 = JOptionPane.showConfirmDialog(
+                this,                         // Component parentComponent
+                objects2,                     // Object message
+                "Another Order?",             // [String title
+                JOptionPane.YES_NO_OPTION,    // int optionType
+                JOptionPane.PLAIN_MESSAGE,    // [int messageType,
+                icon);                        // [Icon icon]
+
+            /* User selects an Option via JComboBox */
+            /* JComboBox's getSelectedItem() method obtains data */
+            data2 = compOrds.getSelectedItem(); // 2nd time??
+
+            // If the user selects one, add it to the Order.
+            if(button2 != JOptionPane.YES_OPTION) break;  // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
+            order.addComputer((Computer) data2);           // Cast converts Object to Computer
+            ++ordersAdded;                                // button2 equals YES_OPTION; therefore, continue ++count
+          } while (true);
+          if(ordersAdded > 0) {
+            store.add(order);  // Pass the Order object built up to store's add method
+            onViewClick(Record.ORDER); // Invoke call
+            setDirty(true);       // Added 4/22/2023 11:39 PM
+          } // end if
 
      } catch(NullPointerException e) {
      } catch(Exception e) {
@@ -709,11 +756,11 @@ public class MainWin extends JFrame {
   private JButton buttonSave;
   private JButton buttonSaveAs;
 
-
   private JLabel response;              // N/A
   private JTextField names;             // Name of parts
   private JTextField costs;             // Cost
   private JComboBox<Object> compOpts;   // JComboBox via Computer Options
+  private JComboBox<Object> compOrds;   // JComboBox via Computer Orders
   private JTextField models;            // Model
 
   /*

@@ -368,6 +368,7 @@ public class MainWin extends JFrame {
           JOptionPane.showMessageDialog(this, "Unable to open " + filename + '\n' + e,
               "Failed", JOptionPane.ERROR_MESSAGE);
       }
+      setDirty(false);                      // << ^^Prof's code
   } // END
 
   protected void onSaveAsClick() {             // Create a new game
@@ -614,35 +615,80 @@ public class MainWin extends JFrame {
      } // end try-catch
    } // end onInsertComputerClick() |  ^^ Revised to Professor's code ^^
 
-   protected void onInsertOrderClick() {
-     // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
-     String name = JOptionPane.showInputDialog(this, "Customer Name", "Inquire Customer", JOptionPane.QUESTION_MESSAGE);
-     String email = JOptionPane.showInputDialog(this, "Customer e-mail", "New Customer", JOptionPane.QUESTION_MESSAGE);
-     Customer custOrd = new Customer(name, email);
-     if (custOrd != null) {
-       Order order = new Order(custOrd);
-     }
-     if(custOrd == null) {
-       int n = JOptionPane.showConfirmDialog(
-           this,
-           "Would you like to create a new customer order? ",
-           "Question",
-           JOptionPane.YES_NO_OPTION,
-           JOptionPane.QUESTION_MESSAGE);
-
+   protected void onInsertOrderClick() { // Entirely Professor's code below:
+   // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
      try {
-         checkEmail(email);
+         // Select (or create) a Customer
+         Object data1;
+         Object[] customers = store.customers();
+         if(customers.length == 0) {        // If no Customer objects exist,
+             onInsertCustomerClick();       // call onInsertCustomerClick(), so user can create one.
+             customers = store.customers(); // If no Customer is created, return
+             if(customers.length == 0) return;
+         }
+         data1 = customers[0];       // Initial customer object exists, use without consent.
+         if(customers.length > 1) { // Two or more customer objects exist.
+             JLabel label = new JLabel("Order for which Customer?");
+             JComboBox<Object> cb = new JComboBox<>(customers);
+             int button = JOptionPane.showConfirmDialog(
+                 this,                          // Component parentComponent
+                 new Object[]{label, cb},       // Object message
+                 "New Order",                   // [String title
+                 JOptionPane.OK_CANCEL_OPTION,  // int optionType
+                 JOptionPane.PLAIN_MESSAGE,     // [int messageType,
+                 icon);                         // [Icon icon]
+             if(button != JOptionPane.OK_OPTION) return;
+
+             /* User selects an Option via JComboBox */
+             /* JComboBox's getSelectedItem() method obtains data */
+             data1 = cb.getSelectedItem();
+         }
+
+         Order order = new Order((Customer) data1); // Instance an Order || Order constructor
+         /* ****************** JComboBox ******************* */
+         JLabel compOrd = new JLabel("Computer");
+         // (A) Obtain an Object[] array of Order objects from store
+         // (1) Store.java | public Object[] orders() { etc...
+         // (B) Instance a JComboBox,
+         // (1) Pass the Object[] array retrieved from store as the constructor parameter
+         // Object[] options = {store.orders()};              // A | 1
+         compOrds = new JComboBox<Object>(store.computers()); // B | 1
+         /* ****************** JComboBox ******************* */
+         Object data2;
+         int ordersAdded = 0;   // Don't add computers with no order
+         Object[] objects2 = {  // An Array of widget to display
+             compOrd, compOrds};
+          // Dialog shows the current order with a JComboBox listing available Computer products.
+          do {
+            int button2 = JOptionPane.showConfirmDialog(
+                this,                         // Component parentComponent
+                objects2,                     // Object message
+                "Another Order?",             // [String title
+                JOptionPane.YES_NO_OPTION,    // int optionType
+                JOptionPane.PLAIN_MESSAGE,    // [int messageType,
+                icon);                        // [Icon icon]
+
+            /* User selects an Option via JComboBox */
+            /* JComboBox's getSelectedItem() method obtains data */
+            data2 = compOrds.getSelectedItem(); // 2nd time??
+
+            // If the user selects one, add it to the Order.
+            if(button2 != JOptionPane.YES_OPTION) break;  // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
+            order.addComputer((Computer) data2);           // Cast converts Object to Computer
+            ++ordersAdded;                                // button2 equals YES_OPTION; therefore, continue ++count
+          } while (true);
+          if(ordersAdded > 0) {
+            store.add(order);  // Pass the Order object built up to store's add method
+            onViewClick(Record.ORDER); // Invoke call
+            setDirty(true);       // Added 4/22/2023 11:39 PM
+          } // end if
 
      } catch(NullPointerException e) {
      } catch(Exception e) {
+         JOptionPane.showMessageDialog(this, e,
+             "Order Not Created", JOptionPane.ERROR_MESSAGE);
+         System.err.println(e.getMessage());
      }
-     if (n == JOptionPane.YES_OPTION) {
-       onInsertCustomerClick();
-     } // end if
-     if (n == JOptionPane.NO_OPTION) {
-       response.setText("No customer created");
-     } // end if
-   } // end if
    } // end onInsertOrderClick()
 
    protected void onViewClick(Record record) {  // >> Professor's code <<

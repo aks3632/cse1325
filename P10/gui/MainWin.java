@@ -616,9 +616,14 @@ public class MainWin extends JFrame {
    } // end onInsertComputerClick() |  ^^ Revised to Professor's code ^^
 
    protected void onInsertOrderClick() { // Entirely Professor's code below:
-   // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
+     // Lecture 13_Custom_dialogs_and_Widgets - Page 18/48
      // Load the icon if available
      ImageIcon icon = null;
+     try {
+         icon = new ImageIcon("gui/resources/add_order.png");
+     } catch(Exception e) {
+     }
+
      try {
          // Select (or create) a Customer
          Object data1;
@@ -648,7 +653,7 @@ public class MainWin extends JFrame {
 
          Order order = new Order((Customer) data1); // Instance an Order || Order constructor
          /* ****************** JComboBox ******************* */
-         JLabel compOrd = new JLabel("Computer");
+         JLabel compOrd = new JLabel("<html><p>" + order.toString().replaceAll("\n", "<br/>") + "</p></html>");
          // (A) Obtain an Object[] array of Order objects from store
          // (1) Store.java | public Object[] orders() { etc...
          // (B) Instance a JComboBox,
@@ -657,8 +662,8 @@ public class MainWin extends JFrame {
          compOrds = new JComboBox<Object>(store.computers()); // B | 1
          /* ****************** JComboBox ******************* */
          Object data2;
-         int ordersAdded = 0;   // Don't add computers with no order
-         Object[] objects2 = {  // An Array of widget to display
+         int computersAdded = 0;  // Don't add computers with no order
+         Object[] objects2 = {    // An Array of widget to display
              compOrd, compOrds};
           // Dialog shows the current order with a JComboBox listing available Computer products.
           do {
@@ -676,10 +681,10 @@ public class MainWin extends JFrame {
 
             // If the user selects one, add it to the Order.
             if(button2 != JOptionPane.YES_OPTION) break;  // If button clicked, NOT EQUAL, then break | responseType: YES_OPTION
-            order.addComputer((Computer) data2);           // Cast converts Object to Computer
-            ++ordersAdded;                                // button2 equals YES_OPTION; therefore, continue ++count
+            order.addComputer((Computer) data2);          // Cast converts Object to Computer
+            ++computersAdded;                             // button2 equals YES_OPTION; therefore, continue ++count
           } while (true);
-          if(ordersAdded > 0) {
+          if(computersAdded > 0) {
             store.add(order);  // Pass the Order object built up to store's add method
             onViewClick(Record.ORDER); // Invoke call
             setDirty(true);       // Added 4/22/2023 11:39 PM

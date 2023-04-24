@@ -78,17 +78,18 @@ public class MainWin extends JFrame {
     }
   };
 
-  private String NAME = "Elsa";
-  private String VERSION = "1.4J";
-  private String FILE_VERSION = "1.0";
-  private String MAGIC_COOKIE = "Store☏"; // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
+  private final String NAME = "Elsa";
+  private final String EXTENSION = "elsa";
+  private final String VERSION = "1.4J";
+  private final String FILE_VERSION = "1.0";
+  private final String MAGIC_COOKIE = "Store☏"; // White Telephone | https://www.hotsymbol.com/symbol/white-telephone
   private final String DEFAULT_STORE_NAME = "New " + NAME + " Store";
 
   public MainWin(String title) { // ** Constructor
       super(title);
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       this.setSize(400, 200);
-      filename = new File("untitled.ppm"); // Replace untitled.nim with ext. *.ppm (parts per million)
+      filename = new File("untitled.elsa"); // Replace untitled.nim with ext. *.ppm (parts per million)
 
       // /////// ////////////////////////////////////////////////////////////////
       // M E N U
@@ -334,7 +335,7 @@ public class MainWin extends JFrame {
 
   protected void onOpenClick() {      // Create a new game(store) - OK
       final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
-      FileFilter storeFiles = new FileNameExtensionFilter("Store files", "ppm"); // Ext. *.ppm (parts per million)
+      FileFilter storeFiles = new FileNameExtensionFilter("Store files", EXTENSION); // Ext. *.ppm (parts per million)
       fc.addChoosableFileFilter(storeFiles);         // Add "Store file" filter
       fc.setFileFilter(storeFiles);                  // Show Store files only by default
 
@@ -373,15 +374,15 @@ public class MainWin extends JFrame {
 
   protected void onSaveAsClick() {             // Create a new game
       final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
-      FileFilter storeFiles = new FileNameExtensionFilter("Store files", "ppm"); // Ext. *.ppm (parts per million)
+      FileFilter storeFiles = new FileNameExtensionFilter("Store files", EXTENSION); // Ext. *.ppm (parts per million)
       fc.addChoosableFileFilter(storeFiles);         // Add "Store file" filter
       fc.setFileFilter(storeFiles);                  // Show Store files only by default
 
       int result = fc.showSaveDialog(this);        // Run dialog, return button clicked
       if (result == JFileChooser.APPROVE_OPTION) { // Also CANCEL_OPTION and ERROR_OPTION
           filename = fc.getSelectedFile();         // Obtain the selected File object
-          if(!filename.getAbsolutePath().endsWith(".ppm"))  // Ensure it ends with ".ppm"
-              filename = new File(filename.getAbsolutePath() + ".ppm"); // Ext. *.ppm (parts per million)
+          if(!filename.getAbsolutePath().endsWith("." + EXTENSION))  // Ensure it ends with ".ppm"
+              filename = new File(filename.getAbsolutePath() + "." + EXTENSION); // Ext. *.ppm (parts per million)
           onSaveClick();                           // Delegate to Save method
       }
   } // END

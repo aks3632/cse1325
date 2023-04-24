@@ -70,8 +70,8 @@ public class Order {
 
   @Override
   public String toString() { // Professor Rice's code below:
-    int dollars = (int)cost / 100;
-    int cents = (int)cost % 100;
+    int dollars = (int)cost() / 100;
+    int cents = (int)cost() % 100;
 
     // Resolved | Obtains iteration of Options (parts) via Computer class!
     StringBuilder sb = new StringBuilder("Order " + orderNumber + " for " + customer + " "

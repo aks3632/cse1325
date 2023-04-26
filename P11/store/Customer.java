@@ -7,10 +7,12 @@ import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.util.Objects;
+import java.util.Comparator;
+
 
  // TreeSet requires that our Customer class
  // implement the Comparable generic interface
- public class Customer {
+ public class Customer implements Comparable<Customer> { // "Generic Type" within <> must match parameter type
 
    // Fields
    private String name;
@@ -64,6 +66,11 @@ import java.util.Objects;
   /* ************************************* REGEX ************************************* */
 
    // Method
+   @Override
+   public String compareTo(Customer t) {
+     return "" + t.name + t.email; // Test Point
+   }
+
    @Override
    public int hashCode() {
      return Objects.hash(name, email); // List all relevant fields as parameters.

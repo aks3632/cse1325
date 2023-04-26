@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.util.HashSet;
 
 public class Store {
     public Store(String name) { // Constructor
@@ -112,8 +113,17 @@ public class Store {
     // Fields
 
     private String name;
+    private HashSet<Customer> customers = new HashSet<>();
+    private HashSet<Option> options = new HashSet<>();
+    private HashSet<Computer> computers = new HashSet<>();
+    private HashSet<Order> orders = new HashSet<>();
+    /*
+    HashSet for Option, Computer, and Order objects in
+    Store will ensure we have no duplicates.
     private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<Option> options = new ArrayList<>();
     private ArrayList<Computer> computers = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
+    https://www.geeksforgeeks.org/how-to-convert-arraylist-to-hashset-in-java/
+    */
 }

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.util.Objects;
 
 public class Computer {
   // Fields - ArrayList<Option> Declerated & Initialized outside methods!
@@ -53,6 +54,12 @@ public class Computer {
     } // end for:each loop
     return totalCost = sum;
   } // end cost
+
+  // Method
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, model, options);
+  }
 
   /* Ex)
   SuperCalc (1Z200XL)

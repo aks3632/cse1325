@@ -354,6 +354,7 @@ public class MainWin extends JFrame {
 
   protected void onAboutClick() { // Display About dialog
       Canvas canvas = new Canvas();
+
       // add(new Canvas());  // Put the drawing surface in the window
       pack();             // Auto-resize to Canvas.getPreferredSize()
 
@@ -430,7 +431,7 @@ public class MainWin extends JFrame {
 
         JOptionPane.showOptionDialog(
             this,
-            new Object[]{add(new Canvas().add(logo)), title, subtitle, version, artists},
+            new Object[]{canvas.add(logo), title, subtitle, version, artists},
             "ELSA",
             JOptionPane.OK_OPTION,
             JOptionPane.PLAIN_MESSAGE,

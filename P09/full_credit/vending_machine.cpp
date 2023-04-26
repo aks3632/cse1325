@@ -22,36 +22,29 @@
     }
 
     std::string Vending_Machine::menu() {
+      // std::vector<char> vec;
+      // char str[] = {items[i].to_string()};
+      // vec.insert(vec.end(), str, str + sizeof(str) - 1);
+
       int i{0};
       std::string menu{"\n"};
-
-      // std::vector<char> vec;
-      // char str[] = {items.to_string()[i]};
-      // vec.insert(vec.end(), str, str + sizeof(str) - 1);
 
       for (; i < items.size(); i++) {
         // menu += std::to_string(i) + ") " + items[i].to_string() + "\n";
         menu.append(std::to_string(i) + ") ").append(items[i].to_string()).append("\n");
         /* code */
       }
-      // Output Phase 1: Original data
-      // https://www.geeksforgeeks.org/g-fact-40-foreach-in-c-and-java/
-      //for(auto x : passedValue) {  // for-each loop C++
-        //std::cout << x << "";      // Phrase entered by user
-      //}
 
       // puts("");                // Prints a newline
       // std::cout << std::endl;  // Empty line
 
-      /*
+
       try {
         // System.out.printf("Enter a choice: \n"); // Promt user
         // Option 2 | For each loop
         int i = 0; // index count for items
         for(Item itcl : items) { // HINT: derived via ArrayList | Creates Menu List
-          std::cout << i << ") " << items[i];
-          std::cout << "    " << "\t\t\t\t" << itcl.to_string();
-          // System.out.println("" + "\t" + itcl.price());
+          std::cout << i << ") " << items[i].to_string() << std::endl;
           i++;
           if(i > 2) { // Menu list displayed restricts to 7 items ONLY
             break;
@@ -63,10 +56,10 @@
         exit(-1);
       } // end try..catch
 
-      std::cout << "7) (q)uit?\n"; // end Menu List
-      std::cout << "\nCurrent Order"; // 2nd Porcess begins
-      std::cout << "-------------\n";
-      */
+      printf("%s", "7) (q)uit?\n"); // end Menu List
+      printf("%s", "\nCurrent Order"); // 2nd Porcess begins
+      printf("%s", "-------------\n");
+
 
       return menu;
     }

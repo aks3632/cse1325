@@ -34,7 +34,7 @@
      printf("USAGE: ./a.out string.txt str1, str2, str#... etc. \n");
      // Gracefully terminate program with warning message
      printf("Invalid input. Closing program.\n");
-     return 1;
+     return EXIT_FAILURE;
    }
 
    // Input Phase: Program continued

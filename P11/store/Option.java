@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.util.Objects;
 
  public class Option {
 
@@ -40,6 +41,11 @@ import java.io.BufferedReader;
    } // end cost
 
    // Method
+   @Override
+   public int hashCode() {
+     return Objects.hash(name, cost);
+   } // end hashcode
+
    @Override
    public String toString() {
      int dollars = (int)cost / 100;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.util.Objects;
 
 public class Order {
 
@@ -58,6 +59,11 @@ public class Order {
     return totalCost = sum;
   } // end cost
 
+  // Method
+  @Override
+  public int hashCode() {
+    return Objects.hash(cost, nextOrderNumber, orderNumber, customer, computers);
+  }
 
   /* Ex) - Enhanced!
   Order 0 for Prof Rice (george.rice@uta.edu)

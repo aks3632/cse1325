@@ -5,6 +5,7 @@ import java.io.IOException;     // reports an error reading from a file
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class Store {
     public Store(String name) { // Constructor
@@ -113,7 +114,7 @@ public class Store {
     // Fields
 
     private String name;
-    private HashSet<Customer> customers = new HashSet<>();
+    private TreeSet<Customer> customers = new TreeSet<>();
     private HashSet<Option> options = new HashSet<>();
     private HashSet<Computer> computers = new HashSet<>();
     private HashSet<Order> orders = new HashSet<>();

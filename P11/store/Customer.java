@@ -67,9 +67,13 @@ import java.util.Comparator;
 
    // Method
    @Override
-   public String compareTo(Customer t) {
-     return "" + t.name + t.email; // Test Point
-   }
+   public int compareTo(Customer cu) { // cu.name + cu.email;
+
+     int em = this.email.compareTo(cu.email);
+     return em == 0                         // Boolean em
+            ? this.name.compareTo(cu.name)  // True
+            : em;                           // False
+   } // end comapreTo
 
    @Override
    public int hashCode() {
@@ -118,4 +122,6 @@ import java.util.Comparator;
  Added try-catch to equals(Object o) + this
  Java Programming Tutorial 15 - String Methods (charAt, concat, contains, indexOf, lastIndexOf)
  Java Programming Tutorial 16 - More String Methods (toLowerCase, strip, substring, repeat, equals)
+ Ex: https://beginnersbook.com/2017/08/comparable-interface-in-java-with-example/
+ (A) public class Customer implements Comparable<Customer> | public int compareTo(Customer t)
  *******************************************************************************/

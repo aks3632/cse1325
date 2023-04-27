@@ -91,5 +91,5 @@ public class ThreadsOfSudoku implements Runnable {
 
     private static Sudoku[] suds = new Sudoku[81];
     private static HashSet<Sudoku> solutions = new HashSet<>();
-    Object lock = new Object();
+    private static Object lock = new Object();
 }
